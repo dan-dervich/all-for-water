@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header>
+  <div
+    class="flex justify-between items-center py-8 relative bg-[#06194a] text-white"
+  >
+    <div class="flex justify-center items-center gap-5">
+      <div class="text-xl ml-5">🌄</div>
+      <h1 class="font-extralight text-2xl">All For Water</h1>
+    </div>
+    <button class="sm:hidden flex absolute right-3">
+      <Icon
+        class="hover:scale-110 hover:cursor-pointer"
+        name="material-symbols-light:menu"
+        size={30}
+      />
+    </button>
+    <div class="flex flex-row gap-5 items-center px-5">
+      <nav class="hidden sm:flex gap-x-5">
+        <a href="">HOME</a>
+        <a href="">PRODUCTS</a>
+        <a href="">CONTACT US</a>
+      </nav>
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search..."
+          class="px-3 py-2 rounded-md text-black focus:outline-none transition-all"
+          onfocus="this.placeholder=''"
+          onblur="this.placeholder='Search...'"
+        />
+        <Icon
+          name="material-symbols-light:search"
+          size={20}
+          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+        />
+      </div>
+    </div>
+  </div>
+</header>
