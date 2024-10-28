@@ -1,3 +1,7 @@
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -5,7 +9,7 @@ export default {
     extend: {
       colors: {
         "header-bg": "#06194a",
-        "header-text": "#de540f",
+        "header-text": "#8E6C88",
       },
     },
   },
