@@ -1,22 +1,17 @@
 ---
+import Menu from "./icons/Menu.astro";
+import Search from "./icons/Search.astro";
 import { Icon } from "astro-icon/components";
 ---
 
 <header>
   <div
-    class="flex justify-between items-center py-8 relative bg-[#06194a] text-white"
+    class="flex justify-between items-center py-8 relative bg-header-bg text-white"
   >
     <div class="flex justify-center items-center gap-5">
       <div class="text-xl ml-5">🌄</div>
       <h1 class="font-extralight text-2xl">All For Water</h1>
     </div>
-    <button class="sm:hidden flex absolute right-3">
-      <Icon
-        class="hover:scale-110 hover:cursor-pointer"
-        name="material-symbols-light:menu"
-        size={30}
-      />
-    </button>
     <div class="flex flex-row gap-5 items-center px-5">
       <nav class="hidden sm:flex gap-x-5">
         <a href="">HOME</a>
@@ -31,12 +26,44 @@ import { Icon } from "astro-icon/components";
           onfocus="this.placeholder=''"
           onblur="this.placeholder='Search...'"
         />
-        <Icon
-          name="material-symbols-light:search"
-          size={20}
-          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-        />
+        <Search />
       </div>
+      <button
+        id="menu-button"
+        class="hover:cursor-pointer sm:hidden flex right-3"
+        onclick="sidebar.classList.toggle('translate-x-full')"
+      >
+        <Icon
+          class="hover:scale-110 hover:cursor-pointer"
+          name="material-symbols-light:menu"
+          size={30}
+        />
+      </button>
     </div>
   </div>
+
+  <aside
+    id="sidebar"
+    class="fixed top-0 right-0 w-64 h-full bg-header-bg text-white p-4 transform transition-transform translate-x-full duration-300"
+  >
+    <button
+      id="close-button"
+      class="flex pb-10 pt-5"
+      onclick="sidebar.classList.toggle('translate-x-full')"
+    >
+      <Icon
+        class="hover:scale-110 hover:cursor-pointer"
+        name="material-symbols-light:close"
+        size={30}
+      />
+    </button>
+    <nav class="flex flex-col gap-y-10 justify-center items-center">
+      <a class="hover:text-header-text transition-colors" href="#">HOME</a>
+      <a class="hover:text-header-text transition-colors" href="#">PRODUCTS</a>
+      <a class="hover:text-header-text transition-colors" href="#">CONTACT US</a
+      >
+    </nav>
+  </aside>
 </header>
+
+<script></script>
