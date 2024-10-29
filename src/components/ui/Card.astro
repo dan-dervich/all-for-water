@@ -1,0 +1,8 @@
+---
+const { imgSrc } = Astro.props;
+const { text } = Astro.props;
+---
+<button class="shadow-xl rounded-xl hover:scale-105 transition-all">
+    <img src={imgSrc} alt="Housing img" class="h-80 w-auto p-5">
+    <h5 class="p-5 text-custom-grey text-xl font-bold">{text}</h5>
+</button>

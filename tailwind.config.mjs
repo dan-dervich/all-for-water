@@ -9,7 +9,11 @@ export default {
     extend: {
       colors: {
         "header-bg": "#06194a",
-        "header-text": "#8E6C88",
+        "header-text": "#31E981",
+        "dark-green": "#35605A",
+        "custom-grey": "#6B818C",
+        "custom-grey-light": "#D8E4FF",
+        "light-green": "#31E981",
       },
     },
   },

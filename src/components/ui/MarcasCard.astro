@@ -1,0 +1,11 @@
+---
+const { imgSrc } = Astro.props;
+const { link } = Astro.props;
+---
+
+<a
+    href={link}
+    class="hover:scale-110 hover:opacity-20 transition-all grayscale"
+>
+    <img src={imgSrc} alt="Logo" class="w-[349px] h-[172px]" />
+</a>
