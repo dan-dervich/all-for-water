@@ -4,13 +4,11 @@ import Search from "./icons/Search.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<header>
-  <div
-    class="flex justify-between items-center py-8 relative bg-header-bg text-white"
-  >
+<header class="fixed top-0 w-full bg-header-bg text-white z-50">
+  <div class="flex justify-between items-center py-8 relative text-white">
     <div class="flex justify-center items-center gap-5">
       <div class="text-xl ml-5">🌄</div>
-      <h1 class="font-extralight text-2xl">All For Water</h1>
+      <h1 class="hidden sm:flex font-extralight text-2xl">All For Water</h1>
     </div>
     <div class="flex flex-row gap-5 items-center px-5">
       <nav class="hidden sm:flex gap-x-5">

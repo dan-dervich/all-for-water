@@ -1,20 +1,14 @@
 <section
   class="relative h-40 sm:h-60 text-white flex items-center justify-center overflow-hidden"
 >
-  <video
-    class="absolute inset-0 w-full h-full object-cover z-[-1]"
-    autoplay
-    loop
-    muted
-    playsinline
-  >
-    <source src="/videos/agua.mp4" type="video/mp4" />
-  </video>
-
+  <img
+    class="absolute inset-0 w-full h-full object-cover z-[-1] transition-transform duration-300"
+    src="/fotos/agua.jpg"
+  />
   <div class="z-10 text-center relative">
     <h1
       id="frases"
-      class="sm:text-4xl text-3xl font-bold opacity-0 transition duration-500 transform"
+      class="sm:text-4xl text-2xl font-bold opacity-0 transition duration-500 transform"
     >
     </h1>
   </div>
@@ -29,28 +23,6 @@
     100% {
       transform: translateX(0);
       opacity: 1;
-    }
-  }
-
-  @keyframes slide-in-left {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-out-right {
-    0% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
     }
   }
 
@@ -69,14 +41,6 @@
     animation: slide-in-right 0.5s forwards;
   }
 
-  .animate-slide-in-left {
-    animation: slide-in-left 0.5s forwards;
-  }
-
-  .animate-slide-out-right {
-    animation: slide-out-right 0.5s forwards;
-  }
-
   .animate-slide-out-left {
     animation: slide-out-left 0.5s forwards;
   }
@@ -92,40 +56,29 @@
   let currentFraseIndex = 0;
   const fraseElement = document.getElementById("frases");
 
-  function cambiarFrase(index, direction) {
+  function cambiarFrase(index) {
     fraseElement.classList.remove(
-      "translate-x-full",
-      "-translate-x-full",
       "opacity-0",
       "animate-slide-in-right",
-      "animate-slide-in-left",
-      "animate-slide-out-right",
       "animate-slide-out-left"
     );
 
-    const exitClass =
-      direction === "next"
-        ? "animate-slide-out-left"
-        : "animate-slide-out-right";
-    const enterClass =
-      direction === "next" ? "animate-slide-in-right" : "animate-slide-in-left";
-
-    fraseElement.classList.add(exitClass);
+    fraseElement.classList.add("animate-slide-out-left");
 
     setTimeout(() => {
       fraseElement.textContent = frases[index];
-      fraseElement.classList.remove(exitClass);
-      fraseElement.classList.add(enterClass);
+      fraseElement.classList.remove("animate-slide-out-left");
+      fraseElement.classList.add("animate-slide-in-right");
     }, 500);
   }
 
   function nextFrase() {
     currentFraseIndex = (currentFraseIndex + 1) % frases.length;
-    cambiarFrase(currentFraseIndex, "next");
+    cambiarFrase(currentFraseIndex);
   }
 
   setInterval(nextFrase, 5000);
   document.addEventListener("DOMContentLoaded", () =>
-    cambiarFrase(currentFraseIndex, "next")
+    cambiarFrase(currentFraseIndex)
   );
 </script>
