@@ -8,12 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        "header-bg": "#06194a",
+        "header-bg": "#0f3666",
         "header-text": "#31E981",
-        "dark-green": "#35605A",
-        "custom-grey": "#6B818C",
-        "custom-grey-light": "#D8E4FF",
-        "light-green": "#31E981",
+        "dark-green": "#8ACB88",
+        "light-blue": "#55A5CA",
+        "light-green": "#80ED99",
+        "violeta": "#404DC6",
       },
     },
   },

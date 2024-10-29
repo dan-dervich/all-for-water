@@ -1,17 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
 <section
-  class="relative h-40 sm:h-60 text-white flex items-center justify-center overflow-hidden"
+  class="relative h-screen text-white flex items-center justify-center flex-col overflow-hidden"
 >
   <img
     class="absolute inset-0 w-full h-full object-cover z-[-1] transition-transform duration-300"
-    src="/fotos/agua.jpg"
+    src="/fotos/oceano.jpg"
   />
-  <div class="z-10 text-center relative">
+  <div
+    class="z-10 text-center relative flex-grow flex items-center justify-center p-4 rounded-lg"
+  >
     <h1
       id="frases"
-      class="sm:text-4xl text-2xl font-bold opacity-0 transition duration-500 transform"
+      class="sm:text-7xl md:text-6xl text-5xl font-bold opacity-0 text-gray-100 transition duration-500 transform"
     >
     </h1>
   </div>
+  <button
+    id="button-down"
+    class="bg-[#55a5ca] text-white rounded-full hover:scale-110 p-5 mb-10 flex justify-center items-center shadow-lg transition-all duration-300"
+  >
+    <Icon name="mdi:arrow-down" size={30} class="text-white" />
+  </button>
 </section>
 
 <style>
@@ -81,4 +93,13 @@
   document.addEventListener("DOMContentLoaded", () =>
     cambiarFrase(currentFraseIndex)
   );
+
+  const buttonDown = document.getElementById("button-down");
+
+  buttonDown.addEventListener("click", () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+  });
 </script>
