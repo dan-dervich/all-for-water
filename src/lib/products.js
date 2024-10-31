@@ -8,47 +8,75 @@ const products = [
     img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg",
     items: [
       {
-        id: 1,
-        name: "Housing product 1",
-        description: "Descripción del producto 1_1",
-        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/08/Housings-2-768x384-1.jpg",
+        name: "Choose a Filter Housing you need:",
       },
       {
-        id: 2,
-        name: "producto 1_2",
-        price: 200,
-        descripcion: "Descripción del producto 1_2",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/08/brackets-768x768-1.jpg",
+        name: "Mounting Brackets and Clips",
       },
       {
-        id: 3,
-        name: "producto 1_3",
-        price: 300,
-        descripcion: "Descripción del producto 1_3",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/08/wrenches-768x768-1.jpg",
+        name: "Opening Wrench",
       },
     ],
   },
   {
     id: 2,
-    name: "product 2",
-    descripcion: "Descripción del producto 2",
+    name: "Accesories",
+    descripcion: "Accesories description 2",
+    img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/float.jpg",
     items: [
       {
-        id: 4,
-        name: "producto 2_1",
-        price: 150,
-        descripcion: "Descripción del producto 2_1",
+        name: "Nipple",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/nipple-1-768x768-1.jpg",
+        description:
+          "FLOAT: Mechanical plastic float valve, ¼” feed tube connection",
       },
       {
-        id: 5,
-        name: "producto 2_2",
-        price: 250,
-        descripcion: "Descripción del producto 2_2",
+        name: "Tube Cutter",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/TUBE-CUTTER-768x768-1.jpg",
+        description: "FLOAT-EL: Electric level control valve, plastic",
       },
       {
-        id: 6,
-        name: "producto 2_3",
-        price: 350,
-        descripcion: "Descripción del producto 2_3",
+        name: "Level Control Valve",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/08/Level-Control-Valve.jpg",
+        description:
+          "Item Part: DRIAN\n* Plastic clamp\n* Includes accessories for installation on pipe\n* ¼” tube connection with compression fitting",
+      },
+      {
+        name: "Drain Clamp",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/drain-clamp-768x768-1.jpg",
+        description: "Item SW-LP: Low pressure switch with ¼” quick fitting",
+      },
+      {
+        name: "Pressure Switch for\nBooster Pump",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/pressure-switch-768x768-1.jpg",
+        description: "Item SW-HP: High pressure switch with ¼” quick fittings",
+      },
+      {
+        name: "Check Valve",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/check-valve-768x768-1.jpg",
+        description:
+          "AQF CHK 1814MT: elbow check valve for ⅛” thread connection to ¼” tube quick fitting",
+      },
+      {
+        name: "Solenoid Valve",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/SOLENOID-1-768x768-1.jpg",
+        description:
+          "AQF CHK 14T: straight tube to tube quick fitting connection for ¼” tube",
+      },
+      {
+        name: "Tank Shut-Off Valve",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/RO-accessories-768x768-1.jpg",
+        description:
+          "Item Part: SOLENOID\n* Normally closed\n* 24V or 100V\n* ¼” female thread",
+      },
+      {
+        name: "Opening Wrench",
+        img: "https://waterpurificationsupplies.com/wp-content/uploads/2021/07/opening-wrench-768x768-1.jpg",
+        description:
+          "Pressure tank ball valve with quick fitting, available as:",
       },
     ],
   },
