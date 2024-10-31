@@ -9,7 +9,6 @@ export default {
     extend: {
       colors: {
         "header-bg": "#0f3666",
-        "header-text": "#31E981",
         "dark-green": "#8ACB88",
         "light-blue": "#55A5CA",
         "light-green": "#80ED99",

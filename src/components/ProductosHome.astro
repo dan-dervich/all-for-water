@@ -1,5 +1,6 @@
 ---
 import Card from "./ui/Card.astro";
+import products from "@lib/products";
 ---
 
 <section class="bg-white flex justify-center items-center flex-col">
@@ -16,29 +17,12 @@ import Card from "./ui/Card.astro";
   <div
     class="grid gap-5 w-3/4 mt-10 mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
-    <Card
-      imgSrc="https://waterpurificationsupplies.com/wp-content/uploads/2021/07/HOUSING-768x768-1.jpg"
-      text="Housing"
-    />
+    {
+      products.map((product) => (
+        <a href={`/${product.id}`}>
+          <Card imgSrc={product.img} text={product.name} />
+        </a>
+      ))
+    }
   </div>
 </section>

@@ -6,7 +6,7 @@ import products from "@lib/products";
 
 <header
   id="header"
-  class="fixed top-0 w-full bg-header-bg text-white z-50 transition-colors duration-300"
+  class="fixed top-0 w-full bg-transparent text-white z-50 transition-colors duration-300"
 >
   <div class="flex justify-between items-center py-8 relative text-white">
     <div class="flex justify-center items-center gap-5">
@@ -15,10 +15,8 @@ import products from "@lib/products";
     </div>
     <div class="flex flex-row gap-5 items-center px-5">
       <nav class="hidden md:flex gap-x-5">
-        <a
-          id="home"
-          href="/"
-          class="transition-all nav-links hover:cursor-pointer">HOME</a
+        <a id="home" class="transition-all nav-links hover:cursor-pointer"
+          >HOME</a
         >
         <a id="contact" href="#footer" class="transition-all nav-links"
           >CONTACT US</a
@@ -94,7 +92,7 @@ import products from "@lib/products";
     </button>
     <nav class="flex flex-col gap-y-10 justify-center items-center">
       <a
-        href="/"
+        onclick="sidebar.classList.toggle('translate-x-full')"
         id="home-sidebar"
         class="transition-all nav-links hover:cursor-pointer">HOME</a
       >
@@ -195,6 +193,16 @@ import products from "@lib/products";
     icon.classList.toggle("rotate-180");
   }
 
+  const header = document.getElementById("header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY >= window.innerHeight) {
+      header.classList.add("bg-header-bg");
+    } else {
+      header.classList.remove("bg-header-bg");
+    }
+  });
+
   const contact = document.getElementById("contact");
   contact.addEventListener("click", () => {
     window.scrollTo({
@@ -207,6 +215,22 @@ import products from "@lib/products";
   contactSidebar.addEventListener("click", () => {
     window.scrollTo({
       top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  });
+
+  const home = document.getElementById("home");
+  home.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  const homeSidebar = document.getElementById("home-sidebar");
+  homeSidebar.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
       behavior: "smooth",
     });
   });
