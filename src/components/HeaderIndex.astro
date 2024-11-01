@@ -18,7 +18,7 @@ import products from "@lib/products";
         <a id="home" class="transition-all nav-links hover:cursor-pointer"
           >HOME</a
         >
-        <a id="contact" href="#footer" class="transition-all nav-links"
+        <a id="contact" href="/contact" class="transition-all nav-links"
           >CONTACT US</a
         >
 
@@ -99,7 +99,7 @@ import products from "@lib/products";
       <a
         onclick="sidebar.classList.toggle('translate-x-full')"
         id="contact-sidebar"
-        href="#footer"
+        href="/contact"
         class="transition-all nav-links">CONTACT US</a
       >
       <div class="relative nav-links">
@@ -201,22 +201,6 @@ import products from "@lib/products";
     } else {
       header.classList.remove("bg-header-bg");
     }
-  });
-
-  const contact = document.getElementById("contact");
-  contact.addEventListener("click", () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
-  });
-
-  const contactSidebar = document.getElementById("contact-sidebar");
-  contactSidebar.addEventListener("click", () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
   });
 
   const home = document.getElementById("home");
