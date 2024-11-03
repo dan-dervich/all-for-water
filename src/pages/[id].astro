@@ -15,7 +15,8 @@ const { id } = Astro.params;
 
 // Find the item by ID
 const item = items.find((product) => product.id.toString() === id);
-console.log(item);
+
+const descripcion = item.descripcion;
 
 if (!item) {
   throw new Error(`item with ID ${id} not found`);
@@ -33,9 +34,8 @@ if (!item) {
     </h1>
     <p
       class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
-    >
-      {item.descripcion}
-    </p>
+      set:html={descripcion}
+    />
     <div
       class="grid gap-5 w-3/4 mt-10 mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
