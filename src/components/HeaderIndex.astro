@@ -8,7 +8,7 @@ import { items } from "@lib/products";
   id="header"
   class="fixed top-0 w-full bg-transparent text-white z-50 transition-colors duration-300"
 >
-  <div class="flex justify-between items-center py-8 relative text-white">
+  <div class="flex justify-between items-center relative text-white">
     <div class="flex justify-center items-center">
       <div class="text-xl">
         <img
@@ -43,7 +43,7 @@ import { items } from "@lib/products";
         </div>
         <div
           id="productsDropdown"
-          class="absolute top-28 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter"
+          class="absolute top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter"
         >
           {
             items.map((item) => (
@@ -61,8 +61,14 @@ import { items } from "@lib/products";
           class="px-3 py-2 rounded-md text-black focus:outline-none transition-all"
           onfocus="this.placeholder=''"
           onblur="this.placeholder='Search...'"
+          id="searchInput"
         />
         <Search />
+        <div
+          id="searchResults"
+          class="absolute bg-white text-black mt-2 rounded-md shadow-lg w-full max-h-64 overflow-y-auto hidden"
+        >
+        </div>
       </div>
       <button
         id="menu-button"
@@ -194,7 +200,7 @@ import { items } from "@lib/products";
   const header = document.getElementById("header");
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY >= window.innerHeight) {
+    if (window.scrollY >= window.innerHeight - 100) {
       header.classList.add("bg-header-bg");
     } else {
       header.classList.remove("bg-header-bg");
@@ -224,6 +230,53 @@ import { items } from "@lib/products";
       !(event.target as Element).closest("#menu-button")
     ) {
       sidebar.classList.add("translate-x-full");
+    }
+  });
+
+  import { items } from "@lib/products";
+
+  // Función de búsqueda
+  function searchProducts(query) {
+    return items.filter((item) =>
+      item.nombre.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  // Evento para manejar la entrada de búsqueda
+  searchInput.addEventListener("input", (event) => {
+    const query = (event.target as HTMLInputElement).value.trim();
+    const results = searchProducts(query);
+
+    // Limpiar resultados previos
+    searchResults.innerHTML = "";
+
+    if (results.length > 0 && query) {
+      // Mostrar resultados
+      results.forEach((item) => {
+        const resultItem = document.createElement("a");
+        resultItem.href = `/${item.id}`;
+        resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
+        resultItem.textContent = item.nombre;
+
+        searchResults.appendChild(resultItem);
+      });
+      searchResults.classList.remove("hidden");
+    } else {
+      // Ocultar resultados si no hay coincidencias o el campo está vacío
+      searchResults.classList.add("hidden");
+    }
+  });
+
+  // Opcional: ocultar el contenedor de resultados cuando el usuario hace clic fuera
+  document.addEventListener("click", (event) => {
+    if (
+      !searchResults.contains(event.target as Node) &&
+      event.target !== searchInput
+    ) {
+      searchResults.classList.add("hidden");
     }
   });
 </script>

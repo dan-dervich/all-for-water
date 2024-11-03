@@ -24,7 +24,7 @@ if (!item) {
 ---
 
 <Layout title={item.nombre_url}>
-  <section class="mt-[160px] bg-white flex flex-col items-center">
+  <section class="mt-[96px] bg-white flex flex-col items-center">
     <div class="w-full flex justify-start"></div>
     <h1 class="text-header-bg font-semibold text-5xl px-5 text-center py-10">
       {
@@ -32,10 +32,11 @@ if (!item) {
           (item.nombre_url || item.nombre).slice(1)
       }
     </h1>
-    <p
+    <div
       class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
-      set:html={descripcion}
-    />
+    >
+      <div set:html={descripcion} />
+    </div>
     <div
       class="grid gap-5 w-3/4 mt-10 mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
