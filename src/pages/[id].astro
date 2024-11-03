@@ -1,49 +1,44 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import products from "../lib/products.js";
+import { items } from "../lib/products.js";
 import CardPorProducto from "@components/ui/CardPorProducto.astro";
 
 // Export `getStaticPaths` to generate dynamic routes
 export async function getStaticPaths() {
-  return products.map((product) => ({
-    params: { id: product.id.toString() },
+  return items.map((item) => ({
+    params: { id: item.id.toString() },
   }));
 }
 
 // Get the ID parameter from Astro
 const { id } = Astro.params;
 
-// Find the product by ID
-const product = products.find((product) => product.id === Number(id));
+// Find the item by ID
+const item = items.find((product) => product.id.toString() === id);
+console.log(item);
 
-if (!product) {
-  throw new Error(`Product with ID ${id} not found`);
+if (!item) {
+  throw new Error(`item with ID ${id} not found`);
 }
 ---
 
-<Layout title={product.name}>
-  <section class="mt-[104px] bg-white flex flex-col items-center">
+<Layout title={item.nombre_url}>
+  <section class="mt-[160px] bg-white flex flex-col items-center">
     <div class="w-full flex justify-start"></div>
     <h1 class="text-header-bg font-semibold text-5xl px-5 text-center py-10">
-      {product.name}
+      {
+        (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
+          (item.nombre_url || item.nombre).slice(1)
+      }
     </h1>
     <p
       class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
     >
-      {product.descripcion}
+      {item.descripcion}
     </p>
     <div
       class="grid gap-5 w-3/4 mt-10 mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
-      {
-        product.items.map((item) => (
-          <CardPorProducto
-            imgSrc={item.img}
-            text={item.name}
-            desc={item.description}
-          />
-        ))
-      }
     </div>
   </section>
 </Layout>

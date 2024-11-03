@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Search from "./icons/Search.astro";
-import products from "@lib/products";
+import { items } from "@lib/products";
 ---
 
 <header
@@ -9,8 +9,14 @@ import products from "@lib/products";
   class="fixed top-0 w-full bg-header-bg text-white z-50 transition-colors duration-300"
 >
   <div class="flex justify-between items-center py-8 relative text-white">
-    <div class="flex justify-center items-center gap-5">
-      <div class="text-xl ml-5">🌄</div>
+    <div class="flex justify-center items-center">
+      <div class="text-xl">
+        <img
+          src="/fotos/logo.png"
+          alt="Logo"
+          class="h-24 w-auto rounded-full"
+        />
+      </div>
       <h1 class="hidden sm:flex text-2xl">All For Water</h1>
     </div>
     <div class="flex flex-row gap-5 items-center px-5">
@@ -20,7 +26,7 @@ import products from "@lib/products";
           href="/"
           class="transition-all nav-links hover:cursor-pointer">HOME</a
         >
-        <a id="contact" href="#footer" class="transition-all nav-links"
+        <a id="contact" href="/contact" class="transition-all nav-links"
           >CONTACT US</a
         >
 
@@ -39,16 +45,12 @@ import products from "@lib/products";
         </div>
         <div
           id="productsDropdown"
-          class="absolute top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter"
+          class="absolute top-28 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter"
         >
           {
-            products.map((product) => (
-              <a
-                href={`/${product.id}`}
-                class="block px-4 py-2"
-                id={product.name}
-              >
-                <p class="hover:scale-110 transition-all">{product.name}</p>
+            items.map((item) => (
+              <a href={`/${item.id}`} class="block px-4 py-2" id={item.nombre}>
+                <p class="hover:scale-110 transition-all">{item.nombre}</p>
               </a>
             ))
           }
@@ -101,7 +103,7 @@ import products from "@lib/products";
       <a
         onclick="sidebar.classList.toggle('translate-x-full')"
         id="contact-sidebar"
-        href="#footer"
+        href="/contact"
         class="transition-all nav-links">CONTACT US</a
       >
       <div class="relative nav-links">
@@ -123,13 +125,9 @@ import products from "@lib/products";
         class="left-0 right-0 w-40 bg-white text-slate-500 rounded-md shadow-lg hidden flex-col gap-y-2 text-center items-center justify-center transition-all fade-enter overflow-y-auto max-h-64"
       >
         {
-          products.map((product) => (
-            <a
-              href={`/${product.id}`}
-              class="block px-4 py-2"
-              id={product.name}
-            >
-              <p class="hover:scale-110 transition-all">{product.name}</p>
+          items.map((item) => (
+            <a href={`/${item.id}`} class="block px-4 py-2" id={item.nombre}>
+              <p class="hover:scale-110 transition-all">{item.nombre}</p>
             </a>
           ))
         }
