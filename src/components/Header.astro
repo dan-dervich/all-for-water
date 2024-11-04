@@ -15,7 +15,7 @@ import { items } from "@lib/products";
           <img
             src="/fotos/logo.png"
             alt="Logo"
-            class="h-24 w-auto rounded-full"
+            class="h-24 w-24 rounded-full"
           />
         </a>
       </div>
@@ -51,7 +51,12 @@ import { items } from "@lib/products";
         >
           {
             items.map((item) => (
-              <a href={`/${item.id}`} class="block px-4 py-2" id={item.nombre}>
+              <a
+                id={item.id}
+                href={`/${item.id}`}
+                class="block px-4 py-2"
+                id={item.nombre}
+              >
                 <p class="hover:scale-110 transition-all">{item.nombre}</p>
               </a>
             ))
@@ -62,7 +67,7 @@ import { items } from "@lib/products";
         <input
           type="text"
           placeholder="Search..."
-          class="px-3 py-2 rounded-md text-black focus:outline-none transition-all"
+          class="px-3 py-2 max-w-32 sm:max-w-60 rounded-md text-black focus:outline-none transition-all"
           onfocus="this.placeholder=''"
           onblur="this.placeholder='Search...'"
           id="searchInput"
