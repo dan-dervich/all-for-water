@@ -47,7 +47,7 @@ import { items } from "@lib/products";
         </div>
         <div
           id="productsDropdown"
-          class="absolute overflow-visible top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter"
+          class="absolute top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter p-3"
         >
           {
             items.map((item) => (
@@ -127,10 +127,9 @@ import { items } from "@lib/products";
           />
         </button>
       </div>
-
       <div
         id="productsDropdownSidebar"
-        class="left-0 right-0 w-40 bg-white text-slate-500 rounded-md shadow-lg hidden flex-col gap-y-2 text-center items-center justify-center transition-all fade-enter overflow-y-auto max-h-64"
+        class="left-0 right-0 w-40 bg-white text-slate-500 rounded-md shadow-lg hidden flex-col gap-y-2 text-center items-center justify-center transition-all fade-enter overflow-auto max-h-[230px]"
       >
         {
           items.map((item) => (
