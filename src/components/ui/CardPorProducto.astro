@@ -17,7 +17,7 @@ if (/<table/.test(desc)) {
     .replace(/<\/thead>/, "</thead>")
     .replace(
       /<tr>/g,
-      '<tr><td class="border border-gray-300 border-t-1 border-l-1 border-r-1">DATA SHEETS</td>'
+      '<tr><th class="border border-gray-300 border-t-1 border-l-1 border-r-1">DATA SHEETS</th>'
     );
 }
 editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed">${editedDesc}</div>`;
