@@ -31,7 +31,6 @@ import { items } from "@lib/products";
         <a id="contact" href="/contact" class="transition-all nav-links"
           >CONTACT US</a
         >
-
         <div class="relative nav-links">
           <button
             id="products-button"
@@ -45,7 +44,7 @@ import { items } from "@lib/products";
             />
           </button>
         </div>
-        <div
+        <ul
           id="productsDropdown"
           class="absolute top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter p-3"
         >
@@ -61,7 +60,7 @@ import { items } from "@lib/products";
               </a>
             ))
           }
-        </div>
+        </ul>
       </nav>
       <div class="relative">
         <input
