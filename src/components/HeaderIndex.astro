@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Search from "./icons/Search.astro";
 import { items } from "@lib/products";
+import ProductsDropdown from "./ui/ProductsDropdown";
 ---
 
 <header
@@ -29,7 +30,6 @@ import { items } from "@lib/products";
         <a id="contact" href="/contact" class="transition-all nav-links"
           >CONTACT US</a
         >
-
         <div class="relative nav-links">
           <button
             id="products-button"
@@ -181,7 +181,7 @@ import { items } from "@lib/products";
 
   document.addEventListener("click", (event) => {
     const productsDropdownSidebar = document.getElementById(
-      "productsDropdownSidebar"
+      "productsDropdownSidebar",
     );
     if (
       !productsDropdownSidebar.classList.contains("hidden") &&
@@ -239,7 +239,7 @@ import { items } from "@lib/products";
   // Función de búsqueda
   function searchProducts(query) {
     return items.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase())
+      item.nombre.toLowerCase().includes(query.toLowerCase()),
     );
   }
 
