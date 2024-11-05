@@ -1,7 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { items } from "../lib/products.js";
+import { items } from "../lib/categories.js";
 import CardPorProducto from "@components/ui/CardPorProducto.astro";
+import { productos } from "@lib/products";
 
 // Export `getStaticPaths` to generate dynamic routes
 export async function getStaticPaths() {
@@ -21,6 +22,7 @@ const descripcion = item.descripcion;
 if (!item) {
   throw new Error(`item with ID ${id} not found`);
 }
+console.log(item.productos);
 ---
 
 <Layout title={item.nombre_url}>
@@ -38,8 +40,19 @@ if (!item) {
       <div set:html={descripcion} />
     </div>
     <div
-      class="grid gap-5 w-3/4 mt-10 mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center grid-cols-1 lg:grid-cols-4"
     >
+      {
+        productos
+          .filter((product) => item.productos.includes(product.id))
+          .map((product) => (
+            <CardPorProducto
+              imgSrc={product.fotoUrl}
+              text={product.nombre}
+              desc={product.descripcion}
+            />
+          ))
+      }
     </div>
   </section>
 </Layout>

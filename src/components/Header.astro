@@ -1,7 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import Search from "./icons/Search.astro";
-import { items } from "@lib/products";
+import { items } from "@lib/categories";
+import ProductsDropdown from "./ui/ProductsDropdown";
+import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 ---
 
 <header
@@ -31,20 +33,8 @@ import { items } from "@lib/products";
         <a id="contact" href="/contact" class="transition-all nav-links"
           >CONTACT US</a
         >
-        <div class="relative nav-links">
-          <button
-            id="products-button"
-            class="transition-all flex items-center gap-x-1"
-          >
-            PRODUCTS
-            <Icon
-              id="products-icon"
-              name="ic:baseline-arrow-drop-down"
-              class="transition-all"
-            />
-          </button>
-        </div>
-        <ul
+        <ProductsDropdown client:only items={items} />
+        <div
           id="productsDropdown"
           class="absolute top-20 mt-2 left-5 right-5 bg-white text-slate-500 rounded-md shadow-lg hidden grid grid-cols-5 gap-y-2 text-center items-center justify-center transition-all fade-enter p-3"
         >
@@ -118,92 +108,12 @@ import { items } from "@lib/products";
         href="/contact"
         class="transition-all nav-links">CONTACT US</a
       >
-      <div class="relative nav-links">
-        <button
-          id="products-button-sidebar"
-          class="transition-all flex items-center gap-x-1"
-        >
-          PRODUCTS
-          <Icon
-            id="products-icon-sidebar"
-            name="ic:baseline-arrow-drop-down"
-            class="transition-all"
-          />
-        </button>
-      </div>
-      <div
-        id="productsDropdownSidebar"
-        class="left-0 right-0 w-40 bg-white text-slate-500 rounded-md shadow-lg hidden flex-col gap-y-2 text-center items-center justify-center transition-all fade-enter overflow-auto max-h-[230px]"
-      >
-        {
-          items.map((item) => (
-            <a href={`/${item.id}`} class="block px-4 py-2" id={item.nombre}>
-              <p class="hover:scale-110 transition-all">{item.nombre}</p>
-            </a>
-          ))
-        }
-      </div>
+      <AsideProductsDropdown client:only items={items} />
     </nav>
   </aside>
 </header>
 
 <script>
-  const dropdown = document.getElementById("productsDropdown");
-  function toggleProductsDropdown() {
-    dropdown.classList.toggle("hidden");
-  }
-  document.getElementById("products-button").addEventListener("click", () => {
-    toggleProductsDropdown();
-    toggleIcon();
-  });
-  document
-    .getElementById("products-button")
-    .addEventListener("mouseenter", () => {
-      toggleProductsDropdown();
-      toggleIcon();
-    });
-  document
-    .getElementById("productsDropdown")
-    .addEventListener("mouseleave", () => {
-      toggleProductsDropdown();
-      toggleIcon();
-    });
-
-  function toggleIcon() {
-    const icon = document.getElementById("products-icon");
-    icon.classList.toggle("rotate-180");
-  }
-
-  function toggleProductsDropdownSidebar() {
-    const dropdown = document.getElementById("productsDropdownSidebar");
-    dropdown.classList.toggle("hidden");
-  }
-  document
-    .getElementById("products-button-sidebar")
-    .addEventListener("click", () => {
-      toggleProductsDropdownSidebar();
-      toggleIconSidebar();
-    });
-
-  document.addEventListener("click", (event) => {
-    const productsDropdownSidebar = document.getElementById(
-      "productsDropdownSidebar"
-    );
-    if (
-      !productsDropdownSidebar.classList.contains("hidden") &&
-      !productsDropdownSidebar.contains(event.target as Node) &&
-      !(event.target as Element).closest("#products-button-sidebar")
-    ) {
-      productsDropdownSidebar.classList.add("hidden");
-      toggleIconSidebar();
-    }
-  });
-
-  function toggleIconSidebar() {
-    const icon = document.getElementById("products-icon-sidebar");
-    icon.classList.toggle("rotate-180");
-  }
-
   const contact = document.getElementById("contact");
   contact.addEventListener("click", () => {
     window.scrollTo({
@@ -230,12 +140,12 @@ import { items } from "@lib/products";
     }
   });
 
-  import { items } from "@lib/products";
+  import { items } from "@lib/categories";
 
   // Función de búsqueda
   function searchProducts(query) {
     return items.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase())
+      item.nombre.toLowerCase().includes(query.toLowerCase()),
     );
   }
 

@@ -2,17 +2,37 @@
 const { imgSrc } = Astro.props;
 const { text } = Astro.props;
 const { desc } = Astro.props;
+
+let editedDesc = desc.replace("<strong>", "<em>").replace("</strong>", "</em>");
+if (/<table/.test(desc)) {
+  editedDesc = editedDesc
+    .replace(
+      "<table",
+      '<table class="w-full min-w-full flex justify-center border-separate border-spacing-0"'
+    )
+    .replace(
+      /<td/g,
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(/<\/thead>/, "</thead>")
+    .replace(
+      /<tr>/g,
+      '<tr><td class="border border-gray-300 border-t-1 border-l-1 border-r-1">DATA SHEETS</td>'
+    );
+}
+editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed">${editedDesc}</div>`;
 ---
 
 <button
-  class="shadow-xl shadow-violeta/40 flex justify-center items-center flex-col rounded-xl hover:scale-105 transition-all"
+  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl hover:scale-105 transition-all w-auto"
+  class:list={desc.includes("<table") ? "md:w-[600px]" : ""}
 >
   <img
     src={imgSrc}
     alt="Housing img"
-    class="h-80 w-auto sm:h-60 md:h-50 p-5"
+    class="h-auto w-auto p-5"
     loading="eager"
   />
   <h5 class="p-5 text-[#5C5D56] text-xl font-bold">{text}</h5>
-  <p class="p-2 text-[#5C5D56] text-sm">{desc}</p>
+  <p set:html={editedDesc} />
 </button>
