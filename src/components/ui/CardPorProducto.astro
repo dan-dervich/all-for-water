@@ -2,6 +2,9 @@
 const { imgSrc } = Astro.props;
 const { text } = Astro.props;
 const { desc } = Astro.props;
+
+let editedDesc = desc.replace("<strong>", "<em>").replace("</strong>", "</em>");
+editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed border-t border-gray-300">${editedDesc}</div>`;
 ---
 
 <button
@@ -14,5 +17,5 @@ const { desc } = Astro.props;
     loading="eager"
   />
   <h5 class="p-5 text-[#5C5D56] text-xl font-bold">{text}</h5>
-  <p class="p-2 text-[#5C5D56] text-sm">{desc}</p>
+  <p set:html={editedDesc} />
 </button>
