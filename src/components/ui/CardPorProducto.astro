@@ -2,29 +2,35 @@
 const { imgSrc } = Astro.props;
 const { text } = Astro.props;
 const { desc } = Astro.props;
+const { pdfs } = Astro.props;
 
+const numbersArray = [1, 2, 3, 4, 5]; // Array de números que deseas usar
+let index = 0;
+let isFirstRow = true; // Variable para identificar la primera fila
 let editedDesc = desc.replace("<strong>", "<em>").replace("</strong>", "</em>");
 if (/<table/.test(desc)) {
   editedDesc = editedDesc
     .replace(
       "<table",
-      '<table class="w-full min-w-full flex justify-center border-separate border-spacing-0"'
+      '<table class="w-full min-w-full flex justify-center border-separate border-spacing-0"',
     )
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"',
     )
     .replace(/<\/thead>/, "</thead>")
-    .replace(
-      /<tr>/g,
-      '<tr><th class="border border-gray-300 border-t-1 border-l-1 border-r-1">DATA SHEETS</th>'
-    );
+    .replace(/<\/tr>/g, () => {
+      const content = isFirstRow ? "DATA SHEETS" : numbersArray[index];
+      if (!isFirstRow) index = (index + 1) % numbersArray.length;
+      isFirstRow = false;
+      return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">${content}</th></tr>`;
+    });
 }
 editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed">${editedDesc}</div>`;
 ---
 
 <button
-  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl hover:scale-105 transition-all w-auto"
+  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl hover:scale-105 transition-all w-[325px]"
   class:list={desc.includes("<table") ? "md:w-[600px]" : ""}
 >
   <img
