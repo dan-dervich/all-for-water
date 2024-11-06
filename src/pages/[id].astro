@@ -3,9 +3,10 @@ import Layout from "@layouts/Layout.astro";
 import { items } from "../lib/categories.js";
 import CardPorProducto from "@components/ui/CardPorProducto.astro";
 import { productos } from "@lib/products";
-import { pdfs_carta } from "@lib/pdfs_carta";
+import pdfs_carta from "@lib/pdfs_carta";
+import pdfs_tabla from "@lib/pdfs_tabla";
+import { segmentos } from "@lib/segmentos";
 
-// Export `getStaticPaths` to generate dynamic routes
 export async function getStaticPaths() {
   return items.map((item) => ({
     params: { id: item.id.toString() },
@@ -17,7 +18,7 @@ const { id } = Astro.params;
 const item = items.find((product) => product.id.toString() === id);
 
 const filteredProductos = productos.filter((product) =>
-  item.productos.includes(product.id),
+  item.productos.includes(product.id)
 );
 
 const descripcion = item.descripcion;
@@ -25,12 +26,10 @@ const descripcion = item.descripcion;
 if (!item) {
   throw new Error(`item with ID ${id} not found`);
 }
-console.log(item.productos);
 ---
 
 <Layout title={item.nombre_url}>
   <section class="mt-[96px] bg-white flex flex-col items-center">
-    <div class="w-full flex justify-start"></div>
     <h1 class="text-header-bg font-semibold text-5xl px-5 text-center py-10">
       {
         (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
@@ -42,17 +41,31 @@ console.log(item.productos);
     >
       <div set:html={descripcion} />
     </div>
+    {filteredProductos.map((product) => <h2>{product.marcas}</h2>)}
     <div
       class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center grid-cols-1 lg:grid-cols-4"
     >
       {
-        filteredProductos.map((product) => (
-          <CardPorProducto
-            imgSrc={product.fotoUrl}
-            text={product.nombre}
-            desc={product.descripcion}
-          />
-        ))
+        filteredProductos.map((product) => {
+          const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+            product.pdfs_tabla.includes(pdf.id)
+          );
+          const productPdfs_carta = pdfs_carta.filter((pdf) =>
+            product.pdfs_carta.includes(pdf.id)
+          );
+          const productSegmentos = segmentos.filter((segmento) =>
+            product.segmentos.includes(segmento.id)
+          );
+          return (
+            <CardPorProducto
+              imgSrc={product.fotoUrl}
+              text={product.nombre}
+              desc={product.descripcion}
+              pdfs_tabla={productPdfs_tabla}
+              pdfs_carta={productPdfs_carta}
+            />
+          );
+        })
       }
     </div>
   </section>

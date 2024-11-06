@@ -2,14 +2,14 @@ import PocketBase from "pocketbase";
 
 const pb = new PocketBase("https://allforwater.pockethost.io");
 
-let productos = [];
+let segmentos = [];
 
 try {
   await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
-  const records = await pb.collection("productos").getList();
-  productos = records.items.map((item) => {
-    const collectionId = "productos"; // ID de la colección
+  const records = await pb.collection("segmentos").getList();
+  segmentos = records.items.map((item) => {
+    const collectionId = "segmentos"; // ID de la colección
     const recordId = item.id; // ID del registro actual
     const firstFilename = item.foto;
 
@@ -28,4 +28,4 @@ try {
   console.error("Error al autenticarse o al obtener el registro:", error);
 }
 
-export { productos };
+export { segmentos };

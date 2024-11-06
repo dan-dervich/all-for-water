@@ -2,35 +2,60 @@
 const { imgSrc } = Astro.props;
 const { text } = Astro.props;
 const { desc } = Astro.props;
-const { pdfs } = Astro.props;
+const { pdfs_carta } = Astro.props;
+const { pdfs_tabla } = Astro.props;
 
-const numbersArray = [1, 2, 3, 4, 5]; // Array de números que deseas usar
 let index = 0;
-let isFirstRow = true; // Variable para identificar la primera fila
+let isFirstRow = true;
 let editedDesc = desc.replace("<strong>", "<em>").replace("</strong>", "</em>");
+
 if (/<table/.test(desc)) {
   editedDesc = editedDesc
     .replace(
       "<table",
-      '<table class="w-full min-w-full flex justify-center border-separate border-spacing-0"',
+      '<table class="w-full border-t border-l border-r border-gray-300 text-center"'
     )
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"',
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
     .replace(/<\/thead>/, "</thead>")
     .replace(/<\/tr>/g, () => {
-      const content = isFirstRow ? "DATA SHEETS" : numbersArray[index];
-      if (!isFirstRow) index = (index + 1) % numbersArray.length;
-      isFirstRow = false;
-      return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">${content}</th></tr>`;
+      if (pdfs_tabla.length > 0) {
+        // Determinar el contenido del enlace
+        const content = isFirstRow
+          ? "DATA SHEET"
+          : pdfs_tabla[index]?.pdfUrl || "#";
+        const linkText = isFirstRow ? "DATA SHEET" : "VIEW";
+        const estilos = isFirstRow
+          ? ""
+          : "text-blue-500 hover:underline transition-all";
+
+        // Cambiar al siguiente índice después de la primera fila
+        if (!isFirstRow) index = (index + 1) % pdfs_tabla.length;
+        isFirstRow = false;
+
+        // Devolver la fila de la tabla con enlace
+        return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
+            <a class=${estilos} href="${content}" target="_blank" rel="noopener noreferrer">${linkText}</a>
+          </th></tr>`;
+      } else {
+        return "</tr>";
+      }
     });
+  if (pdfs_carta.length > 0) {
+    editedDesc += "<br>";
+    pdfs_carta.forEach((pdf) => {
+      editedDesc += `<a class="text-blue-500 hover:underline transition-all" href="${pdf.pdfUrl}" target="_blank" rel="noopener noreferrer">DATA SHEET</a><br>`;
+    });
+  }
 }
+
 editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed">${editedDesc}</div>`;
 ---
 
-<button
-  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl hover:scale-105 transition-all w-[325px]"
+<div
+  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl w-[325px]"
   class:list={desc.includes("<table") ? "md:w-[600px]" : ""}
 >
   <img
@@ -41,4 +66,4 @@ editedDesc = `<div class="p-4 text-gray-800 font-medium leading-relaxed">${edite
   />
   <h5 class="p-5 text-[#5C5D56] text-xl font-bold">{text}</h5>
   <p set:html={editedDesc} />
-</button>
+</div>
