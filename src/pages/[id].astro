@@ -25,6 +25,8 @@ const filteredProductos = productos.filter((product) =>
   item.productos.includes(product.id)
 );
 
+console.log("productos:", filteredProductos);
+
 const filteredSegmentos = filteredProductos.flatMap((product) =>
   segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
 );
@@ -38,6 +40,30 @@ const isAnyProductWithPTag = filteredProductos.some((product) =>
 );
 
 const descripcion = item.descripcion;
+
+let editedDesc = descripcion;
+if (/<table/.test(descripcion)) {
+  editedDesc = editedDesc
+    .replace(
+      "<div",
+      '<div class="flex flex-col justify-center items-center w-11/12 text-gray-800 font-medium leading-relaxed"'
+    )
+    .replace(
+      "<thead>",
+      '<thead class="bg-gray-200 border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(
+      "<table",
+      '<table class="text-center justify-center items-center w-full"'
+    )
+    .replace(
+      /<td/g,
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(/<\/thead>/, "</thead>");
+}
+
+editedDesc = `<div class="flex justify-center items-center w-full text-gray-800 font-medium leading-relaxed gap-10">${editedDesc}</div>`;
 ---
 
 <Layout title={item.nombre_url}>
@@ -49,11 +75,11 @@ const descripcion = item.descripcion;
       }
     </h1>
     <div
-      class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
+      class="max-w-[1000px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
     >
-      <div set:html={descripcion} />
+      <div set:html={editedDesc} />
     </div>
-    <div class="flex flex-wrap justify-center gap-4 m-5">
+    <div class="flex flex-wrap justify-center gap-5 m-5">
       {
         uniqueSegment.map((segment) =>
           segment.marca ? (
@@ -79,7 +105,7 @@ const descripcion = item.descripcion;
       }
     </div>
     <div
-      class={`w-3/4 mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" : "flex flex-col items-center w-3/4"}`}
+      class={`w-3/4 mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" : "flex flex-col items-center w-3/4 gap-5"}`}
     >
       {
         filteredProductos.map((product) => {
