@@ -17,15 +17,23 @@ const { id } = Astro.params;
 
 const item = items.find((product) => product.id.toString() === id);
 
+if (!item) {
+  throw new Error(`Item with ID ${id} not found`);
+}
+
 const filteredProductos = productos.filter((product) =>
   item.productos.includes(product.id)
 );
 
-const descripcion = item.descripcion;
+const filteredSegmentos = filteredProductos.flatMap((product) =>
+  segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
+);
 
-if (!item) {
-  throw new Error(`item with ID ${id} not found`);
-}
+const uniqueSegment = [
+  ...new Set(filteredSegmentos.map((segmento) => segmento)),
+];
+
+const descripcion = item.descripcion;
 ---
 
 <Layout title={item.nombre_url}>
@@ -41,9 +49,20 @@ if (!item) {
     >
       <div set:html={descripcion} />
     </div>
-    {filteredProductos.map((product) => <h2>{product.marcas}</h2>)}
+    <div class="flex flex-wrap justify-center gap-4 m-5">
+      {
+        uniqueSegment.map((segment) => (
+          <button
+            class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
+            data-segment-id={segment.id}
+          >
+            {segment.nombre}
+          </button>
+        ))
+      }
+    </div>
     <div
-      class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center grid-cols-1 lg:grid-cols-4"
+      class="flex gap-5 w-3/4 mt-10 mb-20 justify-center items-center flex-col"
     >
       {
         filteredProductos.map((product) => {
@@ -53,12 +72,10 @@ if (!item) {
           const productPdfs_carta = pdfs_carta.filter((pdf) =>
             product.pdfs_carta.includes(pdf.id)
           );
-          const productSegmentos = segmentos.filter((segmento) =>
-            product.segmentos.includes(segmento.id)
-          );
           return (
             <CardPorProducto
-              imgSrc={product.fotoUrl}
+              id={`${product.segmentos},${product.id}`}
+              imgSrc={product.fotoUrl || "vacio"}
               text={product.nombre}
               desc={product.descripcion}
               pdfs_tabla={productPdfs_tabla}
@@ -69,4 +86,24 @@ if (!item) {
       }
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll(".segment-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const segmentId = button.getAttribute("data-segment-id");
+        const products = document.querySelectorAll("[id]");
+
+        let targetProduct = null;
+        products.forEach((product) => {
+          if (product.id.includes(segmentId) && !targetProduct) {
+            targetProduct = product;
+          }
+        });
+
+        if (targetProduct) {
+          targetProduct.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  </script>
 </Layout>
