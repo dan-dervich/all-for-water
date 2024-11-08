@@ -16,10 +16,7 @@ if (/<table/.test(desc)) {
       "<thead>",
       '<thead class="bg-gray-200 border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
-    .replace(
-      "<table",
-      '<table class="w-full border-t border-l border-r border-gray-300 text-center justify-center items-center"'
-    )
+    .replace("<table", '<table class="text-center justify-center items-center w-full"')
     .replace(
       /<td/g,
       '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'

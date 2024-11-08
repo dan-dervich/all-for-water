@@ -24,6 +24,7 @@ try {
       nombre: item.nombre.toUpperCase(), // Convertir el nombre a mayúsculas
     };
   });
+  console.log("Segmentos obtenidos:", segmentos);
 } catch (error) {
   console.error("Error al autenticarse o al obtener el registro:", error);
 }
