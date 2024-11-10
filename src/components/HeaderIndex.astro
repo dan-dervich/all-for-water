@@ -155,7 +155,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
       // Mostrar resultados
       results.forEach((item) => {
         const resultItem = document.createElement("a");
-        resultItem.href = `/${item.id}`;
+        resultItem.href = `/${item.nombre}`;
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
 

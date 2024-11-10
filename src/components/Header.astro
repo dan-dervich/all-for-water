@@ -42,7 +42,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
             items.map((item) => (
               <a
                 id={item.id}
-                href={`/${item.id}`}
+                href={`/${item.nombre}`}
                 class="block px-4 py-2"
                 id={item.nombre}
               >
@@ -50,7 +50,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
               </a>
             ))
           }
-        </ul>
+        </div>
       </nav>
       <div class="relative">
         <input
@@ -145,7 +145,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   // Función de búsqueda
   function searchProducts(query) {
     return items.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase()),
+      item.nombre.toLowerCase().includes(query.toLowerCase())
     );
   }
 
@@ -164,7 +164,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
       // Mostrar resultados
       results.forEach((item) => {
         const resultItem = document.createElement("a");
-        resultItem.href = `/${item.id}`;
+        resultItem.href = `/${item.nombre}`;
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
 
