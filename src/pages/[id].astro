@@ -6,6 +6,7 @@ import { productos } from "@lib/products";
 import pdfs_carta from "@lib/pdfs_carta";
 import pdfs_tabla from "@lib/pdfs_tabla";
 import { segmentos } from "@lib/segmentos";
+import { descripciones_foto } from "@lib/descripcion_foto";
 
 export async function getStaticPaths() {
   return items.map((item) => ({
@@ -25,10 +26,12 @@ const filteredProductos = productos.filter((product) =>
   item.productos.includes(product.id)
 );
 
-console.log("productos:", filteredProductos);
-
 const filteredSegmentos = filteredProductos.flatMap((product) =>
   segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
+);
+
+const filteredDescFoto = descripciones_foto.filter((desc) =>
+  item.desc.includes(desc.id)
 );
 
 const uniqueSegment = [
@@ -42,19 +45,30 @@ const isAnyProductWithPTag = filteredProductos.some((product) =>
 const descripcion = item.descripcion;
 
 let editedDesc = descripcion;
-if (/<table/.test(descripcion)) {
-  editedDesc = editedDesc
-    .replace(
-      "<div",
-      '<div class="flex flex-col justify-center items-center w-11/12 text-gray-800 font-medium leading-relaxed"'
-    )
+
+let editedDescFoto =
+  filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
+
+editedDescFoto = editedDescFoto.split("</div>");
+
+editedDescFoto[0] = editedDescFoto[0].replace(
+  "<div>",
+  "<div class='flex flex-col justify-center text-center items-center'>"
+);
+
+if (editedDescFoto[1] == undefined) {
+  editedDescFoto[1] = "";
+}
+
+if (/<table/.test(editedDescFoto[1])) {
+  editedDescFoto[1] = editedDescFoto[1]
     .replace(
       "<thead>",
-      '<thead class="bg-gray-200 border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
     .replace(
       "<table",
-      '<table class="text-center justify-center items-center w-full"'
+      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
     )
     .replace(
       /<td/g,
@@ -62,12 +76,13 @@ if (/<table/.test(descripcion)) {
     )
     .replace(/<\/thead>/, "</thead>");
 }
-
-editedDesc = `<div class="flex justify-center items-center w-full text-gray-800 font-medium leading-relaxed gap-10">${editedDesc}</div>`;
+editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
 <Layout title={item.nombre_url}>
-  <section class="mt-[96px] bg-white flex flex-col items-center">
+  <section
+    class="mt-[96px] bg-white flex flex-col items-center justify-center text-center"
+  >
     <h1 class="text-header-bg font-semibold text-5xl px-5 text-center py-10">
       {
         (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
@@ -75,9 +90,19 @@ editedDesc = `<div class="flex justify-center items-center w-full text-gray-800 
       }
     </h1>
     <div
-      class="max-w-[1000px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
+      class="max-w-[1000px] text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
     >
-      <div set:html={editedDesc} />
+      <div class="flex justify-center items-center flex-col md:flex-row gap-5">
+        {
+          filteredDescFoto[0] && (
+            <img class="w-1/2 h-auto" src={filteredDescFoto[0].fotoUrl} />
+          )
+        }
+        <div set:html={editedDesc || editedDescFoto[0]} />
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <div set:html={editedDescFoto[1]} />
     </div>
     <div class="flex flex-wrap justify-center gap-5 m-5">
       {
@@ -105,7 +130,7 @@ editedDesc = `<div class="flex justify-center items-center w-full text-gray-800 
       }
     </div>
     <div
-      class={`w-3/4 mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" : "flex flex-col items-center w-3/4 gap-5"}`}
+      class={`w-3/4 mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center" : "flex flex-col w-3/4 gap-5 justify-center items-center"}`}
     >
       {
         filteredProductos.map((product) => {
@@ -132,21 +157,23 @@ editedDesc = `<div class="flex justify-center items-center w-full text-gray-800 
   </section>
 
   <script>
-    document.querySelectorAll(".segment-button").forEach((button) => {
-      button.addEventListener("click", () => {
-        const segmentId = button.getAttribute("data-segment-id");
-        const products = document.querySelectorAll("[id]");
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".segment-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const segmentId = button.getAttribute("data-segment-id");
+          const products = document.querySelectorAll("[id]");
 
-        let targetProduct = null;
-        products.forEach((product) => {
-          if (product.id.includes(segmentId) && !targetProduct) {
-            targetProduct = product;
+          let targetProduct = null;
+          products.forEach((product) => {
+            if (product.id.includes(segmentId) && !targetProduct) {
+              targetProduct = product;
+            }
+          });
+
+          if (targetProduct) {
+            targetProduct.scrollIntoView({ behavior: "smooth" });
           }
         });
-
-        if (targetProduct) {
-          targetProduct.scrollIntoView({ behavior: "smooth" });
-        }
       });
     });
   </script>
