@@ -108,23 +108,23 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       {
         uniqueSegment.map((segment) =>
           segment.marca ? (
-            <button
+            <a
               class="segment-button hover:scale-105 transition-all shadow-md"
-              data-segment-id={segment.id}
+              href={`#${segment.id}`}
             >
               <img
                 src={segment.fotoUrl}
                 alt={segment.nombre}
                 class="w-auto h-24 object-cover rounded-md"
               />
-            </button>
+            </a>
           ) : (
-            <button
+            <a
               class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
-              data-segment-id={segment.id}
+              href={`#${segment.id}`}
             >
               {segment.nombre}
-            </button>
+            </a>
           )
         )
       }
@@ -143,7 +143,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 
           return (
             <CardPorProducto
-              id={`${product.segmentos},${product.id}`}
+              id={product.segmentos}
               imgSrc={product.fotoUrl || "vacio"}
               text={product.nombre}
               desc={product.descripcion}
@@ -156,25 +156,9 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
     </div>
   </section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".segment-button").forEach((button) => {
-        button.addEventListener("click", () => {
-          const segmentId = button.getAttribute("data-segment-id");
-          const products = document.querySelectorAll("[id]");
-
-          let targetProduct = null;
-          products.forEach((product) => {
-            if (product.id.includes(segmentId) && !targetProduct) {
-              targetProduct = product;
-            }
-          });
-
-          if (targetProduct) {
-            targetProduct.scrollIntoView({ behavior: "smooth" });
-          }
-        });
-      });
-    });
-  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </Layout>

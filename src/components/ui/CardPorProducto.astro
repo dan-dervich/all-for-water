@@ -16,7 +16,10 @@ if (/<table/.test(desc)) {
       "<thead>",
       '<thead class="bg-gray-200 border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
-    .replace("<table", '<table class="text-center justify-center items-center w-full"')
+    .replace(
+      "<table",
+      '<table class="text-center justify-center items-center w-full"'
+    )
     .replace(
       /<td/g,
       '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
@@ -46,7 +49,7 @@ if (/<table/.test(desc)) {
       }
     });
 }
-editedDesc = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
+editedDesc = `<div class="flex justify-center items-center text-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
 if (pdfs_carta.length > 0) {
   editedDesc += "<br>";
   pdfs_carta.forEach((pdf) => {
