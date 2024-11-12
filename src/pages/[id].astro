@@ -58,8 +58,6 @@ if (editedDescFoto[1] == undefined) {
   editedDescFoto[1] = ``;
 }
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
-console.log(editedDescFoto[0]);
-console.log(editedDescFoto[1]);
 
 if (/<table/.test(editedDescFoto[1])) {
   editedDescFoto[1] = editedDescFoto[1]
@@ -83,7 +81,7 @@ console.log(editedDescFoto[1]);
 
 <Layout title={item.nombre}>
   <section
-    class="mt-[96px] bg-white flex flex-col items-center justify-center text-center p-2"
+    class="mt-[96px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
   >
     <h1 class="text-header-bg font-semibold text-5xl px-5 text-center py-10">
       {
@@ -106,54 +104,109 @@ console.log(editedDescFoto[1]);
     <div class="flex flex-col justify-center items-center">
       <div set:html={editedDescFoto[1]} />
     </div>
+
     <div class="flex flex-wrap justify-center gap-5 m-5">
       {
-        uniqueSegment.map((segment) =>
-          segment.marca ? (
-            <a
-              class="segment-button hover:scale-105 transition-all shadow-md"
-              href={`#${segment.id}`}
-            >
-              <img
-                src={segment.fotoUrl}
-                alt={segment.nombre}
-                class="w-auto h-24 object-cover rounded-md"
-              />
-            </a>
-          ) : (
-            <a
-              class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
-              href={`#${segment.id}`}
-            >
-              {segment.nombre}
-            </a>
-          ),
-        )
+        uniqueSegment.length > 0 &&
+          uniqueSegment.map((segment) =>
+            segment.marca ? (
+              <a
+                class="segment-button hover:scale-105 transition-all shadow-md"
+                href={"#segmento-" + segment.nombre}
+              >
+                <img
+                  src={segment.fotoUrl}
+                  alt={segment.nombre}
+                  class="w-auto h-24 object-cover rounded-md"
+                />
+              </a>
+            ) : (
+              <a
+                class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
+                href={`#${segment.id}`}
+              >
+                {segment.nombre}
+              </a>
+            ),
+          )
       }
     </div>
-    <div
-      class={`sm:w-3/4 w-full mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-start" : "flex flex-col w-3/4 gap-5 justify-center items-start"}`}
-    >
-      {
-        filteredProductos.map((product) => {
-          const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-            product.pdfs_tabla.includes(pdf.id),
-          );
-          const productPdfs_carta = pdfs_carta.filter((pdf) =>
-            product.pdfs_carta.includes(pdf.id),
-          );
 
-          return (
-            <CardPorProducto
-              id={product.segmentos}
-              imgSrc={product.fotoUrl || "vacio"}
-              text={product.nombre}
-              desc={product.descripcion}
-              pdfs_tabla={productPdfs_tabla}
-              pdfs_carta={productPdfs_carta}
-            />
-          );
-        })
+    <div class="w-full mt-10 mb-20">
+      {
+        uniqueSegment.length > 0 ? (
+          uniqueSegment.map((segment) => {
+            const productosPorSegmento = filteredProductos.filter((product) =>
+              product.segmentos.includes(segment.id),
+            );
+
+            if (productosPorSegmento.length > 0) {
+              return (
+                <section id={segment.id} class="mb-10">
+                  <h2
+                    id={"segmento-" + segment.nombre}
+                    class="text-header-bg font-semibold text-5xl px-5 text-start py-10"
+                  >
+                    {segment.nombre}
+                  </h2>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center sm:items-center items-start w-full">
+                    {productosPorSegmento.map((product) => {
+                      const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+                        product.pdfs_tabla.includes(pdf.id),
+                      );
+                      const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                        product.pdfs_carta.includes(pdf.id),
+                      );
+
+                      return (
+                        <CardPorProducto
+                          key={product.id}
+                          id={product.segmentos}
+                          imgSrc={product.fotoUrl || "vacio"}
+                          text={product.nombre}
+                          desc={product.descripcion}
+                          pdfs_tabla={productPdfs_tabla}
+                          pdfs_carta={productPdfs_carta}
+                        />
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            }
+
+            return null;
+          })
+        ) : (
+          <div
+            class={`${
+              isAnyProductWithPTag
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center sm:items-start w-full"
+                : "flex flex-col w-3/4 gap-5 justify-center items-center"
+            }`}
+          >
+            {filteredProductos.map((product) => {
+              const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+                product.pdfs_tabla.includes(pdf.id),
+              );
+              const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                product.pdfs_carta.includes(pdf.id),
+              );
+
+              return (
+                <CardPorProducto
+                  key={product.id}
+                  id={product.segmentos}
+                  imgSrc={product.fotoUrl || "vacio"}
+                  text={product.nombre}
+                  desc={product.descripcion}
+                  pdfs_tabla={productPdfs_tabla}
+                  pdfs_carta={productPdfs_carta}
+                />
+              );
+            })}
+          </div>
+        )
       }
     </div>
   </section>
