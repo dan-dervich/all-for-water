@@ -1,5 +1,6 @@
 import Fuse from "fuse.js";
 import { useState } from "react";
+import { useHistory } from "react-router-dom"; // Importa useHistory si estás usando react-router-dom
 
 // Configs fuse.js
 // https://fusejs.io/api/options.html
@@ -13,6 +14,7 @@ const options = {
 function Search({ searchList }) {
   // User's input
   const [query, setQuery] = useState("");
+  const history = useHistory(); // Usa useHistory para redirigir
 
   const fuse = new Fuse(searchList, options);
 
@@ -25,6 +27,12 @@ function Search({ searchList }) {
   function handleOnSearch({ target = {} }) {
     const { value } = target;
     setQuery(value);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter" && posts.length > 0) {
+      history.push(`/${posts[0].frontmatter.slug}`);
+    }
   }
 
   return (
@@ -59,6 +67,7 @@ function Search({ searchList }) {
           id="search"
           value={query}
           onChange={handleOnSearch}
+          onKeyDown={handleKeyDown}
           className="block w-full p-4 pl-10 text-sm 
                                 text-gray-900 
                                border border-gray-300
@@ -81,7 +90,7 @@ function Search({ searchList }) {
       <ul className="list-none">
         {posts &&
           posts.map((post) => (
-            <li className="py-2">
+            <li className="py-2" key={post.frontmatter.slug}>
               <a
                 className="text-lg text-blue-700 hover:text-blue-900 hover:underline underline-offset-2"
                 href={`/${post.frontmatter.slug}`}
