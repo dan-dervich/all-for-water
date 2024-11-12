@@ -23,15 +23,15 @@ if (!item) {
 }
 
 const filteredProductos = productos.filter((product) =>
-  item.productos.includes(product.id)
+  item.productos.includes(product.id),
 );
 
 const filteredSegmentos = filteredProductos.flatMap((product) =>
-  segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
+  segmentos.filter((segmento) => product.segmentos.includes(segmento.id)),
 );
 
 const filteredDescFoto = descripciones_foto.filter((desc) =>
-  item.desc.includes(desc.id)
+  item.desc.includes(desc.id),
 );
 
 const uniqueSegment = [
@@ -39,7 +39,7 @@ const uniqueSegment = [
 ];
 
 const isAnyProductWithPTag = filteredProductos.some((product) =>
-  product.descripcion.includes("<p>")
+  product.descripcion.includes("<p>"),
 );
 
 const descripcion = item.descripcion;
@@ -51,30 +51,34 @@ editedDescFoto = editedDescFoto.split("</div>");
 
 editedDescFoto[0] = editedDescFoto[0].replace(
   "<div>",
-  "<div class='flex flex-col justify-center text-center items-center'>"
+  "<div class='flex flex-col justify-center text-center items-center'>",
 );
 
 if (editedDescFoto[1] == undefined) {
-  editedDescFoto[1] = "";
+  editedDescFoto[1] = ``;
 }
+editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
+console.log(editedDescFoto[0]);
+console.log(editedDescFoto[1]);
 
 if (/<table/.test(editedDescFoto[1])) {
   editedDescFoto[1] = editedDescFoto[1]
     .replace(
       "<thead>",
-      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"',
     )
     .replace(
       "<table",
-      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
+      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"',
     )
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"',
     )
     .replace(/<\/thead>/, "</thead>");
 }
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
+console.log(editedDescFoto[1]);
 ---
 
 <Layout title={item.nombre}>
@@ -90,7 +94,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
     <div
       class="max-w-[1000px] text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
     >
-      <div class="flex justify-center items-center flex-col md:flex-row gap-5">
+      <div class="flex justify-center items-center md:flex-row flex-col gap-5">
         {
           filteredDescFoto[0] && (
             <img class="w-1/2 h-auto" src={filteredDescFoto[0].fotoUrl} />
@@ -123,20 +127,20 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
             >
               {segment.nombre}
             </a>
-          )
+          ),
         )
       }
     </div>
     <div
-      class={`sm:w-3/4 w-full mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center" : "flex flex-col w-3/4 gap-5 justify-center items-center"}`}
+      class={`sm:w-3/4 w-full mt-10 mb-20 ${isAnyProductWithPTag ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-start" : "flex flex-col w-3/4 gap-5 justify-center items-start"}`}
     >
       {
         filteredProductos.map((product) => {
           const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-            product.pdfs_tabla.includes(pdf.id)
+            product.pdfs_tabla.includes(pdf.id),
           );
           const productPdfs_carta = pdfs_carta.filter((pdf) =>
-            product.pdfs_carta.includes(pdf.id)
+            product.pdfs_carta.includes(pdf.id),
           );
 
           return (
