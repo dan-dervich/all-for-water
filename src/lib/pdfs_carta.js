@@ -7,7 +7,7 @@ let pdfs_carta = [];
 try {
   await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
-  pdfs_carta = await pb.collection("pdfs_carta").getList();
+  pdfs_carta = await pb.collection("pdfs_carta").getList(0, 100);
   pdfs_carta = pdfs_carta.items;
 
   // Añadir una URL completa para cada archivo

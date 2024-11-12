@@ -23,15 +23,15 @@ if (!item) {
 }
 
 const filteredProductos = productos.filter((product) =>
-  item.productos.includes(product.id),
+  item.productos.includes(product.id)
 );
 
 const filteredSegmentos = filteredProductos.flatMap((product) =>
-  segmentos.filter((segmento) => product.segmentos.includes(segmento.id)),
+  segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
 );
 
 const filteredDescFoto = descripciones_foto.filter((desc) =>
-  item.desc.includes(desc.id),
+  item.desc.includes(desc.id)
 );
 
 const uniqueSegment = [
@@ -39,7 +39,7 @@ const uniqueSegment = [
 ];
 
 const isAnyProductWithPTag = filteredProductos.some((product) =>
-  product.descripcion.includes("<p>"),
+  product.descripcion.includes("<p>")
 );
 
 const descripcion = item.descripcion;
@@ -51,7 +51,7 @@ editedDescFoto = editedDescFoto.split("</div>");
 
 editedDescFoto[0] = editedDescFoto[0].replace(
   "<div>",
-  "<div class='flex flex-col justify-center text-center items-center'>",
+  "<div class='flex flex-col justify-center text-center items-center'>"
 );
 
 if (editedDescFoto[1] == undefined) {
@@ -63,15 +63,15 @@ if (/<table/.test(editedDescFoto[1])) {
   editedDescFoto[1] = editedDescFoto[1]
     .replace(
       "<thead>",
-      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"',
+      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
     .replace(
       "<table",
-      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"',
+      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
     )
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"',
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
     )
     .replace(/<\/thead>/, "</thead>");
 }
@@ -127,7 +127,7 @@ console.log(editedDescFoto[1]);
               >
                 {segment.nombre}
               </a>
-            ),
+            )
           )
       }
     </div>
@@ -137,7 +137,7 @@ console.log(editedDescFoto[1]);
         uniqueSegment.length > 0 ? (
           uniqueSegment.map((segment) => {
             const productosPorSegmento = filteredProductos.filter((product) =>
-              product.segmentos.includes(segment.id),
+              product.segmentos.includes(segment.id)
             );
 
             if (productosPorSegmento.length > 0) {
@@ -149,13 +149,13 @@ console.log(editedDescFoto[1]);
                   >
                     {segment.nombre}
                   </h2>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center sm:items-center items-start w-full">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-start w-full">
                     {productosPorSegmento.map((product) => {
                       const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-                        product.pdfs_tabla.includes(pdf.id),
+                        product.pdfs_tabla.includes(pdf.id)
                       );
                       const productPdfs_carta = pdfs_carta.filter((pdf) =>
-                        product.pdfs_carta.includes(pdf.id),
+                        product.pdfs_carta.includes(pdf.id)
                       );
 
                       return (
@@ -180,17 +180,17 @@ console.log(editedDescFoto[1]);
         ) : (
           <div
             class={`${
-              isAnyProductWithPTag
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center sm:items-start w-full"
-                : "flex flex-col w-3/4 gap-5 justify-center items-center"
+              filteredProductos.length > 1
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-start w-full"
+                : "flex flex-col gap-5 justify-center items-center w-full"
             }`}
           >
             {filteredProductos.map((product) => {
               const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-                product.pdfs_tabla.includes(pdf.id),
+                product.pdfs_tabla.includes(pdf.id)
               );
               const productPdfs_carta = pdfs_carta.filter((pdf) =>
-                product.pdfs_carta.includes(pdf.id),
+                product.pdfs_carta.includes(pdf.id)
               );
 
               return (
