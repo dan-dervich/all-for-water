@@ -133,6 +133,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   import { productos } from "@lib/products";
   import { items } from "@lib/categories";
+  const categories = items;
 
   // Función de búsqueda
   function searchProducts(query) {
@@ -158,8 +159,8 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
         const resultItem = document.createElement("a");
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
-        // const category = findCategoryByProductId(item.id);
-        // resultItem.href = `/${category.nombre}`;
+        const category = findCategoryByProductId(item.id);
+        resultItem.href = `/${category.nombre}`;
 
         searchResults.appendChild(resultItem);
       });
@@ -172,8 +173,8 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   // Buscar categoría por ID de producto
   function findCategoryByProductId(productId) {
-    for (const category of items) {
-      if (category.productos.some((producto) => producto.id === productId)) {
+    for (const category of categories) {
+      if (category.productos.includes(productId)) {
         return category;
       }
     }
