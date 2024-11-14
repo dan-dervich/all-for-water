@@ -132,6 +132,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   });
 
   import { productos } from "@lib/products";
+  import { items } from "@lib/categories";
 
   // Función de búsqueda
   function searchProducts(query) {
@@ -151,15 +152,14 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
     // Limpiar resultados previos
     searchResults.innerHTML = "";
 
-    console.log("hola");
     if (results.length > 0 && query) {
       // Mostrar resultados
       results.forEach((item) => {
-        console.log("hola", item);
         const resultItem = document.createElement("a");
-        resultItem.href = `/search?query=${query}`;
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
+        // const category = findCategoryByProductId(item.id);
+        // resultItem.href = `/${category.nombre}`;
 
         searchResults.appendChild(resultItem);
       });
@@ -169,6 +169,16 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
       searchResults.classList.add("hidden");
     }
   });
+
+  // Buscar categoría por ID de producto
+  function findCategoryByProductId(productId) {
+    for (const category of items) {
+      if (category.productos.some((producto) => producto.id === productId)) {
+        return category;
+      }
+    }
+    return null;
+  }
 
   // Opcional: ocultar el contenedor de resultados cuando el usuario hace clic fuera
   document.addEventListener("click", (event) => {

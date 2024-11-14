@@ -142,29 +142,29 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   import { items } from "@lib/categories";
 
-  // Función de búsqueda
   function searchProducts(query) {
-    return items.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase())
+    return items.flatMap((category) =>
+      category.productos
+        .filter((producto) =>
+          producto.nombre.toLowerCase().includes(query.toLowerCase())
+        )
+        .map((producto) => ({ ...producto, categoria: category.nombre }))
     );
   }
 
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
 
-  // Evento para manejar la entrada de búsqueda
   searchInput.addEventListener("input", (event) => {
     const query = (event.target as HTMLInputElement).value.trim();
     const results = searchProducts(query);
 
-    // Limpiar resultados previos
     searchResults.innerHTML = "";
 
     if (results.length > 0 && query) {
-      // Mostrar resultados
       results.forEach((item) => {
         const resultItem = document.createElement("a");
-        resultItem.href = `/${item.nombre}`;
+        resultItem.href = `/${item.categoria}/${item.nombre}`;
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
 
