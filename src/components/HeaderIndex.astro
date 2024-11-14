@@ -137,8 +137,10 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   // Función de búsqueda
   function searchProducts(query) {
-    return productos.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase())
+    return productos.filter(
+      (item) =>
+        item.nombre.toLowerCase().includes(query.toLowerCase()) ||
+        item.descripcion.toLowerCase().includes(query.toLowerCase())
     );
   }
 
