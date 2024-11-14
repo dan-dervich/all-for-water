@@ -131,12 +131,12 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
     }
   });
 
-  import { items } from "@lib/categories";
+  import { productos } from "@lib/products";
 
   // Función de búsqueda
   function searchProducts(query) {
-    return items.filter((item) =>
-      item.nombre.toLowerCase().includes(query.toLowerCase()),
+    return productos.filter((item) =>
+      item.nombre.toLowerCase().includes(query.toLowerCase())
     );
   }
 
@@ -151,11 +151,13 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
     // Limpiar resultados previos
     searchResults.innerHTML = "";
 
+    console.log("hola");
     if (results.length > 0 && query) {
       // Mostrar resultados
       results.forEach((item) => {
+        console.log("hola", item);
         const resultItem = document.createElement("a");
-        resultItem.href = `/${item.nombre}`;
+        resultItem.href = `/search?query=${query}`;
         resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
         resultItem.textContent = item.nombre;
 
