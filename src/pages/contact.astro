@@ -22,6 +22,7 @@ import Layout from "@layouts/Layout.astro";
               type="text"
               id="nombre"
               name="nombre"
+              placeholder="Your name..."
               class="bg-transparent p-2 border-b-[2px] border-slate-400 focus:outline-none focus:border-black transition-colors w-full"
             />
           </div>
@@ -31,6 +32,7 @@ import Layout from "@layouts/Layout.astro";
               type="text"
               id="email"
               name="email"
+              placeholder="Your email..."
               class="bg-transparent p-2 border-b-[2px] border-slate-400 focus:outline-none focus:border-black transition-colors w-full"
             />
           </div>
@@ -40,6 +42,7 @@ import Layout from "@layouts/Layout.astro";
               type="tel"
               id="number"
               name="number"
+              placeholder="Your phone number..."
               class="bg-transparent p-2 border-b-[2px] border-slate-400 focus:outline-none focus:border-black transition-colors w-full"
             />
           </div>
@@ -49,6 +52,7 @@ import Layout from "@layouts/Layout.astro";
           <textarea
             id="mensaje"
             name="mensaje"
+            placeholder="Your message..."
             class="bg-transparent p-2 border-b-[2px] border-slate-400 focus:outline-none focus:border-black transition-colors w-full"
           ></textarea>
           <button
@@ -63,6 +67,7 @@ import Layout from "@layouts/Layout.astro";
   </section>
 
   <script>
+    import Toastify from "toastify-js";
     document
       .getElementById("contactForm")
       .addEventListener("submit", async function (event) {
@@ -79,11 +84,21 @@ import Layout from "@layouts/Layout.astro";
           .value;
 
         const data = {
-          name: `${nombre}`,
+          name: nombre,
           msg: mensaje,
           email: email,
           tel: tel,
         };
+
+        // Mostrar toast de carga
+        const loadingToast = Toastify({
+          text: "Enviando mensaje...",
+          duration: -1,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "#3498db",
+        }).showToast();
 
         try {
           const response = await fetch(
@@ -97,14 +112,43 @@ import Layout from "@layouts/Layout.astro";
             }
           );
 
+          // Cerrar el toast de carga
+          loadingToast.hideToast();
+
           if (response.ok) {
-            alert("Mensaje enviado exitosamente.");
+            // Mostrar toast de éxito
+            Toastify({
+              text: "Mensaje enviado exitosamente.",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "#28a745",
+            }).showToast();
+
+            // Vaciar los campos del formulario
+            (document.getElementById("contactForm") as HTMLFormElement).reset();
           } else {
-            alert("Hubo un error al enviar el mensaje.");
+            // Mostrar toast de error
+            Toastify({
+              text: "Hubo un error al enviar el mensaje.",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "#dc3545",
+            }).showToast();
           }
         } catch (error) {
           console.error("Error:", error);
-          alert("Hubo un problema con la solicitud.");
+
+          // Cerrar el toast de carga y mostrar toast de error
+          loadingToast.hideToast();
+          Toastify({
+            text: "Hubo un problema con la solicitud.",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#dc3545",
+          }).showToast();
         }
       });
   </script>
