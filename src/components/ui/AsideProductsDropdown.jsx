@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const ProductsDropdown = ({ items }) => {
+const AsideProductsDropdown = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isOpen && !event.target.closest(".products-dropdown-container")) {
+      if (isOpen && !event.target.closest(".aside-dropdown-container")) {
         setIsOpen(false);
       }
     };
@@ -16,11 +16,10 @@ const ProductsDropdown = ({ items }) => {
   }, [isOpen]);
 
   return (
-    <div className="relative products-dropdown-container nav-links">
+    <div className="relative aside-dropdown-container nav-links">
       <button
         className="transition-all flex items-center gap-x-1"
         onClick={() => setIsOpen(!isOpen)}
-        onMouseEnter={() => setIsOpen(true)}
       >
         PRODUCTS
         <IoMdArrowDropdown
@@ -28,23 +27,32 @@ const ProductsDropdown = ({ items }) => {
         />
       </button>
       <div
-        className={`absolute overflow-visible top-full mt-2 
-                    left-1/2 -translate-x-3/4 
-                    lg:w-[900px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg 
-                    grid lg:grid-cols-5 grid-cols-3 lg:gap-4 gap-2 text-center items-center justify-center 
-                    transition-all p-4 
+        className={`absolute overflow-y-auto 
+                    -left-12 top-full mt-2
+                    w-52 max-h-[300px] bg-white text-slate-500 rounded-md shadow-lg 
+                    flex flex-col gap-2 text-center items-center justify-start 
+                    transition-all p-4 z-50
                     ${
                       isOpen
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-2 pointer-events-none"
                     }`}
-        onMouseLeave={() => setIsOpen(false)}
       >
         {items?.map((item) => (
           <a
             key={item.id}
             href={`/${item.nombre}`}
-            className="block px-4 py-2 hover:scale-110 transition-all"
+            className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
+            onClick={() => {
+              setIsOpen(false);
+              // Si tienes una función para cerrar el sidebar, llámala aquí
+              if (typeof window !== "undefined") {
+                const sidebar = document.getElementById("sidebar");
+                if (sidebar) {
+                  sidebar.classList.add("translate-x-full");
+                }
+              }
+            }}
           >
             <p>{item.nombre}</p>
           </a>
@@ -79,4 +87,4 @@ const styleElement = document.createElement("style");
 styleElement.textContent = style;
 document.head.appendChild(styleElement);
 
-export default ProductsDropdown;
+export default AsideProductsDropdown;
