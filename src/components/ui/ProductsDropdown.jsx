@@ -56,7 +56,7 @@ const ProductsDropdown = ({ items }) => {
 
 const style = `
 .nav-links {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     width: fit-content;
 }

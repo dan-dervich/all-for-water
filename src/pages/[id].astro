@@ -148,7 +148,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                   >
                     {segment.nombre}
                   </h2>
-                  <div class="flex flex-wrap gap-5 justify-center items-start w-full">
+                  <div class="flex flex-wrap gap-5 justify-center items-start">
                     {productosPorSegmento.map((product) => {
                       const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
                         product.pdfs_tabla.includes(pdf.id)
@@ -158,7 +158,13 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                       );
 
                       return (
-                        <div class="md:w-screen lg:w-1/3">
+                        <div
+                          class={
+                            productosPorSegmento.length === 1
+                              ? "w-3/4"
+                              : "md:w-screen lg:w-[32.3%]"
+                          }
+                        >
                           <CardPorProducto
                             key={product.id}
                             id={product.segmentos}
