@@ -28,11 +28,7 @@ const ProductsDropdown = ({ items }) => {
         />
       </button>
       <div
-        className={`absolute overflow-visible top-full mt-2 
-                    left-1/2 -translate-x-3/4 
-                    lg:w-[900px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg 
-                    grid lg:grid-cols-5 grid-cols-3 lg:gap-4 gap-2 text-center items-center justify-center 
-                    transition-all p-4 
+        className={`absolute overflow-visible top-full mt-2 left-1/2 -translate-x-3/4 lg:w-[900px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg grid lg:grid-cols-5 grid-cols-3 text-center items-center justify-center transition-all p-2 text-base
                     ${
                       isOpen
                         ? "opacity-100 translate-y-0"
