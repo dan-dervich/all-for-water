@@ -56,12 +56,11 @@ import { Icon } from "astro-icon/components";
 
 <script>
   const scrollTopButton = document.getElementById("scroll-top");
-  document.addEventListener("DOMContentLoaded", () => {
-    scrollTopButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+
+  scrollTopButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     });
   });
 </script>

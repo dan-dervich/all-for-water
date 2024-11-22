@@ -13,11 +13,11 @@ import { items } from "@lib/categories";
     The solution to all your water treatment problems In business for over 20 years, we are official distributors of water treatment supplies for CLACK, Toray, Hydranautics, CSM, VIQUA, CAT Pumps, Procon, Goulds, FLECK - Pentair, Resintech, and many more companies
   </p>
   <div
-    class="grid gap-5 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    class="grid gap-10 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     {
       items.map((item) => (
-        <a href={`/${item.nombre}`}>
+        <a href={`/${item.nombre}`} class="w-full h-full">
           <Card imgSrc={item.fotoUrl} text={item.nombre} />
         </a>
       ))
