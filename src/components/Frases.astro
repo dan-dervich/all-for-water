@@ -56,47 +56,47 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-  const frases = [
-    "Residential and commercial water treatment systems",
-    "We are the solution to your water problems",
-    "All you need in life is water and love",
-  ];
+  document.addEventListener("DOMContentLoaded", () => {
+    const frases = [
+      "Residential and commercial water treatment systems",
+      "We are the solution to your water problems",
+      "All you need in life is water and love",
+    ];
 
-  let currentFraseIndex = 0;
-  const fraseElement = document.getElementById("frases");
+    let currentFraseIndex = 0;
+    const fraseElement = document.getElementById("frases");
 
-  function cambiarFrase(index) {
-    fraseElement.classList.remove(
-      "opacity-0",
-      "animate-slide-in-right",
-      "animate-slide-out-left"
-    );
+    function cambiarFrase(index) {
+      fraseElement.classList.remove(
+        "opacity-0",
+        "animate-slide-in-right",
+        "animate-slide-out-left",
+      );
 
-    fraseElement.classList.add("animate-slide-out-left");
+      fraseElement.classList.add("animate-slide-out-left");
 
-    setTimeout(() => {
-      fraseElement.textContent = frases[index];
-      fraseElement.classList.remove("animate-slide-out-left");
-      fraseElement.classList.add("animate-slide-in-right");
-    }, 500);
-  }
+      setTimeout(() => {
+        fraseElement.textContent = frases[index];
+        fraseElement.classList.remove("animate-slide-out-left");
+        fraseElement.classList.add("animate-slide-in-right");
+      }, 500);
+    }
 
-  function nextFrase() {
-    currentFraseIndex = (currentFraseIndex + 1) % frases.length;
+    function nextFrase() {
+      currentFraseIndex = (currentFraseIndex + 1) % frases.length;
+      cambiarFrase(currentFraseIndex);
+    }
+
+    setInterval(nextFrase, 5000);
     cambiarFrase(currentFraseIndex);
-  }
 
-  setInterval(nextFrase, 5000);
-  document.addEventListener("DOMContentLoaded", () =>
-    cambiarFrase(currentFraseIndex)
-  );
+    const buttonDown = document.getElementById("button-down");
 
-  const buttonDown = document.getElementById("button-down");
-
-  buttonDown.addEventListener("click", () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
+    buttonDown.addEventListener("click", () => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
     });
   });
 </script>
