@@ -8,92 +8,96 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
 <header
   id="header"
-  class="fixed top-0 w-full bg-header-bg text-white z-50 transition-colors duration-300"
+  class="fixed top-0 w-full z-50 justify-center flex mt-5"
 >
-  <div class="flex justify-between items-center relative text-white">
-    <div class="flex justify-center items-center">
-      <div class="text-xl">
-        <a id="logo" href="/">
-          <img
-            src="/fotos/logo.png"
-            alt="Logo"
-            class="h-32 w-32 rounded-full"
-          />
-        </a>
-      </div>
-      <h1 class="hidden sm:flex text-2xl font-edu font-medium">
-        All For Water
-      </h1>
-    </div>
-    <div class="flex flex-row gap-5 items-center px-5">
-      <nav class="hidden md:flex gap-x-5">
-        <a id="home" href="/" class="transition-all nav-links hover:cursor-pointer"
-          >HOME</a
-        >
-        <a id="contact" href="/contact" class="transition-all nav-links"
-          >CONTACT US</a
-        >
-        <ProductsDropdown client:only items={items} />
-      </nav>
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search..."
-          class="px-3 py-2 max-w-32 sm:max-w-60 rounded-md text-black focus:outline-none transition-all"
-          onfocus="this.placeholder=''"
-          onblur="this.placeholder='Search...'"
-          id="searchInput"
-        />
-        <Search />
-        <div
-          id="searchResults"
-          class="absolute bg-white text-black mt-2 rounded-md shadow-lg w-full max-h-64 overflow-y-auto hidden"
-        >
+  <div class="px-5 bg-gradient-to-b from-light-blue to-transparent text-white rounded-full w-11/12">
+    <div class="flex justify-between items-center relative text-white">
+      <div class="flex justify-center items-center">
+        <div class="text-xl">
+          <a id="logo" href="/">
+            <img
+              src="/fotos/logo.png"
+              alt="Logo"
+              class="h-32 w-32 rounded-full"
+            />
+          </a>
         </div>
+        <h1 class="hidden sm:flex text-2xl font-edu font-medium">
+          All For Water
+        </h1>
       </div>
+      <div class="flex flex-row gap-5 items-center px-5">
+        <nav class="hidden md:flex gap-x-5">
+          <a
+            id="home"
+            href="/"
+            class="transition-all nav-links hover:cursor-pointer">HOME</a
+          >
+          <a id="contact" href="/contact" class="transition-all nav-links"
+            >CONTACT US</a
+          >
+          <ProductsDropdown client:only items={items} />
+        </nav>
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="px-3 py-2 max-w-32 sm:max-w-60 rounded-md text-black focus:outline-none transition-all"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='Search...'"
+            id="searchInput"
+          />
+          <Search />
+          <div
+            id="searchResults"
+            class="absolute bg-white text-black mt-2 rounded-md shadow-lg w-full max-h-64 overflow-y-auto hidden"
+          >
+          </div>
+        </div>
+        <button
+          id="menu-button"
+          class="hover:cursor-pointer md:hidden flex right-3"
+          onclick="sidebar.classList.toggle('translate-x-full')"
+        >
+          <Icon
+            class="hover:scale-110 hover:cursor-pointer"
+            name="material-symbols-light:menu"
+            size={30}
+          />
+        </button>
+      </div>
+    </div>
+    <aside
+      id="sidebar"
+      class="fixed z-50 top-0 right-0 w-64 h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
+    >
       <button
-        id="menu-button"
-        class="hover:cursor-pointer md:hidden flex right-3"
+        id="close-button"
+        class="flex pb-10 pt-5"
         onclick="sidebar.classList.toggle('translate-x-full')"
       >
         <Icon
           class="hover:scale-110 hover:cursor-pointer"
-          name="material-symbols-light:menu"
+          name="material-symbols-light:close"
           size={30}
         />
       </button>
-    </div>
+      <nav class="flex flex-col gap-y-10 justify-center items-center">
+        <a
+          onclick="sidebar.classList.toggle('translate-x-full')"
+          id="home-sidebar"
+          class="transition-all nav-links hover:cursor-pointer">HOME</a
+        >
+        <a
+          onclick="sidebar.classList.toggle('translate-x-full')"
+          id="contact-sidebar"
+          href="/contact"
+          class="transition-all nav-links">CONTACT US</a
+        >
+        <AsideProductsDropdown client:only items={items} />
+      </nav>
+    </aside>
   </div>
-  <aside
-    id="sidebar"
-    class="fixed z-50 top-0 right-0 w-64 h-full bg-header-bg text-white p-4 transform transition-transform translate-x-full duration-300"
-  >
-    <button
-      id="close-button"
-      class="flex pb-10 pt-5"
-      onclick="sidebar.classList.toggle('translate-x-full')"
-    >
-      <Icon
-        class="hover:scale-110 hover:cursor-pointer"
-        name="material-symbols-light:close"
-        size={30}
-      />
-    </button>
-    <nav class="flex flex-col gap-y-10 justify-center items-center">
-      <a
-        onclick="sidebar.classList.toggle('translate-x-full')"
-        id="home-sidebar"
-        class="transition-all nav-links hover:cursor-pointer">HOME</a
-      >
-      <a
-        onclick="sidebar.classList.toggle('translate-x-full')"
-        id="contact-sidebar"
-        href="/contact"
-        class="transition-all nav-links">CONTACT US</a
-      >
-      <AsideProductsDropdown client:only items={items} />
-    </nav>
-  </aside>
 </header>
 
 <script>
@@ -189,7 +193,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 </script>
 
 <style>
-  .bg-header-bg {
+  .bg-light-blue {
     background-color: #0f3666;
   }
   .nav-links {
