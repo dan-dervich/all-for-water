@@ -56,49 +56,47 @@ import { Icon } from "astro-icon/components";
   }
 </style>
 
-<client:only>
-  <script>
-    const frases = [
-      "Residential and commercial water treatment systems",
-      "We are the solution to your water problems",
-      "All you need in life is water and love",
-    ];
+<script is:inline>
+  const frases = [
+    "Residential and commercial water treatment systems",
+    "We are the solution to your water problems",
+    "All you need in life is water and love",
+  ];
 
-    let currentFraseIndex = 0;
-    const fraseElement = document.getElementById("frases");
+  let currentFraseIndex = 0;
+  const fraseElement = document.getElementById("frases");
 
-    function cambiarFrase(index) {
-      fraseElement.classList.remove(
-        "opacity-0",
-        "animate-slide-in-right",
-        "animate-slide-out-left"
-      );
-
-      fraseElement.classList.add("animate-slide-out-left");
-
-      setTimeout(() => {
-        fraseElement.textContent = frases[index];
-        fraseElement.classList.remove("animate-slide-out-left");
-        fraseElement.classList.add("animate-slide-in-right");
-      }, 500);
-    }
-
-    function nextFrase() {
-      currentFraseIndex = (currentFraseIndex + 1) % frases.length;
-      cambiarFrase(currentFraseIndex);
-    }
-
-    setInterval(nextFrase, 5000);
-    document.addEventListener("DOMContentLoaded", () =>
-      cambiarFrase(currentFraseIndex)
+  function cambiarFrase(index) {
+    fraseElement.classList.remove(
+      "opacity-0",
+      "animate-slide-in-right",
+      "animate-slide-out-left"
     );
 
-    document.getElementById("button-down").addEventListener("click", (e) => {
-      e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-      const productosSection = document.querySelector("#productos");
-      if (productosSection) {
-        productosSection.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  </script>
-</client:only>
+    fraseElement.classList.add("animate-slide-out-left");
+
+    setTimeout(() => {
+      fraseElement.textContent = frases[index];
+      fraseElement.classList.remove("animate-slide-out-left");
+      fraseElement.classList.add("animate-slide-in-right");
+    }, 500);
+  }
+
+  function nextFrase() {
+    currentFraseIndex = (currentFraseIndex + 1) % frases.length;
+    cambiarFrase(currentFraseIndex);
+  }
+
+  setInterval(nextFrase, 5000);
+  document.addEventListener("DOMContentLoaded", () =>
+    cambiarFrase(currentFraseIndex)
+  );
+
+  document.getElementById("button-down").addEventListener("click", (e) => {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    const productosSection = document.querySelector("#productos");
+    if (productosSection) {
+      productosSection.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
