@@ -115,7 +115,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   </div>
 </header>
 
-<script>
+<script is:inline>
   const home = document.getElementById("home");
   home.addEventListener("click", () => {
     window.scrollTo({
@@ -135,8 +135,8 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   const sidebar = document.getElementById("sidebar");
   document.addEventListener("click", (event) => {
     if (
-      !sidebar.contains(event.target as Node) &&
-      !(event.target as Element).closest("#menu-button")
+      !sidebar.contains(event.target) &&
+      !event.target.closest("#menu-button")
     ) {
       sidebar.classList.add("translate-x-full");
     }
@@ -162,7 +162,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   // Evento para manejar la entrada de búsqueda
   searchInput.addEventListener("input", (event) => {
-    const query = (event.target as HTMLInputElement).value.trim();
+    const query = event.target.value.trim();
     const results = searchProducts(query);
 
     // Limpiar resultados previos
@@ -188,7 +188,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   // Evento para manejar la entrada de búsqueda
   searchInput1.addEventListener("input", (event) => {
-    const query = (event.target as HTMLInputElement).value.trim();
+    const query = event.target.value.trim();
     const results = searchProducts(query);
 
     // Limpiar resultados previos
@@ -224,10 +224,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
   // Opcional: ocultar el contenedor de resultados cuando el usuario hace clic fuera
   document.addEventListener("click", (event) => {
-    if (
-      !searchResults.contains(event.target as Node) &&
-      event.target !== searchInput
-    ) {
+    if (!searchResults.contains(event.target) && event.target !== searchInput) {
       searchResults.classList.add("hidden");
     }
   });
