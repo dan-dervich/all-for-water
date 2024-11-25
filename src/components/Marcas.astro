@@ -29,7 +29,13 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
           link={
             marca.nombre.toLowerCase() === "viqua"
               ? "/ULTRAVIOLET%20STERILIZERS"
-              : marca.id
+              : marca.nombre.toLowerCase() === "matrikx"
+                ? "/CARTRIDGES"
+                : marca.nombre.toLowerCase() === "purolite"
+                  ? "/MEDIA%20&%20RESINS"
+                  : marca.nombre.toLowerCase() === "resintech"
+                    ? "/MEDIA%20&%20RESINS"
+                    : marca.id
           }
         />
       ))
