@@ -57,7 +57,7 @@ import { Icon } from "astro-icon/components";
 <script is:inline>
   document.getElementById("scroll-top").addEventListener("click", (e) => {
     e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-    const productosSection = document.querySelector("#productos");
+    const productosSection = document.querySelector("#section-frases");
     if (productosSection) {
       productosSection.scrollIntoView({ behavior: "smooth" });
     }
