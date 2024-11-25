@@ -13,7 +13,11 @@ export default defineConfig({
     defaultStrategy: "viewport",
     prefetchAll: true,
   },
-  alias: {
-    "@lib": "./src/lib",
+  vite: {
+    resolve: {
+      alias: {
+        "@lib": "/src/lib",
+      },
+    },
   },
 });
