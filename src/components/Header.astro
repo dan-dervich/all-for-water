@@ -1,9 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
-import Search from "./icons/Search.astro";
 import { items } from "@lib/categories";
 import ProductsDropdown from "./ui/ProductsDropdown";
 import AsideProductsDropdown from "./ui/AsideProductsDropdown";
+import SearchComponent from "@components/ui/SearchComponent";
+import SearchComponentAside from "./ui/SearchComponentAside";
 ---
 
 <header id="header" class="fixed top-0 w-full z-50 justify-center flex mt-5">
@@ -38,20 +39,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
           <ProductsDropdown client:only items={items} />
         </nav>
         <div class="relative hidden sm:flex">
-          <input
-            type="text"
-            placeholder="Search..."
-            class="px-3 py-2 max-w-32 sm:max-w-60 rounded-full text-black focus:outline-none transition-all"
-            onfocus="this.placeholder=''"
-            onblur="this.placeholder='Search...'"
-            id="searchInput"
-          />
-          <Search />
-          <div
-            id="searchResults"
-            class="absolute bg-white text-black mt-10 rounded-md shadow-lg w-full max-h-64 overflow-y-auto hidden"
-          >
-          </div>
+          <SearchComponent client:load />
         </div>
         <button
           id="menu-button"
@@ -83,20 +71,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
       </button>
       <nav class="flex flex-col gap-y-10 justify-center items-center">
         <div class="relative">
-          <input
-            type="text"
-            placeholder="Search..."
-            class="px-3 py-2 w-full sm:max-w-60 rounded-full text-black focus:outline-none transition-all"
-            onfocus="this.placeholder=''"
-            onblur="this.placeholder='Search...'"
-            id="searchInput1"
-          />
-          <Search />
-          <div
-            id="searchResults1"
-            class="absolute bg-white text-black mt-2 rounded-md shadow-lg w-full max-h-64 overflow-y-auto hidden z-50"
-          >
-          </div>
+          <SearchComponentAside client:load />
         </div>
         <a
           onclick="sidebar.classList.toggle('translate-x-full')"
@@ -117,7 +92,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 
 <script>
   const home = document.getElementById("home");
-  home.addEventListener("click", () => {
+  home?.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -125,7 +100,7 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   });
 
   const homeSidebar = document.getElementById("home-sidebar");
-  homeSidebar.addEventListener("click", () => {
+  homeSidebar?.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -133,107 +108,19 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
   });
 
   const sidebar = document.getElementById("sidebar");
+  const menuButton = document.getElementById("menu-button");
   document.addEventListener("click", (event) => {
     if (
-      !sidebar.contains(event.target) &&
-      !event.target.closest("#menu-button")
+      sidebar &&
+      !sidebar.contains(event.target as Node) &&
+      event.target !== menuButton
     ) {
       sidebar.classList.add("translate-x-full");
-    }
-  });
-
-  import { productos } from "../lib/products";
-  import { items } from "../lib/categories";
-  const categories = items;
-
-  // Función de búsqueda
-  function searchProducts(query) {
-    return productos.filter(
-      (item) =>
-        item.nombre.toLowerCase().includes(query.toLowerCase()) ||
-        item.descripcion.toLowerCase().includes(query.toLowerCase())
-    );
-  }
-
-  const searchInput = document.getElementById("searchInput");
-  const searchResults = document.getElementById("searchResults");
-  const searchInput1 = document.getElementById("searchInput1");
-  const searchResults1 = document.getElementById("searchResults1");
-
-  // Evento para manejar la entrada de búsqueda
-  searchInput.addEventListener("input", (event) => {
-    const query = event.target.value.trim();
-    const results = searchProducts(query);
-
-    // Limpiar resultados previos
-    searchResults.innerHTML = "";
-
-    if (results.length > 0 && query) {
-      // Mostrar resultados
-      results.forEach((item) => {
-        const resultItem = document.createElement("a");
-        resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
-        resultItem.textContent = item.nombre;
-        const category = findCategoryByProductId(item.id);
-        resultItem.href = `/${category.nombre}`;
-
-        searchResults.appendChild(resultItem);
-      });
-      searchResults.classList.remove("hidden");
-    } else {
-      // Ocultar resultados si no hay coincidencias o el campo está vacío
-      searchResults.classList.add("hidden");
-    }
-  });
-
-  // Evento para manejar la entrada de búsqueda
-  searchInput1.addEventListener("input", (event) => {
-    const query = event.target.value.trim();
-    const results = searchProducts(query);
-
-    // Limpiar resultados previos
-    searchResults1.innerHTML = "";
-
-    if (results.length > 0 && query) {
-      // Mostrar resultados
-      results.forEach((item) => {
-        const resultItem = document.createElement("a");
-        resultItem.classList.add("block", "px-4", "py-2", "hover:bg-gray-200");
-        resultItem.textContent = item.nombre;
-        const category = findCategoryByProductId(item.id);
-        resultItem.href = `/${category.nombre}`;
-
-        searchResults1.appendChild(resultItem);
-      });
-      searchResults1.classList.remove("hidden");
-    } else {
-      // Ocultar resultados si no hay coincidencias o el campo está vacío
-      searchResults1.classList.add("hidden");
-    }
-  });
-
-  // Buscar categoría por ID de producto
-  function findCategoryByProductId(productId) {
-    for (const category of categories) {
-      if (category.productos.includes(productId)) {
-        return category;
-      }
-    }
-    return null;
-  }
-
-  // Opcional: ocultar el contenedor de resultados cuando el usuario hace clic fuera
-  document.addEventListener("click", (event) => {
-    if (!searchResults.contains(event.target) && event.target !== searchInput) {
-      searchResults.classList.add("hidden");
     }
   });
 </script>
 
 <style>
-  .bg-light-blue {
-    background-color: #0f3666;
-  }
   .nav-links {
     font-size: 1.2rem;
     font-weight: 500;

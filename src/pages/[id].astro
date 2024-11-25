@@ -80,7 +80,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 
 <Layout title={item.nombre}>
   <section
-    class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
+    class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >
     <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
       {
@@ -167,7 +167,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                         >
                           <CardPorProducto
                             key={product.id}
-                            id={product.segmentos}
+                            id={`producto-${product.id}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
                             desc={product.descripcion}

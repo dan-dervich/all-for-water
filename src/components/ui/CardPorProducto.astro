@@ -27,7 +27,7 @@ if (/<table/.test(desc)) {
     )
     .replace("style", "")
     .replace(/style="[^"]*"/g, "")
-    .replace('ul', 'ul class="list-disc list-inside ml-5"')
+    .replace("ul", 'ul class="list-disc list-inside ml-5"')
     .replace(/<li[^>]*>/g, '<li class="mb-2">') // Agrega margen entre elementos de lista
     .replace(/<p>/g, '<p class="mb-4">') // Agrega margen entre párrafos y listas
     .replace(/&rdquo;/g, '"') // Corrige comillas en el contenido
@@ -65,7 +65,7 @@ if (pdfs_carta.length > 0) {
 
 <div
   id={id}
-  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl w-full m-5"
+  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl w-full sm:m-5 m-0"
 >
   <img
     src={imgSrc !== "/path-to-placeholder-image.png" ? imgSrc : ""}
