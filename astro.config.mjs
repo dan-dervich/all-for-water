@@ -14,6 +14,6 @@ export default defineConfig({
     prefetchAll: true,
   },
   alias: {
-    "@lib": "./src/lib", // Ajusta según la estructura de tu proyecto
+    "@lib": "./src/lib",
   },
 });
