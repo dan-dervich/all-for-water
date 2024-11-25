@@ -1,3 +1,4 @@
+console.log("Hello from script.js");
 import { productos } from "@lib/products";
 import { items } from "@lib/categories";
 
