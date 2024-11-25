@@ -141,9 +141,76 @@ import AsideProductsDropdown from "./ui/AsideProductsDropdown";
       sidebar.classList.add("translate-x-full");
     }
   });
-</script>
 
-<script src="/public/script.js" type="module"></script>
+  import { productos } from "@lib/products";
+  import { items } from "@lib/categories";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+
+    // Función para buscar productos
+    function searchProducts(query) {
+      return productos.filter(
+        (item) =>
+          item.nombre.toLowerCase().includes(query.toLowerCase()) ||
+          item.descripcion.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    // Función para encontrar la categoría por ID de producto
+    function findCategoryByProductId(productId) {
+      for (const category of items) {
+        if (category.productos.includes(productId)) {
+          return category.nombre;
+        }
+      }
+      return null;
+    }
+
+    // Manejo de eventos para la búsqueda
+    searchInput.addEventListener("input", (event) => {
+      const query = event.target.value.trim();
+      const results = searchProducts(query);
+
+      // Limpiar resultados previos
+      searchResults.innerHTML = "";
+
+      if (results.length > 0 && query) {
+        results.forEach((item) => {
+          const resultItem = document.createElement("a");
+          resultItem.classList.add(
+            "block",
+            "px-4",
+            "py-2",
+            "hover:bg-gray-200"
+          );
+          resultItem.textContent = item.nombre;
+
+          const category = findCategoryByProductId(item.id);
+          if (category) {
+            resultItem.href = `/${category}`;
+          }
+
+          searchResults.appendChild(resultItem);
+        });
+        searchResults.classList.remove("hidden");
+      } else {
+        searchResults.classList.add("hidden");
+      }
+    });
+
+    // Ocultar resultados si se hace clic fuera
+    document.addEventListener("click", (event) => {
+      if (
+        !searchResults.contains(event.target) &&
+        event.target !== searchInput
+      ) {
+        searchResults.classList.add("hidden");
+      }
+    });
+  });
+</script>
 
 <style>
   .bg-light-blue {
