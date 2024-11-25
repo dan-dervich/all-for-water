@@ -55,12 +55,11 @@ import { Icon } from "astro-icon/components";
 </footer>
 
 <script>
-  const scrollTopButton = document.getElementById("scroll-top");
-
-  scrollTopButton.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  document.getElementById("scroll-top").addEventListener("click", (e) => {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    const productosSection = document.querySelector("#section-frases");
+    if (productosSection) {
+      productosSection.scrollIntoView({ behavior: "smooth" });
+    }
   });
 </script>
