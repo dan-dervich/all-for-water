@@ -13,4 +13,7 @@ export default defineConfig({
     defaultStrategy: "viewport",
     prefetchAll: true,
   },
+  alias: {
+    "@lib": "./src/lib", // Ajusta según la estructura de tu proyecto
+  },
 });
