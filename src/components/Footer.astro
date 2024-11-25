@@ -54,17 +54,12 @@ import { Icon } from "astro-icon/components";
   </section>
 </footer>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const scrollTopButton = document.getElementById("scroll-top");
-    if (scrollTopButton) {
-      scrollTopButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        const sectionFrases = document.querySelector("#section-frases");
-        if (sectionFrases) {
-          sectionFrases.scrollIntoView({ behavior: "smooth" });
-        }
-      });
+<script is:inline>
+  document.getElementById("scroll-top").addEventListener("click", (e) => {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    const productosSection = document.querySelector("#productos");
+    if (productosSection) {
+      productosSection.scrollIntoView({ behavior: "smooth" });
     }
   });
 </script>
