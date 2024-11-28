@@ -15,6 +15,10 @@ const ProductsDropdown = ({ items }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  const sortedItems = items
+    ?.slice()
+    .sort((a, b) => a.nombre.localeCompare(b.nombre));
+
   return (
     <div className="relative products-dropdown-container nav-links">
       <button
@@ -36,7 +40,7 @@ const ProductsDropdown = ({ items }) => {
                     }`}
         onMouseLeave={() => setIsOpen(false)}
       >
-        {items?.map((item) => (
+        {sortedItems?.map((item) => (
           <a
             key={item.id}
             href={`/${item.nombre}`}

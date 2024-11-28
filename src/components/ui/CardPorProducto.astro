@@ -27,8 +27,8 @@ if (/<table/.test(desc)) {
     )
     .replace("style", "")
     .replace(/style="[^"]*"/g, "")
-    .replace("ul", 'ul class="list-disc list-inside ml-5"')
-    .replace(/<li[^>]*>/g, '<li class="mb-2">') // Agrega margen entre elementos de lista
+    .replace("<ul", '<ul class="list-disc list-inside ml-5"')
+    .replace(/<li[^>]*>/g, '<li class="mb-2 max-w-80">') // Agrega margen entre elementos de lista
     .replace(/<p>/g, '<p class="mb-4">') // Agrega margen entre párrafos y listas
     .replace(/&rdquo;/g, '"') // Corrige comillas en el contenido
     .replace(/&ldquo;/g, '"')
@@ -54,6 +54,7 @@ if (/<table/.test(desc)) {
       }
     });
 }
+editedDesc = editedDesc.replace(/<p>/g, '<p class="max-w-80">');
 editedDesc = `<div class="flex justify-stretch items-stretch text-start flex-col w-full overflow-auto p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
 if (pdfs_carta.length > 0) {
   editedDesc += "<br>";
