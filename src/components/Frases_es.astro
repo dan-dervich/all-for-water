@@ -1,0 +1,102 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  class="relative h-screen text-white flex items-center justify-center flex-col overflow-hidden bg-[url('/fotos/oceano.jpg')] md:bg-fixed md:bg-cover md:bg-center"
+  id="seccion-frases_es"
+>
+  <div
+    class="z-10 text-center relative flex-grow flex items-center justify-center p-4 rounded-lg"
+  >
+    <h1
+      id="frases_es"
+      class="sm:text-7xl md:text-6xl text-5xl font-bold opacity-1 text-gray-100 transition duration-500 transform"
+    >
+      Todo lo que necesitas en la vida es agua y amor
+    </h1>
+  </div>
+  <a
+    id="boton-abajo_es"
+    class="bg-[#55a5ca] text-white rounded-full hover:scale-110 p-5 mb-10 flex justify-center items-center shadow-lg transition-all duration-300"
+  >
+    <Icon name="mdi:arrow-down" size={30} class="text-white" />
+  </a>
+</section>
+
+<style>
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-left {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s forwards;
+  }
+
+  .animate-slide-out-left {
+    animation: slide-out-left 0.3s forwards;
+  }
+</style>
+
+<script is:inline>
+  const frases_es = [
+    "Sistemas de tratamiento de agua residenciales y comerciales",
+    "Somos la solución a tus problemas de agua",
+    "Todo lo que necesitas en la vida es agua y amor",
+  ];
+
+  let indiceFraseActual_es = 0;
+  const elementoFrase_es = document.getElementById("frases_es");
+
+  function cambiarFrase_es(indice) {
+    elementoFrase_es.classList.remove(
+      "opacity-0",
+      "animate-slide-in-right",
+      "animate-slide-out-left"
+    );
+
+    elementoFrase_es.classList.add("animate-slide-out-left");
+
+    setTimeout(() => {
+      elementoFrase_es.textContent = frases_es[indice];
+      elementoFrase_es.classList.remove("animate-slide-out-left");
+      elementoFrase_es.classList.add("animate-slide-in-right");
+    }, 500);
+  }
+
+  function siguienteFrase_es() {
+    indiceFraseActual_es = (indiceFraseActual_es + 1) % frases_es.length;
+    cambiarFrase_es(indiceFraseActual_es);
+  }
+
+  setInterval(siguienteFrase_es, 5000);
+  document.addEventListener("DOMContentLoaded", () =>
+    cambiarFrase_es(indiceFraseActual_es)
+  );
+
+  document.getElementById("boton-abajo_es").addEventListener("click", (e) => {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    const seccionProductos = document.querySelector("#productos_es");
+    if (seccionProductos) {
+      seccionProductos.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>

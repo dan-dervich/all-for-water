@@ -1,0 +1,44 @@
+---
+import MarcasCard from "./ui/MarcasCard.astro";
+import { segmentos } from "@lib/segmentos";
+import { marcas } from "@lib/marcas";
+
+const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
+---
+
+<section class="bg-white flex justify-center items-center flex-col">
+  <h2
+    class="text-light-blue font-semibold sm:text-5xl text-2xl px-5 pt-20 text-center"
+  >
+    Marcas Representadas
+  </h2>
+  <p class="text-custom-grey font-light max-w-[800px] p-5 text-center">
+    Las mejores marcas a tu alcance: Matrikx® Carbon Block, Viqua®
+    Sterilight® Sistemas UV, Membranas Toray®, Membranas de Ósmosis Inversa
+    CSM®, Membranas Hydranautics®, Bombas Goulds®, Bombas Procon®, Bombas
+    CAT®, Resina Purolite®, Resina Resintech®, Válvulas Clack®. ¡Todo lo que
+    necesitas y mucho más!
+  </p>
+  <div
+    class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  >
+    {
+      uniqueMarca.map((marca) => (
+        <MarcasCard
+          imgSrc={marca.fotoUrl}
+          link={
+            marca.nombre.toLowerCase() === "viqua"
+              ? "/ULTRAVIOLET%20STERILIZERS"
+              : marca.nombre.toLowerCase() === "matrikx"
+                ? "/CARTRIDGES"
+                : marca.nombre.toLowerCase() === "purolite"
+                  ? "/MEDIA%20&%20RESINS"
+                  : marca.nombre.toLowerCase() === "resintech"
+                    ? "/MEDIA%20&%20RESINS"
+                    : marca.id
+          }
+        />
+      ))
+    }
+  </div>
+</section>
