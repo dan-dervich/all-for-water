@@ -9,49 +9,37 @@ import LanguageSwitch from "@components/ui/LenguageSwitch";
 ---
 
 <Layout title="All for water.">
-  <div id="language-container" data-initial-language="EN">
-    <LanguageSwitch client:load />
+  <LanguageSwitch client:only="react" />
 
-    <div id="english-content">
-      <Frases />
-      <ProductosHome />
-      <ContactUs />
-      <Marcas />
-      <Miembro />
-    </div>
-
-    <div id="spanish-content" class="hidden">
-      {/* Add your Spanish content here */}
-      Spanish content goes here
-    </div>
+  <div id="english-content">
+    <Frases />
+    <ProductosHome />
+    <ContactUs />
+    <Marcas />
+    <Miembro />
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("language-container");
-      const englishContent = document.getElementById("english-content");
-      const spanishContent = document.getElementById("spanish-content");
-      const initialLanguage =
-        container?.getAttribute("data-initial-language") || "EN";
-
-      function updateLanguage(language) {
-        if (language === "EN") {
-          englishContent?.classList.remove("hidden");
-          spanishContent?.classList.add("hidden");
-        } else {
-          englishContent?.classList.add("hidden");
-          spanishContent?.classList.remove("hidden");
-        }
-      }
-
-      // Initial language setup
-      updateLanguage(initialLanguage);
-
-      // Listen for custom language change event
-      window.addEventListener("language-change", (event) => {
-        const language = (event as CustomEvent).detail;
-        updateLanguage(language);
-      });
-    });
-  </script>
+  <div id="spanish-content" style="display: none;">
+    {/* Add your Spanish content here */}
+    Spanish content
+  </div>
 </Layout>
+
+<script is:inline>
+  // Fallback for browsers without localStorage or for initial load
+  document.addEventListener("DOMContentLoaded", () => {
+    const language = localStorage.getItem("language") || "EN";
+    const englishContent = document.getElementById("english-content");
+    const spanishContent = document.getElementById("spanish-content");
+
+    if (englishContent && spanishContent) {
+      if (language === "EN") {
+        englishContent.style.display = "block";
+        spanishContent.style.display = "none";
+      } else {
+        englishContent.style.display = "none";
+        spanishContent.style.display = "block";
+      }
+    }
+  });
+</script>

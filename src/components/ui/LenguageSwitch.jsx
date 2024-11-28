@@ -1,24 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function LanguageSwitch() {
-  const [language, setLanguage] = useState("EN");
+  const [language, setLanguage] = useState(() => {
+    // Check if window is defined (client-side) to avoid SSR issues
+    if (typeof window !== "undefined") {
+      return window.localStorage?.getItem("language") || "EN";
+    }
+    return "EN";
+  });
+
+  useEffect(() => {
+    // Only run on client-side
+    if (typeof window !== "undefined") {
+      // Save language to localStorage
+      window.localStorage?.setItem("language", language);
+
+      // Dispatch custom event
+      window.dispatchEvent(
+        new CustomEvent("language-change", {
+          detail: language,
+        })
+      );
+
+      // Update page content visibility
+      const englishContent = document.getElementById("english-content");
+      const spanishContent = document.getElementById("spanish-content");
+
+      if (englishContent && spanishContent) {
+        if (language === "EN") {
+          englishContent.style.display = "block";
+          spanishContent.style.display = "none";
+        } else {
+          englishContent.style.display = "none";
+          spanishContent.style.display = "block";
+        }
+      }
+    }
+  }, [language]);
 
   const toggleLanguage = () => {
-    const newLanguage = language === "EN" ? "ES" : "EN";
-    setLanguage(newLanguage);
-
-    // Dispatch a custom event for language change
-    window.dispatchEvent(
-      new CustomEvent("language-change", {
-        detail: newLanguage,
-      })
-    );
+    setLanguage((prev) => (prev === "EN" ? "ES" : "EN"));
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 transition-all">
+    <div className="fixed bottom-5 right-5 z-50">
       <button
-        className={`w-20 h-10 transition-all bg-[#55A5CA] rounded-full p-1 flex items-center ${
+        className={`w-20 h-10 bg-[#55A5CA] rounded-full p-1 flex items-center ${
           language === "ES" ? "justify-end" : "justify-start"
         }`}
         onClick={toggleLanguage}
