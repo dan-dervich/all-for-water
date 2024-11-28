@@ -5,12 +5,37 @@ import ProductosHome from "@components/ProductosHome.astro";
 import Marcas from "@components/Marcas.astro";
 import Miembro from "@components/Miembro.astro";
 import Layout from "@layouts/Layout.astro";
+import LanguageSwitch from "@components/ui/LenguageSwitch";
 ---
 
 <Layout title="All for water.">
-  <Frases />
-  <ProductosHome />
-  <ContactUs />
-  <Marcas />
-  <Miembro />
+  <LanguageSwitch client:load />
+  <div id="english">
+    <Frases />
+    <ProductosHome />
+    <ContactUs />
+    <Marcas />
+    <Miembro />
+  </div>
+  <div id="spanish">putooo</div>
+
+  <script>
+    function updateContent() {
+      const language = localStorage.getItem("language") || "ES";
+      const content = document.getElementById("english");
+      if (content) {
+        content.style.display = language === "ES" ? "none" : "block";
+      }
+      const contentSpanish = document.getElementById("spanish");
+      if (contentSpanish) {
+        contentSpanish.style.display = language === "ES" ? "block" : "none";
+      }
+    }
+
+    // Initial update
+    updateContent();
+
+    // Listen for language changes
+    window.addEventListener("languageChange", updateContent);
+  </script>
 </Layout>
