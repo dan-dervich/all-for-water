@@ -1,0 +1,67 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<footer class="bg-slate-200 text-custom-grey font-extralight">
+  <div class="flex md:flex-row flex-col">
+    <div class="p-3 flex flex-col gap-5 md:w-1/2">
+      <div class="flex flex-col justify-center items-center text-center">
+        <h1 class="p-3 text-light-blue font-semibold">
+          ¿CÓMO PODEMOS AYUDARTE?
+        </h1>
+        <p class="px-3">
+          Contáctanos hoy para obtener más información sobre productos de
+          tratamiento de agua. Nuestro equipo de expertos está aquí para
+          responder tus preguntas.
+        </p>
+      </div>
+      <div class="flex flex-col justify-center items-center text-center">
+        <h1 class="p-3 text-light-blue font-semibold">
+          DÍAS / HORAS LABORALES
+        </h1>
+        <p class="px-3">
+          Lunes-Jueves: 9:30am a 1:00pm, 2:00pm a 5:00pm. <br />
+          Viernes: 9:30am a 1:00pm <br />
+          Sábado: CERRADO <br />
+          Domingo: CERRADO <br />
+        </p>
+      </div>
+    </div>
+    <div class="p-3 flex flex-col gap-5 md:w-1/2 justify-center items-center">
+      <div class="flex flex-col justify-center items-center text-center">
+        <h1
+          class="text-3xl md:text-5xl p-3 text-light-blue font-semibold flex items-center"
+        >
+          <Icon name="ic:baseline-phone" />
+          <span class="ml-2">(954) 322-6666</span>
+        </h1>
+        <p class="px-3">
+          3146 John P. Curcie Dr., Bay 8 Pembroke Park, FL 33009
+        </p>
+        <p class="px-3 flex items-center gap-1">
+          <Icon name="ic:baseline-email" />
+          <span> sales@allforwater.com </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="w-full bg-zinc-400 h-[1px]"></div>
+  <section class="p-3 flex justify-center items-center flex-col">
+    <button
+      id="scroll-top_es"
+      class="flex justify-center items-center rounded-full h-12 w-12 bg-white hover:scale-105 transition-all"
+    >
+      <Icon class="" name="ri:arrow-up-s-line" size={25} />
+    </button>
+    <h3 class="font-extralight text-sm mt-5">
+      Ⓒ 2024 All for Water. Todos los derechos reservados.
+    </h3>
+  </section>
+</footer>
+
+<script is:inline>
+  document.getElementById("scroll-top_es").addEventListener("click", (e) => {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>

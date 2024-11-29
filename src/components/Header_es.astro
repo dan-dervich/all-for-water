@@ -1,0 +1,172 @@
+---
+import { Icon } from "astro-icon/components";
+import { items } from "@lib/categories";
+import ProductsDropdownEs from "./ui/ProductsDropdown_es";
+import AsideProductsDropdownEs from "./ui/AsideProductsDropdown_es";
+import SearchComponentEs from "@components/ui/SearchComponent_es";
+import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
+---
+
+<header id="header" class="fixed top-0 w-full z-50 justify-center flex mt-5">
+  <div
+    class="px-5 bg-light-blue/60 from-light-blue to-transparent text-white rounded-full w-11/12"
+  >
+    <div class="flex justify-between items-center relative text-white">
+      <div class="flex justify-center items-center">
+        <div class="text-xl">
+          <a id="logo" href="/">
+            <img
+              src="/fotos/logo.png"
+              alt="Logo"
+              class="sm:h-32 sm:w-32 h-24 w-24 rounded-full"
+            />
+          </a>
+        </div>
+        <h1 class="hidden sm:flex text-2xl font-edu font-medium">
+          All For Water
+        </h1>
+      </div>
+      <div class="flex flex-row gap-5 items-center px-5">
+        <nav class="hidden md:flex gap-x-5">
+          <a
+            id="home"
+            href="/"
+            class="transition-all nav-links hover:cursor-pointer">INICIO</a
+          >
+          <a id="contact" href="/contact" class="transition-all nav-links"
+            >CONTACTO</a
+          >
+          <ProductsDropdownEs client:only items={items} />
+        </nav>
+        <div class="relative hidden sm:flex">
+          <SearchComponentEs client:load />
+        </div>
+        <button
+          id="menu-button"
+          class="hover:cursor-pointer md:hidden flex right-3"
+          onclick="sidebar.classList.toggle('translate-x-full')"
+        >
+          <Icon
+            class="hover:scale-110 hover:cursor-pointer"
+            name="material-symbols-light:menu"
+            size={40}
+          />
+        </button>
+      </div>
+    </div>
+    <aside
+      id="sidebar"
+      class="fixed z-50 top-0 right-0 w-64 h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
+    >
+      <button
+        id="close-button"
+        class="flex pb-10 pt-5"
+        onclick="sidebar.classList.toggle('translate-x-full')"
+      >
+        <Icon
+          class="hover:scale-110 hover:cursor-pointer"
+          name="material-symbols-light:close"
+          size={30}
+        />
+      </button>
+      <nav class="flex flex-col gap-y-10 justify-center items-center">
+        <div class="relative">
+          <SearchComponentAsideEs client:load />
+        </div>
+        <a
+          onclick="sidebar.classList.toggle('translate-x-full')"
+          id="home-sidebar"
+          class="transition-all nav-links hover:cursor-pointer">INICIO</a
+        >
+        <a
+          onclick="sidebar.classList.toggle('translate-x-full')"
+          id="contact-sidebar"
+          href="/contact"
+          class="transition-all nav-links">CONTACTO</a
+        >
+        <AsideProductsDropdownEs client:only items={items} />
+      </nav>
+    </aside>
+  </div>
+</header>
+
+<script>
+  const home = document.getElementById("home");
+  home?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  const homeSidebar = document.getElementById("home-sidebar");
+  homeSidebar?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  const sidebar = document.getElementById("sidebar");
+  const menuButton = document.getElementById("menu-button");
+  document.addEventListener("click", (event) => {
+    if (
+      sidebar &&
+      !sidebar.contains(event.target as Node) &&
+      event.target !== menuButton
+    ) {
+      sidebar.classList.add("translate-x-full");
+    }
+  });
+</script>
+
+<style>
+  .nav-links {
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: fit-content;
+  }
+  .nav-links::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2.5px;
+    background-color: white;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+    opacity: 1;
+    z-index: 101;
+  }
+  .nav-links:hover::after {
+    width: 100%;
+  }
+  .fade-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.3s forwards;
+  }
+  .fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeOut 0.3s forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+</style>
