@@ -38,10 +38,6 @@ const uniqueSegment = [
   ...new Set(filteredSegmentos.map((segmento) => segmento)),
 ];
 
-const isAnyProductWithPTag = filteredProductos.some((product) =>
-  product.descripcion.includes("<p>")
-);
-
 const descripcion = item.descripcion;
 
 let editedDescFoto =
