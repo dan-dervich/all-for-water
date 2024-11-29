@@ -1,36 +1,36 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import { items } from "../lib/categories.js";
+import LayoutEs from "@layouts/Layout_es.astro";
+import { items_es } from "../lib/categories_es.js";
 import CardPorProducto from "@components/ui/CardPorProducto.astro";
-import { productos } from "@lib/products";
-import pdfs_carta from "@lib/pdfs_carta";
-import pdfs_tabla from "@lib/pdfs_tabla";
-import { segmentos } from "@lib/segmentos";
-import { descripciones_foto } from "@lib/descripcion_foto";
+import { productos_es } from "@lib/products_es";
+import pdfs_carta_es from "@lib/pdfs_carta_es";
+import pdfs_tabla_es from "@lib/pdfs_tabla_es";
+import { segmentos_es } from "@lib/segmentos_es";
+import { descripciones_foto_es } from "@lib/descripcion_foto_es";
 
 export async function getStaticPaths() {
-  return items.map((item) => ({
-    params: { id: item.nombre },
+  return items_es.map((item) => ({
+    params: { id_es: item.nombre },
   }));
 }
 
-const { id } = Astro.params;
+const { id_es } = Astro.params;
 
-const item = items.find((product) => product.nombre === id);
+const item = items_es.find((product) => product.nombre === id_es);
 
 if (!item) {
-  throw new Error(`Item with name ${id} not found`);
+  throw new Error(`Item with name ${id_es} not found`);
 }
 
-const filteredProductos = productos.filter((product) =>
+const filteredProductos = productos_es.filter((product) =>
   item.productos.includes(product.id)
 );
 
 const filteredSegmentos = filteredProductos.flatMap((product) =>
-  segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
+  segmentos_es.filter((segmento) => product.segmentos.includes(segmento.id))
 );
 
-const filteredDescFoto = descripciones_foto.filter((desc) =>
+const filteredDescFoto = descripciones_foto_es.filter((desc) =>
   item.desc.includes(desc.id)
 );
 
@@ -78,7 +78,7 @@ if (/<table/.test(editedDescFoto[1])) {
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
-<Layout title={item.nombre}>
+<LayoutEs title={item.nombre}>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >
@@ -150,10 +150,10 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                   </h2>
                   <div class="flex flex-wrap gap-5 justify-center items-start">
                     {productosPorSegmento.map((product) => {
-                      const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+                      const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
                         product.pdfs_tabla.includes(pdf.id)
                       );
-                      const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                      const productPdfs_carta = pdfs_carta_es.filter((pdf) =>
                         product.pdfs_carta.includes(pdf.id)
                       );
 
@@ -193,10 +193,10 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
             }`}
           >
             {filteredProductos.map((product) => {
-              const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+              const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
                 product.pdfs_tabla.includes(pdf.id)
               );
-              const productPdfs_carta = pdfs_carta.filter((pdf) =>
+              const productPdfs_carta = pdfs_carta_es.filter((pdf) =>
                 product.pdfs_carta.includes(pdf.id)
               );
 
@@ -223,4 +223,4 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       scroll-behavior: smooth;
     }
   </style>
-</Layout>
+</LayoutEs>

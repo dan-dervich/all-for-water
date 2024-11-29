@@ -1,6 +1,6 @@
 ---
 import Card from "./ui/Card.astro";
-import { items } from "@lib/categories";
+import { items_es } from "@lib/categories_es";
 ---
 
 <section
@@ -22,7 +22,7 @@ import { items } from "@lib/categories";
     class="grid gap-10 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     {
-      items.map((item) => (
+      items_es.map((item) => (
         <a href={`/${item.nombre}`} class="w-full h-full">
           <Card imgSrc={item.fotoUrl} text={item.nombre} />
         </a>
