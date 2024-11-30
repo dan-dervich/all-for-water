@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { productos } from '@lib/products';
-import { items } from '@lib/categories';
+import { productos_es } from '@lib/products_es';
+import { items_es } from '@lib/categories_es';
 
 interface Product {
     id: string;
@@ -44,7 +44,7 @@ const SearchComponent: React.FC = () => {
         setSearchTerm(term);
 
         if (term.length > 0) {
-            const filteredProductos = productos.filter(product =>
+            const filteredProductos = productos_es.filter(product =>
                 product.nombre.toLowerCase().includes(term.toLowerCase())
             );
             setSearchResults(filteredProductos);
@@ -56,7 +56,7 @@ const SearchComponent: React.FC = () => {
     };
 
     const findCategoryByProductId = (productId: string): Category | null => {
-        for (const category of items) {
+        for (const category of items_es) {
             if (category.productos && category.productos.includes(productId)) {
                 return category;
             }
