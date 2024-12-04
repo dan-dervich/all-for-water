@@ -6,49 +6,13 @@ import Marcas from "@components/Marcas.astro";
 import Miembro from "@components/Miembro.astro";
 import Layout from "@layouts/Layout.astro";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
-import Frases_es from "@components/Frases_es.astro";
-import ProductosHome_es from "@components/ProductosHome_es.astro";
-import ContactUs_es from "@components/ContactUs_es.astro";
-import Marcas_es from "@components/Marcas_es.astro";
-import Miembro_es from "@components/Miembro_es.astro";
-import LayoutEs from "@layouts/Layout_es.astro";
 ---
 
-<LanguageSwitch client:only="react" />
-<div id="english-content">
-  <Layout title="All for Water.">
-    <Frases />
-    <ProductosHome />
-    <ContactUs />
-    <Marcas />
-    <Miembro />
-  </Layout>
-</div>
-
-<div id="spanish-content" style="display: none;">
-  <LayoutEs title="All for Water.">
-    <Frases_es />
-    <ProductosHome_es />
-    <ContactUs_es />
-    <Marcas_es />
-    <Miembro_es />
-  </LayoutEs>
-</div>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const language = localStorage.getItem("language") || "EN";
-    const englishContent = document.getElementById("english-content");
-    const spanishContent = document.getElementById("spanish-content");
-
-    if (englishContent && spanishContent) {
-      if (language === "EN") {
-        englishContent.style.display = "block";
-        spanishContent.style.display = "none";
-      } else {
-        englishContent.style.display = "none";
-        spanishContent.style.display = "block";
-      }
-    }
-  });
-</script>
+<LanguageSwitch client:only="react" url={"/es/"} lenguage={'EN'} />
+<Layout title="All for Water.">
+  <Frases />
+  <ProductosHome />
+  <ContactUs />
+  <Marcas />
+  <Miembro />
+</Layout>

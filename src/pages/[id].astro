@@ -7,6 +7,8 @@ import pdfs_carta from "@lib/pdfs_carta";
 import pdfs_tabla from "@lib/pdfs_tabla";
 import { segmentos } from "@lib/segmentos";
 import { descripciones_foto } from "@lib/descripcion_foto";
+import LanguageSwitch from "@components/ui/LenguageSwitch";
+import { items_es } from "@lib/categories_es";
 
 export async function getStaticPaths() {
   return items.map((item) => ({
@@ -25,6 +27,14 @@ if (!item) {
 const filteredProductos = productos.filter((product) =>
   item.productos.includes(product.id)
 );
+
+const categoria_es_id = item.espanol;
+
+let categoria_es_nombre = items_es.find(
+  (categoria) => categoria.id === categoria_es_id
+);
+
+categoria_es_nombre = categoria_es_nombre ? categoria_es_nombre.nombre : "";
 
 const filteredSegmentos = filteredProductos.flatMap((product) =>
   segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
@@ -74,6 +84,11 @@ if (/<table/.test(editedDescFoto[1])) {
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
+<LanguageSwitch
+  client:only="react"
+  url={`/es/${categoria_es_nombre}`}
+  idioma={"EN"}
+/>
 <Layout title={item.nombre}>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"

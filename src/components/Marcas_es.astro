@@ -1,9 +1,9 @@
 ---
 import MarcasCard from "./ui/MarcasCard.astro";
 import { segmentos } from "@lib/segmentos";
-import { marcas } from "@lib/marcas";
+import { marcas_es } from "@lib/marcas_es";
 
-const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
+const uniqueMarca = [...new Set(marcas_es.map((marca) => marca))];
 ---
 
 <section class="bg-white flex justify-center items-center flex-col">
@@ -35,7 +35,7 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
                   ? "/MEDIA%20&%20RESINS"
                   : marca.nombre.toLowerCase() === "resintech"
                     ? "/MEDIA%20&%20RESINS"
-                    : marca.id
+                    : `/es/${marca.id}`
           }
         />
       ))

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export default function LanguageSwitch() {
+export default function LanguageSwitch({ url, idioma }) {
   const [language, setLanguage] = useState(() => {
-    // Check if window is defined (client-side) to avoid SSR issues
-    if (typeof window !== "undefined") {
-      return window.localStorage?.getItem("language") || "EN";
-    }
-    return "EN";
+    // Get language from localStorage
+    const localLanguage = window.localStorage?.getItem("language");
+    return idioma || localLanguage;
   });
 
   useEffect(() => {
@@ -39,7 +37,11 @@ export default function LanguageSwitch() {
   }, [language]);
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "EN" ? "ES" : "EN"));
+    setLanguage((prev) => {
+      const newLanguage = prev === "EN" ? "ES" : "EN";
+      window.location.href = url;
+      return newLanguage;
+    });
   };
 
   return (

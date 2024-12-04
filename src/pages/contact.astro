@@ -2,37 +2,9 @@
 import Layout from "@layouts/Layout.astro";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
 import ContactForm from "@components/ContactForm.astro";
-import ContactFormEs from "@components/ContactForm_es.astro";
-import LayoutEs from "@layouts/Layout_es.astro";
 ---
 
-<LanguageSwitch client:only="react" />
-<div id="english-content">
-  <Layout title="Contact">
-    <ContactForm />
-  </Layout>
-</div>
-
-<div id="spanish-content" style="display: none;">
-  <LayoutEs title="Contacto">
-    <ContactFormEs />
-  </LayoutEs>
-</div>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const language = localStorage.getItem("language") || "EN";
-    const englishContent = document.getElementById("english-content");
-    const spanishContent = document.getElementById("spanish-content");
-
-    if (englishContent && spanishContent) {
-      if (language === "EN") {
-        englishContent.style.display = "block";
-        spanishContent.style.display = "none";
-      } else {
-        englishContent.style.display = "none";
-        spanishContent.style.display = "block";
-      }
-    }
-  });
-</script>
+<LanguageSwitch client:only="react" url={"/es/contacto"} idioma={'EN'} />
+<Layout title="Contact">
+  <ContactForm />
+</Layout>

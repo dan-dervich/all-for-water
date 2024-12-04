@@ -1,12 +1,14 @@
 ---
 import LayoutEs from "@layouts/Layout_es.astro";
-import { items_es } from "../lib/categories_es.js";
+import { items_es } from "../../lib/categories_es.js";
 import CardPorProducto from "@components/ui/CardPorProducto.astro";
 import { productos_es } from "@lib/products_es";
 import pdfs_carta_es from "@lib/pdfs_carta_es";
 import pdfs_tabla_es from "@lib/pdfs_tabla_es";
 import { segmentos_es } from "@lib/segmentos_es";
 import { descripciones_foto_es } from "@lib/descripcion_foto_es";
+import { items } from "@lib/categories";
+import LanguageSwitch from "@components/ui/LenguageSwitch";
 
 export async function getStaticPaths() {
   return items_es.map((item) => ({
@@ -17,6 +19,14 @@ export async function getStaticPaths() {
 const { id_es } = Astro.params;
 
 const item = items_es.find((product) => product.nombre === id_es);
+
+const categoria_eng_id = item.ingles;
+
+let categoria_eng_nombre = items.find(
+  (categoria) => categoria.id === categoria_eng_id
+);
+
+categoria_eng_nombre = categoria_eng_nombre ? categoria_eng_nombre.nombre : "";
 
 if (!item) {
   throw new Error(`Item with name ${id_es} not found`);
@@ -74,6 +84,11 @@ if (/<table/.test(editedDescFoto[1])) {
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
+<LanguageSwitch
+  client:only="react"
+  url={`/${categoria_eng_nombre}`}
+  idioma={"ES"}
+/>
 <LayoutEs title={item.nombre}>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"

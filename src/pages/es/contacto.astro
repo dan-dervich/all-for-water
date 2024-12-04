@@ -1,0 +1,10 @@
+---
+import ContactFormEs from "@components/ContactForm_es.astro";
+import LanguageSwitch from "@components/ui/LenguageSwitch";
+import LayoutEs from "@layouts/Layout_es.astro";
+---
+
+<LanguageSwitch client:only="react" url={"/contact"} idioma={"ES"} />
+<LayoutEs title="Contacto">
+  <ContactFormEs />
+</LayoutEs>
