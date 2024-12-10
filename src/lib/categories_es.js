@@ -21,7 +21,10 @@ try {
     return {
       ...item,
       fotoUrl: imageUrl, // Agregamos la URL de la imagen al objeto item
-      nombre: item.nombre.toUpperCase(), // Convertir el nombre a mayúsculas
+      nombre: item.nombre
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase(), // Ignorar tildes y convertir el nombre a mayúsculas
     };
   });
 } catch (error) {

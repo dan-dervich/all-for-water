@@ -23,10 +23,7 @@ import { items_es } from "@lib/categories_es";
   >
     {
       items_es.map((item) => (
-        <a
-          href={`/es/${item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
-          class="w-full h-full"
-        >
+        <a href={`/es/${item.nombre}`} class="w-full h-full">
           <Card imgSrc={item.fotoUrl} text={item.nombre} />
         </a>
       ))
