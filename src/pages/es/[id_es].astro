@@ -12,7 +12,9 @@ import LanguageSwitch from "@components/ui/LenguageSwitch";
 
 export async function getStaticPaths() {
   return items_es.map((item) => ({
-    params: { id_es: item.nombre },
+    params: {
+      id_es: item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    },
   }));
 }
 
