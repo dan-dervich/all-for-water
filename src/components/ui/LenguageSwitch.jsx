@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 
+const usa = "/fotos/usa.png";
+const espana = "/fotos/espana.png";
+
 export default function LanguageSwitch({ url, idioma }) {
   const [language, setLanguage] = useState(() => {
     // Get language from localStorage
     const localLanguage = window.localStorage?.getItem("language");
-    return idioma || localLanguage;
+    return idioma || localLanguage || "ES";
   });
 
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function LanguageSwitch({ url, idioma }) {
   return (
     <div className="fixed bottom-5 right-5 z-50">
       <button
-        className={`w-20 h-10 bg-[#55A5CA] rounded-full p-1 flex items-center ${
+        className={`w-28 h-14 bg-[#55A5CA] rounded-full p-1 flex items-center ${
           language === "ES" ? "justify-end" : "justify-start"
         }`}
         onClick={toggleLanguage}
@@ -55,10 +58,17 @@ export default function LanguageSwitch({ url, idioma }) {
           language === "ES" ? "Switch to English" : "Cambiar a Español"
         }
       >
-        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
-          <span className="text-[#55A5CA] font-bold text-xs">
-            {language === "EN" ? "EN" : "ES"}
-          </span>
+        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+          <div className="flex items-center">
+            <span className="text-[#55A5CA] font-bold text-xs mr-1">
+              {language === "EN" ? "EN" : "ES"}
+            </span>
+            <img
+              src={language === "EN" ? usa : espana}
+              alt={language === "EN" ? "English Flag" : "Spanish Flag"}
+              className="w-4 h-4 rounded-full"
+            />
+          </div>
         </div>
       </button>
     </div>
