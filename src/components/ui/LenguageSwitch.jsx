@@ -49,28 +49,49 @@ export default function LanguageSwitch({ url, idioma }) {
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
-      <button
-        className={`w-28 h-14 bg-[#55A5CA] rounded-full p-1 flex items-center ${
-          language === "ES" ? "justify-end" : "justify-start"
-        }`}
-        onClick={toggleLanguage}
-        aria-label={
-          language === "ES" ? "Switch to English" : "Cambiar a Español"
-        }
-      >
-        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
-          <div className="flex items-center">
-            <span className="text-[#55A5CA] font-bold text-xs mr-1">
-              {language === "EN" ? "EN" : "ES"}
-            </span>
-            <img
-              src={language === "EN" ? usa : espana}
-              alt={language === "EN" ? "English Flag" : "Spanish Flag"}
-              className="w-4 h-4 rounded-full"
-            />
+      <div className="relative w-28 h-14 bg-[#55A5CA] rounded-full p-1 flex items-center">
+        {/* Transparent alternate language option */}
+        <div
+          className={`absolute top-0 bottom-0 flex items-center opacity-50 transition-all duration-300 
+            ${language === "ES" ? "left-1" : "right-1"}`}
+        >
+          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <div className="flex items-center">
+              <span className="text-[#55A5CA] font-bold text-xs mr-1">
+                {language === "EN" ? "ES" : "EN"}
+              </span>
+              <img
+                src={language === "EN" ? espana : usa}
+                alt={language === "EN" ? "Spanish Flag" : "English Flag"}
+                className="w-4 h-4 rounded-full"
+              />
+            </div>
           </div>
         </div>
-      </button>
+
+        {/* Active language button */}
+        <button
+          className={`w-full h-full flex items-center transition-all duration-300 
+            ${language === "ES" ? "justify-end" : "justify-start"}`}
+          onClick={toggleLanguage}
+          aria-label={
+            language === "ES" ? "Switch to English" : "Cambiar a Español"
+          }
+        >
+          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+            <div className="flex items-center">
+              <span className="text-[#55A5CA] font-bold text-xs mr-1">
+                {language === "EN" ? "EN" : "ES"}
+              </span>
+              <img
+                src={language === "EN" ? usa : espana}
+                alt={language === "EN" ? "English Flag" : "Spanish Flag"}
+                className="w-4 h-4 rounded-full"
+              />
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
   );
 }
