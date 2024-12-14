@@ -50,10 +50,14 @@ export default function LanguageSwitch({ url, idioma }) {
   return (
     <div className="fixed bottom-5 right-5 z-50">
       <div className="relative w-28 h-14 bg-[#55A5CA] rounded-full p-1 flex items-center">
-        {/* Transparent alternate language option */}
-        <div
+        {/* Inactive language button */}
+        <button
           className={`absolute top-0 bottom-0 flex items-center opacity-50 transition-all duration-300 
             ${language === "ES" ? "left-1" : "right-1"}`}
+          onClick={toggleLanguage}
+          aria-label={
+            language === "ES" ? "Switch to English" : "Cambiar a Español"
+          }
         >
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
             <div className="flex items-center">
@@ -67,16 +71,12 @@ export default function LanguageSwitch({ url, idioma }) {
               />
             </div>
           </div>
-        </div>
+        </button>
 
-        {/* Active language button */}
-        <button
+        {/* Active language display */}
+        <div
           className={`w-full h-full flex items-center transition-all duration-300 
             ${language === "ES" ? "justify-end" : "justify-start"}`}
-          onClick={toggleLanguage}
-          aria-label={
-            language === "ES" ? "Switch to English" : "Cambiar a Español"
-          }
         >
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
             <div className="flex items-center">
@@ -90,7 +90,7 @@ export default function LanguageSwitch({ url, idioma }) {
               />
             </div>
           </div>
-        </button>
+        </div>
       </div>
     </div>
   );

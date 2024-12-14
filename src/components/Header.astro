@@ -76,7 +76,8 @@ import SearchComponentAside from "./ui/SearchComponentAside";
         <a
           onclick="sidebar.classList.toggle('translate-x-full')"
           id="home-sidebar"
-          class="transition-all nav-links hover:cursor-pointer">HOME</a
+          class="transition-all nav-links hover:cursor-pointer"
+          href="/">HOME</a
         >
         <a
           onclick="sidebar.classList.toggle('translate-x-full')"
@@ -90,7 +91,7 @@ import SearchComponentAside from "./ui/SearchComponentAside";
   </div>
 </header>
 
-<script>
+<!-- <script>
   const home = document.getElementById("home");
   home?.addEventListener("click", () => {
     window.scrollTo({
@@ -118,7 +119,7 @@ import SearchComponentAside from "./ui/SearchComponentAside";
       sidebar.classList.add("translate-x-full");
     }
   });
-</script>
+</script> -->
 
 <style>
   .nav-links {
