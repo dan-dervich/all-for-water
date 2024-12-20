@@ -121,6 +121,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
           uniqueSegment.map((segment) =>
             segment.marca ? (
               <a
+                key={segment.id}
                 class="segment-button hover:scale-105 transition-all shadow-md"
                 href={"#segmento-" + segment.nombre}
               >
@@ -132,6 +133,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
               </a>
             ) : (
               <a
+                key={segment.id}
                 class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
                 href={`#${segment.id}`}
               >
@@ -152,14 +154,20 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 
             if (productosPorSegmento.length > 0) {
               return (
-                <section id={segment.id} class="mb-10">
+                <section key={segment.id} id={segment.id} class="mb-10">
                   <h2
                     id={"segmento-" + segment.nombre}
                     class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
                   >
                     {segment.nombre}
                   </h2>
-                  <div class="flex flex-wrap gap-5 justify-center items-start">
+                  <div
+                    class={`grid gap-5 ${
+                      productosPorSegmento.length === 1
+                        ? "grid-cols-1 w-screen"
+                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
+                    }`}
+                  >
                     {productosPorSegmento.map((product) => {
                       const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
                         product.pdfs_tabla.includes(pdf.id)
@@ -169,23 +177,16 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                       );
 
                       return (
-                        <div
-                          class={
-                            productosPorSegmento.length === 1
-                              ? "w-screen"
-                              : "md:w-screen lg:w-fit"
-                          }
-                        >
-                          <CardPorProducto
-                            key={product.id}
-                            id={`producto-${product.id}`}
-                            imgSrc={product.fotoUrl || "vacio"}
-                            text={product.nombre}
-                            desc={product.descripcion}
-                            pdfs_tabla={productPdfs_tabla}
-                            pdfs_carta={productPdfs_carta}
-                          />
-                        </div>
+                        <CardPorProducto
+                          key={product.id}
+                          id={`producto-${product.id}`}
+                          imgSrc={product.fotoUrl || "vacio"}
+                          text={product.nombre}
+                          desc={product.descripcion}
+                          pdfs_tabla={productPdfs_tabla}
+                          pdfs_carta={productPdfs_carta}
+                          className="w-64 h-64"
+                        />
                       );
                     })}
                   </div>
@@ -214,7 +215,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
               return (
                 <CardPorProducto
                   key={product.id}
-                  id={product.segmentos}
+                  id={`producto-${product.id}`}
                   imgSrc={product.fotoUrl || "vacio"}
                   text={product.nombre}
                   desc={product.descripcion}

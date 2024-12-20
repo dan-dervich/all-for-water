@@ -26,6 +26,15 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
+    <script>
+      // Deshabilitar el clic derecho en imágenes
+      document.addEventListener("contextmenu", (event) => {
+        if ((event.target as HTMLElement).tagName === "IMG") {
+          event.preventDefault();
+          alert("No puedes guardar esta imagen.");
+        }
+      });
+    </script>
     <HeaderEs />
     <main>
       <slot />
