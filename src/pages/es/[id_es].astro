@@ -197,13 +197,15 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
             return null;
           })
         ) : (
-          <div
+            <div
             class={`${
               filteredProductos.length > 1
-                ? "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
-                : "flex flex-col gap-5 justify-center items-center w-full"
+              ? filteredProductos.length < 3
+                ? "flex flex-col gap-5 justify-center items-center w-full"
+                : "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
+              : "flex flex-col gap-5 justify-center items-center w-full"
             }`}
-          >
+            >
             {filteredProductos.map((product) => {
               const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
                 product.pdfs_tabla.includes(pdf.id)

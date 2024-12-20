@@ -100,7 +100,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       }
     </h1>
     <div
-      class="sm:max-w-[1000px] max-w-full overflow-auto text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
+      class="sm:max-w-[1000px] max-w-full text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
     >
       <div class="flex justify-center items-center md:flex-row flex-col gap-5">
         {
@@ -131,12 +131,12 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                 />
               </a>
             ) : (
-              <a
-                class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
+                <a
+                class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all flex items-center justify-center"
                 href={`#${segment.id}`}
-              >
+                >
                 {segment.nombre}
-              </a>
+                </a>
             )
           )
       }
@@ -198,7 +198,9 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
           <div
             class={`${
               filteredProductos.length > 1
-                ? "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
+                ? filteredProductos.length < 3
+                  ? "flex flex-col gap-5 justify-center items-center w-full"
+                  : "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
                 : "flex flex-col gap-5 justify-center items-center w-full"
             }`}
           >
