@@ -121,7 +121,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
           uniqueSegment.map((segment) =>
             segment.marca ? (
               <a
-                key={segment.id}
+                id={segment.id}
                 class="segment-button hover:scale-105 transition-all shadow-md"
                 href={"#segmento-" + segment.nombre}
               >
@@ -133,7 +133,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
               </a>
             ) : (
               <a
-                key={segment.id}
+                id={segment.id}
                 class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
                 href={`#${segment.id}`}
               >
@@ -154,7 +154,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 
             if (productosPorSegmento.length > 0) {
               return (
-                <section key={segment.id} id={segment.id} class="mb-10">
+                <section id={segment.id} class="mb-10">
                   <h2
                     id={"segmento-" + segment.nombre}
                     class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
