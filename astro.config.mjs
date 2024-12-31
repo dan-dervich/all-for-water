@@ -6,13 +6,29 @@ import icon from "astro-icon";
 
 import react from "@astrojs/react";
 
+
+import sitemap from "@astrojs/sitemap";
+
+import vercel from "@astrojs/vercel/serverless";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), icon(), react()],
+  integrations: [tailwind(), icon(), react(), sitemap({
+    i18n: {
+      locales: ["en", "es"],
+      defaultLocale: "en",
+    },
+    lastmod: new Date(),
+    
+  })],
+
   prefetch: {
     defaultStrategy: "viewport",
     prefetchAll: true,
   },
+
+  site: "https://allforwater.com",
+
   vite: {
     resolve: {
       alias: {
@@ -20,4 +36,11 @@ export default defineConfig({
       },
     },
   },
+
+  output: "server",
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    }
+  }),
 });

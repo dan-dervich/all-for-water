@@ -9,6 +9,8 @@ import { marcas } from "@lib/marcas";
 import { marcas_es } from "@lib/marcas_es";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
 
+export const prerender = true
+
 export async function getStaticPaths() {
   return marcas.map((marca) => ({
     params: { marca: marca.id },
