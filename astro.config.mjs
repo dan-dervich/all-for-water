@@ -37,7 +37,7 @@ export default defineConfig({
     },
   },
 
-  output: "server",
+  // output: "server",
   // adapter: vercel({
   //   webAnalytics: {
   //     enabled: true,
