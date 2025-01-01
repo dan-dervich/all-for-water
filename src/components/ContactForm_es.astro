@@ -62,7 +62,7 @@
 </section>
 
 <script>
-  import Toastify from "toastify-js";
+  // import Toastify from "toastify-js";
   document
     .getElementById("contactForm_es")
     .addEventListener("submit", async function (event) {
@@ -86,14 +86,15 @@
       };
 
       // Mostrar toast de carga
-      const loadingToast = Toastify({
-        text: "Enviando mensaje...",
-        duration: -1,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#3498db",
-      }).showToast();
+      // const loadingToast = Toastify({
+      //   text: "Enviando mensaje...",
+      //   duration: -1,
+      //   close: true,
+      //   gravity: "top",
+      //   position: "right",
+      //   backgroundColor: "#3498db",
+      // }).showToast();
+      alert("Enviando mensaje...");
 
       try {
         const response = await fetch(
@@ -108,17 +109,18 @@
         );
 
         // Cerrar el toast de carga
-        loadingToast.hideToast();
+        // loadingToast.hideToast();
 
         if (response.ok) {
           // Mostrar toast de éxito
-          Toastify({
-            text: "Mensaje enviado exitosamente.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#28a745",
-          }).showToast();
+          // Toastify({
+          //   text: "Mensaje enviado exitosamente.",
+          //   duration: 3000,
+          //   gravity: "top",
+          //   position: "right",
+          //   backgroundColor: "#28a745",
+          // }).showToast();
+          alert("Mensaje enviado exitosamente.");
 
           // Vaciar los campos del formulario
           (
@@ -126,26 +128,28 @@
           ).reset();
         } else {
           // Mostrar toast de error
-          Toastify({
-            text: "Hubo un error al enviar el mensaje.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#dc3545",
-          }).showToast();
+          // Toastify({
+          //   text: "Hubo un error al enviar el mensaje.",
+          //   duration: 3000,
+          //   gravity: "top",
+          //   position: "right",
+          //   backgroundColor: "#dc3545",
+          // }).showToast();
+          alert("Hubo un error al enviar el mensaje.");
         }
       } catch (error) {
         console.error("Error:", error);
 
         // Cerrar el toast de carga y mostrar toast de error
-        loadingToast.hideToast();
-        Toastify({
-          text: "Hubo un problema con la solicitud.",
-          duration: 3000,
-          gravity: "top",
-          position: "right",
-          backgroundColor: "#dc3545",
-        }).showToast();
+        // loadingToast.hideToast();
+        // Toastify({
+        //   text: "Hubo un problema con la solicitud.",
+        //   duration: 3000,
+        //   gravity: "top",
+        //   position: "right",
+        //   backgroundColor: "#dc3545",
+        // }).showToast();
+        alert("Hubo un problema con la solicitud.");
       }
     });
 </script>
