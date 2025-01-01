@@ -10,7 +10,7 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
   <h2
     class="text-light-blue font-semibold sm:text-5xl text-2xl px-5 pt-20 text-center"
   >
-  Brands we Represent
+    Brands we Represent
   </h2>
   <p class="text-custom-grey font-light max-w-[800px] p-5 text-center">
     Top brands at your fingertips: Matrikx® Carbon Block, Viqua® Sterilight®
@@ -27,7 +27,8 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
         <MarcasCard
           imgSrc={marca.fotoUrl}
           link={
-            marca.nombre.toLowerCase() === "viqua"
+            "/marca" +
+            (marca.nombre.toLowerCase() === "viqua"
               ? "/ULTRAVIOLET%20STERILIZERS"
               : marca.nombre.toLowerCase() === "matrikx"
                 ? "/CARTRIDGES"
@@ -35,7 +36,7 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
                   ? "/MEDIA%20&%20RESINS"
                   : marca.nombre.toLowerCase() === "resintech"
                     ? "/MEDIA%20&%20RESINS"
-                    : marca.id
+                    : "/" + marca.id)
           }
         />
       ))

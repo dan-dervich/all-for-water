@@ -1,7 +1,7 @@
 /* empty css                                   */
 import { c as createAstro, a as createComponent, r as renderTemplate, d as renderComponent, m as maybeRenderHead, b as addAttribute, u as unescapeHTML } from '../../chunks/astro/server_CSx5QtHz.mjs';
 import 'kleur/colors';
-import { $ as $$LayoutEs } from '../../chunks/Layout_es_12h06j3-.mjs';
+import { $ as $$LayoutEs } from '../../chunks/Layout_es_SsxG8k8l.mjs';
 import { i as items_es } from '../../chunks/categories_es_ubxGnyBe.mjs';
 import { $ as $$CardPorProducto } from '../../chunks/CardPorProducto_CdqDp4KJ.mjs';
 import { p as productos_es } from '../../chunks/products_es_CQJZ-GMj.mjs';

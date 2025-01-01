@@ -2,7 +2,7 @@
 import { a as createComponent, r as renderTemplate, m as maybeRenderHead, d as renderComponent } from '../../chunks/astro/server_CSx5QtHz.mjs';
 import 'kleur/colors';
 import 'clsx';
-import { $ as $$LayoutEs } from '../../chunks/Layout_es_12h06j3-.mjs';
+import { $ as $$LayoutEs } from '../../chunks/Layout_es_SsxG8k8l.mjs';
 export { renderers } from '../../renderers.mjs';
 
 var __freeze = Object.freeze;

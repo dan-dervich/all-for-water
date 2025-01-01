@@ -2,12 +2,12 @@
 import { a as createComponent, r as renderTemplate, m as maybeRenderHead, d as renderComponent, b as addAttribute } from '../chunks/astro/server_CSx5QtHz.mjs';
 import 'kleur/colors';
 import 'clsx';
-import { $ as $$Icon } from '../chunks/ClientRouter_DLcPeYho.mjs';
+import { $ as $$Icon } from '../chunks/ClientRouter_D75ElYGr.mjs';
 /* empty css                                 */
 import { $ as $$Card, a as $$MarcasCard } from '../chunks/MarcasCard_D4C-L2DX.mjs';
 import { i as items } from '../chunks/categories_BS9PQIRL.mjs';
 import { m as marcas } from '../chunks/marcas_BY2rULPG.mjs';
-import { $ as $$Layout } from '../chunks/Layout_BKJpCN5H.mjs';
+import { $ as $$Layout } from '../chunks/Layout_Bj0oLuaU.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$ContactUs = createComponent(($$result, $$props, $$slots) => {
@@ -49,7 +49,7 @@ Top brands at your fingertips: Matrikx® Carbon Block, Viqua® Sterilight®
     Hydranautics® Membranes , Goulds Pumps®, Procon Pumps®, CAT Pumps®,
     Purolite® Resin, Resintech® Resin, Clack® Valves. All you need and much
     more!
-</p> <div class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> ${uniqueMarca.map((marca) => renderTemplate`${renderComponent($$result, "MarcasCard", $$MarcasCard, { "imgSrc": marca.fotoUrl, "link": marca.nombre.toLowerCase() === "viqua" ? "/ULTRAVIOLET%20STERILIZERS" : marca.nombre.toLowerCase() === "matrikx" ? "/CARTRIDGES" : marca.nombre.toLowerCase() === "purolite" ? "/MEDIA%20&%20RESINS" : marca.nombre.toLowerCase() === "resintech" ? "/MEDIA%20&%20RESINS" : marca.id })}`)} </div> </section>`;
+</p> <div class="grid gap-5 w-3/4 mt-10 mb-20 justify-center items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> ${uniqueMarca.map((marca) => renderTemplate`${renderComponent($$result, "MarcasCard", $$MarcasCard, { "imgSrc": marca.fotoUrl, "link": "/marca" + (marca.nombre.toLowerCase() === "viqua" ? "/ULTRAVIOLET%20STERILIZERS" : marca.nombre.toLowerCase() === "matrikx" ? "/CARTRIDGES" : marca.nombre.toLowerCase() === "purolite" ? "/MEDIA%20&%20RESINS" : marca.nombre.toLowerCase() === "resintech" ? "/MEDIA%20&%20RESINS" : "/" + marca.id) })}`)} </div> </section>`;
 }, "/home/dan/all-for-water/src/components/Marcas.astro", void 0);
 
 const $$Miembro = createComponent(($$result, $$props, $$slots) => {
