@@ -9,17 +9,18 @@ import react from "@astrojs/react";
 
 import sitemap from "@astrojs/sitemap";
 
+import vercel from "@astrojs/vercel";
+
 // import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), icon(), react(), sitemap({
     i18n: {
-      locales: ["en", "es"],
+      locales: {en: "en-US", es: "es-ES"},
       defaultLocale: "en",
     },
     lastmod: new Date(),
-    
   })],
 
   prefetch: {
@@ -37,10 +38,16 @@ export default defineConfig({
     },
   },
 
-  // output: "server",
   // adapter: vercel({
   //   webAnalytics: {
   //     enabled: true,
   //   }
   // }),
+  output: "server",
+
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    }
+  }),
 });

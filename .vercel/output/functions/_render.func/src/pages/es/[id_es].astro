@@ -1,0 +1,242 @@
+---
+import LayoutEs from "@layouts/Layout_es.astro";
+import { items_es } from "../../lib/categories_es.js";
+import CardPorProducto from "@components/ui/CardPorProducto.astro";
+import { productos_es } from "@lib/products_es";
+import pdfs_carta_es from "@lib/pdfs_carta_es";
+import pdfs_tabla_es from "@lib/pdfs_tabla_es";
+import { segmentos_es } from "@lib/segmentos_es";
+import { descripciones_foto_es } from "@lib/descripcion_foto_es";
+import { items } from "@lib/categories";
+import LanguageSwitch from "@components/ui/LenguageSwitch";
+
+export async function getStaticPaths() {
+  return items_es.map((item) => ({
+    params: { id_es: item.nombre },
+  }));
+}
+
+const { id_es } = Astro.params;
+
+const item = items_es.find((product) => product.nombre === id_es);
+
+const categoria_eng_id = item.ingles;
+
+let categoria_eng_nombre = items.find(
+  (categoria) => categoria.id === categoria_eng_id
+);
+
+categoria_eng_nombre = categoria_eng_nombre ? categoria_eng_nombre.nombre : "";
+
+if (!item) {
+  throw new Error(`Item with name ${id_es} not found`);
+}
+
+const filteredProductos = productos_es.filter((product) =>
+  item.productos.includes(product.id)
+);
+
+const filteredSegmentos = filteredProductos.flatMap((product) =>
+  segmentos_es.filter((segmento) => product.segmentos.includes(segmento.id))
+);
+
+const filteredDescFoto = descripciones_foto_es.filter((desc) =>
+  item.desc.includes(desc.id)
+);
+
+const uniqueSegment = [
+  ...new Set(filteredSegmentos.map((segmento) => segmento)),
+];
+
+const descripcion = item.descripcion;
+
+let editedDescFoto =
+  filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
+
+editedDescFoto = editedDescFoto.split("</div>");
+
+editedDescFoto[0] = editedDescFoto[0].replace(
+  "<div>",
+  "<div class='flex flex-col justify-center text-center items-center'>"
+);
+
+if (editedDescFoto[1] == undefined) {
+  editedDescFoto[1] = ``;
+}
+editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
+
+if (/<table/.test(editedDescFoto[1])) {
+  editedDescFoto[1] = editedDescFoto[1]
+    .replace(
+      "<thead>",
+      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(
+      "<table",
+      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
+    )
+    .replace(
+      /<td/g,
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(/<\/thead>/, "</thead>");
+}
+editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
+---
+
+<LanguageSwitch
+  client:only="react"
+  url={`/${categoria_eng_nombre}`}
+  idioma={"ES"}
+/>
+<LayoutEs title={item.nombre}>
+  <section
+    class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
+  >
+    <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+      {
+        (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
+          (item.nombre_url || item.nombre).slice(1)
+      }
+    </h1>
+    <div
+      class="sm:max-w-[1000px] max-w-full overflow-auto text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
+    >
+      <div class="flex justify-center items-center md:flex-row flex-col gap-5">
+        {
+          filteredDescFoto[0] && (
+            <img class="w-1/2 h-auto" src={filteredDescFoto[0].fotoUrl} />
+          )
+        }
+        <div set:html={descripcion || editedDescFoto[0]} />
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <div set:html={editedDescFoto[1]} />
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-5 m-5">
+      {
+        uniqueSegment.length > 0 &&
+          uniqueSegment.map((segment) =>
+            segment.marca ? (
+              <a
+                id={segment.id}
+                class="segment-button hover:scale-105 transition-all shadow-md"
+                href={"#segmento-" + segment.nombre}
+              >
+                <img
+                  src={segment.fotoUrl}
+                  alt={segment.nombre}
+                  class="w-auto h-24 object-cover rounded-md"
+                />
+              </a>
+            ) : (
+              <a
+                id={segment.id}
+                class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all"
+                href={`#${segment.id}`}
+              >
+                {segment.nombre}
+              </a>
+            )
+          )
+      }
+    </div>
+
+    <div class="w-full mt-10 mb-20">
+      {
+        uniqueSegment.length > 0 ? (
+          uniqueSegment.map((segment) => {
+            const productosPorSegmento = filteredProductos.filter((product) =>
+              product.segmentos.includes(segment.id)
+            );
+
+            if (productosPorSegmento.length > 0) {
+              return (
+                <section id={segment.id} class="mb-10">
+                  <h2
+                    id={"segmento-" + segment.nombre}
+                    class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
+                  >
+                    {segment.nombre}
+                  </h2>
+                  <div
+                    class={`grid gap-5 ${
+                      productosPorSegmento.length === 1
+                        ? "grid-cols-1 w-screen"
+                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
+                    }`}
+                  >
+                    {productosPorSegmento.map((product) => {
+                      const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
+                        product.pdfs_tabla.includes(pdf.id)
+                      );
+                      const productPdfs_carta = pdfs_carta_es.filter((pdf) =>
+                        product.pdfs_carta.includes(pdf.id)
+                      );
+
+                      return (
+                        <CardPorProducto
+                          key={product.id}
+                          id={`producto-${product.id}`}
+                          imgSrc={product.fotoUrl || "vacio"}
+                          text={product.nombre}
+                          desc={product.descripcion}
+                          pdfs_tabla={productPdfs_tabla}
+                          pdfs_carta={productPdfs_carta}
+                          className="w-64 h-64"
+                        />
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            }
+
+            return null;
+          })
+        ) : (
+          <div
+            class={`${
+              filteredProductos.length > 1
+                ? filteredProductos.length === 2
+                  ? "grid grid-cols-2 gap-5 justify-center items-start w-full"
+                  : filteredProductos.length < 3
+                    ? "flex flex-col gap-5 justify-center items-center w-full"
+                    : "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
+                : "flex flex-col gap-5 justify-center items-center w-full"
+            }`}
+          >
+            {filteredProductos.map((product) => {
+              const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
+                product.pdfs_tabla.includes(pdf.id)
+              );
+              const productPdfs_carta = pdfs_carta_es.filter((pdf) =>
+                product.pdfs_carta.includes(pdf.id)
+              );
+
+              return (
+                <CardPorProducto
+                  key={product.id}
+                  id={`producto-${product.id}`}
+                  imgSrc={product.fotoUrl || "vacio"}
+                  text={product.nombre}
+                  desc={product.descripcion}
+                  pdfs_tabla={productPdfs_tabla}
+                  pdfs_carta={productPdfs_carta}
+                />
+              );
+            })}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</LayoutEs>
