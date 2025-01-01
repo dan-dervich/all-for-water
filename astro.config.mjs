@@ -43,7 +43,7 @@ export default defineConfig({
   //     enabled: true,
   //   }
   // }),
-  output: "server",
+  output: "hybrid",
 
   adapter: vercel({
     webAnalytics: {
