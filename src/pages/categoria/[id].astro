@@ -9,7 +9,7 @@ import { segmentos } from "@lib/segmentos";
 import { descripciones_foto } from "@lib/descripcion_foto";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
 import { items_es } from "@lib/categories_es";
-export const prerender = true
+export const prerender = true;
 export async function getStaticPaths() {
   return items.map((item) => ({
     params: { id: item.nombre },
@@ -19,7 +19,6 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 
 const item = items.find((product) => product.nombre === id);
-
 if (!item) {
   throw new Error(`Item with name ${id} not found`);
 }
@@ -89,7 +88,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
   url={`/es/${categoria_es_nombre}`}
   idioma={"EN"}
 />
-<Layout title={item.nombre}>
+<Layout title={item.seo_title} description={item.seo_description} keywords={item.seo_keywords}>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >

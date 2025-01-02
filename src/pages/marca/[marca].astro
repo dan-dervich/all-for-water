@@ -32,7 +32,7 @@ const filteredProductos = productos.filter((product) =>
 ---
 
 <LanguageSwitch client:only="react" url={`/es/${marca_es_id}`} idioma={"EN"} />
-<Layout title={marcaData.nombre}>
+<Layout title={marcaData.seo_title} description={marcaData.seo_description} keywords={marcaData.seo_keywords}>
   <section
     class="mt-[96px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
   >
