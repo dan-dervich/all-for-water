@@ -11,7 +11,6 @@ import sitemap from "@astrojs/sitemap";
 
 import vercel from "@astrojs/vercel";
 
-// import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,7 +27,7 @@ export default defineConfig({
     prefetchAll: true,
   },
 
-  site: "https://allforwater.com",
+  site: "https://www.allforwater.com",
 
   vite: {
     resolve: {
@@ -37,8 +36,8 @@ export default defineConfig({
       },
     },
   },
-
-  output: "static",
+  outDir: "./dist",
+  output: "server",
 
   adapter: vercel({
     webAnalytics: {

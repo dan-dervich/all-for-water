@@ -23,7 +23,7 @@ import { items } from "@lib/categories";
   >
     {
       items.map((item) => (
-        <a href={`/${item.nombre}`} class="w-full h-full">
+        <a href={`/categoria/${item.nombre}`} class="w-full h-full">
           <Card imgSrc={item.fotoUrl} text={item.nombre} />
         </a>
       ))
