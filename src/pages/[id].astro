@@ -9,7 +9,7 @@ import { segmentos } from "@lib/segmentos";
 import { descripciones_foto } from "@lib/descripcion_foto";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
 import { items_es } from "@lib/categories_es";
-
+export const prerender = true
 export async function getStaticPaths() {
   return items.map((item) => ({
     params: { id: item.nombre },
