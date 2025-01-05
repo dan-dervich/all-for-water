@@ -27,16 +27,16 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
         <MarcasCard
           imgSrc={marca.fotoUrl}
           link={
-            "/marca" +
+            "" +
             (marca.nombre.toLowerCase() === "viqua"
-              ? "/ULTRAVIOLET%20STERILIZERS"
+              ? "/categoria/ULTRAVIOLET%20STERILIZERS"
               : marca.nombre.toLowerCase() === "matrikx"
-                ? "/CARTRIDGES"
+                ? "/categoria/CARTRIDGES"
                 : marca.nombre.toLowerCase() === "purolite"
-                  ? "/MEDIA%20&%20RESINS"
+                  ? "/categoria/MEDIA%20&%20RESINS"
                   : marca.nombre.toLowerCase() === "resintech"
-                    ? "/MEDIA%20&%20RESINS"
-                    : "/" + marca.id)
+                    ? "/categoria/MEDIA%20&%20RESINS"
+                    : "/marca/" + marca.id)
           }
         />
       ))

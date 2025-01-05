@@ -31,20 +31,21 @@ const filteredProductos = productos.filter((product) =>
 );
 ---
 
-<LanguageSwitch client:only="react" url={`/es/${marca_es_id}`} idioma={"EN"} />
-<Layout title={marcaData.seo_title} description={marcaData.seo_description} keywords={marcaData.seo_keywords}>
-  <section
-    class="mt-[96px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
-  >
-    <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
-      {marcaData.nombre}
-    </h1>
-    <p
+<Layout
+canonical={"https://www.allforwater.com/marca/" + marcaData.id}
+title={marcaData.seo_title} description={marcaData.seo_description} keywords={marcaData.seo_keywords}>
+<section
+class="mt-[96px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
+>
+<h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+  {marcaData.nombre}
+</h1>
+<p
       class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
     >
       {marcaData.descripcion}
     </p>
-
+    
     <div class="flex flex-wrap gap-5 justify-center items-start">
       {
         filteredProductos.map((product) => {
@@ -74,3 +75,5 @@ const filteredProductos = productos.filter((product) =>
     </div>
   </section>
 </Layout>
+
+<LanguageSwitch client:only="react" url={`/es/${marca_es_id}`} idioma={"EN"} />

@@ -6,10 +6,11 @@ import Marcas from "@components/Marcas.astro";
 import Miembro from "@components/Miembro.astro";
 import Layout from "@layouts/Layout.astro";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
+export const prerender = true;
 ---
 
-<LanguageSwitch client:only="react" url={"/es/"} idioma={"EN"} />
 <Layout
+  canonical="https://www.allforwater.com/"
   keywords="commercial reverse osmosis systems, industrial reverse osmosis systems, residential reverse osmosis systems, clack water softener, clack water filter, water softener, water filter, reverse osmosis 20000gpd"
   description="Allforwater provides the best Industrial, commercial and residential RO systems as well as the best softeners and filters."
   title="Industrial, Commercial, and Residential RO systems | allforwater"
@@ -20,3 +21,5 @@ import LanguageSwitch from "@components/ui/LenguageSwitch";
   <Marcas />
   <Miembro />
 </Layout>
+
+<LanguageSwitch client:only="react" url={"/es/"} idioma={"EN"} />

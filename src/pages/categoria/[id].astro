@@ -83,12 +83,12 @@ if (/<table/.test(editedDescFoto[1])) {
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
-<LanguageSwitch
-  client:only="react"
-  url={`/es/${categoria_es_nombre}`}
-  idioma={"EN"}
-/>
-<Layout title={item.seo_title} description={item.seo_description} keywords={item.seo_keywords}>
+<Layout
+  canonical={"https://www.allforwater.com/categoria" + item.nombre}
+  title={item.seo_title}
+  description={item.seo_description}
+  keywords={item.seo_keywords}
+>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >
@@ -237,3 +237,8 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
     }
   </style>
 </Layout>
+<LanguageSwitch
+  client:only="react"
+  url={`/es/${categoria_es_nombre}`}
+  idioma={"EN"}
+/>
