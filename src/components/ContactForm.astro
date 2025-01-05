@@ -60,9 +60,15 @@
     </div>
   </form>
 </section>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"
+></script>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+/>
 <script type="module">
-  // import Toastify from "toastify-js";
+  // import Toastify from "react-toastify";
   document
     .getElementById("contactForm")
     .addEventListener("submit", async function (event) {
@@ -81,8 +87,15 @@
       };
 
       // Show loading alert
-      alert("Sending message...");
-
+      // alert("Sending message...");
+      const loadingToast = Toastify({
+        text: "Sending message...",
+        duration: -1,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#3498db",
+      }).showToast();
       try {
         const response = await fetch(
           "https://contact-app-murex.vercel.app/afw/send-mail",
@@ -96,23 +109,42 @@
         );
 
         // Close loading toast
-        // loadingToast.hideToast();
+        loadingToast.hideToast();
 
         if (response.ok) {
-          // Show success alert
-          alert("Message sent successfully.");
+           // Show success toast
+           Toastify({
+            text: "Message sent successfully.",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#28a745",
+          }).showToast();
 
           // Clear form fields
           document.getElementById("contactForm").reset();
         } else {
           // Show error alert
-          alert("There was an error sending the message.");
+          Toastify({
+            text: "There was an error sending the message.",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#dc3545",
+          }).showToast();
         }
       } catch (error) {
         console.error("Error:", error);
 
         // show error alert
-        alert("There was a problem with the request.");
+        loadingToast.hideToast();
+        Toastify({
+          text: "There was a problem with the request.",
+          duration: 3000,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "#dc3545",
+        }).showToast();
       }
     });
 </script>
