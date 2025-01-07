@@ -3,7 +3,7 @@ interface Props {
   title: string;
   description: string;
   keywords: string;
-  canonical: string
+  canonical: string;
 }
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -16,12 +16,31 @@ const { title, description, keywords, canonical } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="canonical" href={canonical}/>
+    <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/fotos/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/fotos/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/fotos/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/fotos/favicon_io/site.webmanifest" />
+
     <script>
       document.addEventListener("contextmenu", (event) => {
         if ((event.target as HTMLElement).tagName === "IMG") {

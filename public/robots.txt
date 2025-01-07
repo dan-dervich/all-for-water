@@ -2,9 +2,9 @@ User-agent: *
 Allow: /
 
 User-agent: *
-Disallow: /images/
+Disallow: /toast/
 
 User-agent: *
-Disallow: /css/
+Allow: /fotos/favicon_io
 
 Sitemap: https://allforwater.com/sitemap-index.xml
