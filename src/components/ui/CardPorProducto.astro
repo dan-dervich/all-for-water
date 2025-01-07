@@ -43,6 +43,12 @@ if (/<table/.test(desc)) {
           : "text-blue-500 hover:underline transition-all";
         // Cambiar al siguiente índice después de la primera fila
         if (!isFirstRow) index = (index + 1) % pdfs_tabla.length;
+        if (isFirstRow) {
+          isFirstRow = false;
+          return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
+            ${linkText}
+          </th>`;
+        }
         isFirstRow = false;
 
         // Devolver la fila de la tabla con enlace
