@@ -107,7 +107,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
             <img class="w-1/2 h-auto" src={filteredDescFoto[0].fotoUrl} />
           )
         }
-        <div set:html={descripcion || editedDescFoto[0]} />
+        <div set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` + (descripcion || editedDescFoto[0])} />
       </div>
     </div>
     <div class="flex flex-col justify-center items-center">
