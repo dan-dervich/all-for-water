@@ -9,7 +9,7 @@ import { segmentos_es } from "@lib/segmentos_es";
 import { descripciones_foto_es } from "@lib/descripcion_foto_es";
 import { items } from "@lib/categories";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
-export const prerender = true
+export const prerender = true;
 
 export async function getStaticPaths() {
   return items_es.map((item) => ({
@@ -90,7 +90,12 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
   url={`/categoria/${categoria_eng_nombre}`}
   idioma={"ES"}
 />
-<LayoutEs title={item.nombre}>
+<LayoutEs
+canonical="https://www.allforwater.com/es/" + item.nombre
+  keywords={item.seo_keywords as string}
+  description={item.seo_description as string}
+  title={item.seo_title as string}
+>
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >
