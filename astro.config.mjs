@@ -48,12 +48,12 @@ export default defineConfig({
     },
   },
   outDir: "./dist",
-  // output: "server",
+  output: "server",
 
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-    isr: { fallback: true },
-  }),
+  // adapter: vercel({
+  //   webAnalytics: {
+  //     enabled: true,
+  //   },
+  //   isr: { fallback: true },
+  // }),
 });
