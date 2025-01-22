@@ -22,6 +22,17 @@ export default defineConfig({
     lastmod: new Date(),
   })],
 
+
+  // vercel.json
+  // {
+  
+//     "rewrites": [
+//       { "source": "/sitemap-:id.xml", "destination": "/sitemap-:id.xml" }
+
+//     ]
+// }
+  
+
   // prefetch: {
   //   defaultStrategy: "viewport",
   //   prefetchAll: true,
