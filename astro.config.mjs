@@ -48,7 +48,7 @@ export default defineConfig({
     },
   },
   outDir: "./dist",
-  output: "server",
+  // output: "server",
 
   // adapter: vercel({
   //   webAnalytics: {
