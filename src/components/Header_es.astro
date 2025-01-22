@@ -33,12 +33,12 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
             href="/es/"
             class="transition-all nav-links hover:cursor-pointer">INICIO</a
           >
+          <ProductsDropdownEs client:only items={items_es} />
           <a
             id="contact_es"
             href="/es/contacto"
             class="transition-all nav-links">CONTACTO</a
           >
-          <ProductsDropdownEs client:only items={items_es} />
         </nav>
         <div class="relative hidden sm:flex">
           <SearchComponentEs client:load />
@@ -91,6 +91,56 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
       </nav>
     </aside>
   </div>
+  <style>
+    .nav-links {
+      font-size: 1.2rem;
+      font-weight: 500;
+      width: fit-content;
+    }
+    .nav-links::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2.5px;
+      background-color: white;
+      transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+      opacity: 1;
+      z-index: 101;
+    }
+    .nav-links:hover::after {
+      width: 100%;
+    }
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeIn 0.3s forwards;
+    }
+    .fade-exit {
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeOut 0.3s forwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+  </style>
 </header>
 <!-- 
 <script>
@@ -123,53 +173,4 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
   });
 </script> -->
 
-<style>
-  .nav-links {
-    font-size: 1.2rem;
-    font-weight: 500;
-    width: fit-content;
-  }
-  .nav-links::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2.5px;
-    background-color: white;
-    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
-    opacity: 1;
-    z-index: 101;
-  }
-  .nav-links:hover::after {
-    width: 100%;
-  }
-  .fade-enter {
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeIn 0.3s forwards;
-  }
-  .fade-exit {
-    opacity: 1;
-    transform: translateY(0);
-    animation: fadeOut 0.3s forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-  }
-</style>
+

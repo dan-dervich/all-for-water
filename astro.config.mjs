@@ -22,10 +22,10 @@ export default defineConfig({
     lastmod: new Date(),
   })],
 
-  prefetch: {
-    defaultStrategy: "viewport",
-    prefetchAll: true,
-  },
+  // prefetch: {
+  //   defaultStrategy: "viewport",
+  //   prefetchAll: true,
+  // },
 
   site: "https://www.allforwater.com",
 
@@ -37,11 +37,11 @@ export default defineConfig({
     },
   },
   outDir: "./dist",
-  // output: "server",
+  output: "server",
 
-  // adapter: vercel({
-  //   webAnalytics: {
-  //     enabled: true,
-  //   }
-  // }),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    }
+  }),
 });

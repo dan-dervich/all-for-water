@@ -4,7 +4,7 @@ import LanguageSwitch from "@components/ui/LenguageSwitch";
 import ContactForm from "@components/ContactForm.astro";
 ---
 
-<LanguageSwitch client:only="react" url={"/es/contacto"} idioma={"EN"} />
 <Layout canonical="https://www.allforwater.com/contact" description="conctact" keywords="" title="Contact">
   <ContactForm />
 </Layout>
+<LanguageSwitch client:only="react" url={"/es/contacto"} idioma={"EN"} />

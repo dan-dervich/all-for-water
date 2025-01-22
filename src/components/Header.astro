@@ -34,10 +34,10 @@ import SearchComponentAside from "./ui/SearchComponentAside";
             href="/"
             class="transition-all nav-links hover:cursor-pointer">HOME</a
           >
+          <ProductsDropdown client:only items={items} />
           <a id="contact" href="/contact" class="transition-all nav-links"
             >CONTACT US</a
           >
-          <ProductsDropdown client:only items={items} />
         </nav>
         <div class="relative hidden sm:flex">
           <SearchComponent client:load />
