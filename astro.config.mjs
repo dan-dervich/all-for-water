@@ -22,22 +22,6 @@ export default defineConfig({
     lastmod: new Date(),
   })],
 
-
-  // vercel.json
-  // {
-  
-//     "rewrites": [
-//       { "source": "/sitemap-:id.xml", "destination": "/sitemap-:id.xml" }
-
-//     ]
-// }
-  
-
-  // prefetch: {
-  //   defaultStrategy: "viewport",
-  //   prefetchAll: true,
-  // },
-
   site: "https://www.allforwater.com",
 
   vite: {
@@ -48,12 +32,4 @@ export default defineConfig({
     },
   },
   outDir: "./dist",
-  // output: "server",
-
-  // adapter: vercel({
-  //   webAnalytics: {
-  //     enabled: true,
-  //   },
-  //   isr: { fallback: true },
-  // }),
 });

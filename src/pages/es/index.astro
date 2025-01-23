@@ -8,7 +8,6 @@ import Miembro_es from "@components/Miembro_es.astro";
 import LayoutEs from "@layouts/Layout_es.astro";
 ---
 
-<LanguageSwitch client:only="react" url={"/"} idioma={'ES'} />
 <LayoutEs title="Venta De Insumos para el tratamiento de agua comercial e industrial">
   <Frases_es />
   <ProductosHome_es />
@@ -16,3 +15,5 @@ import LayoutEs from "@layouts/Layout_es.astro";
   <Marcas_es />
   <Miembro_es />
 </LayoutEs>
+
+<LanguageSwitch client:only="react" url={"/"} idioma={'ES'} />
