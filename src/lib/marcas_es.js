@@ -7,7 +7,7 @@ let marcas_es = [];
 try {
   await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
-  const records_es = await pb.collection("segmentos_es").getList(0, 50);
+  const records_es = await pb.collection("segmentos_es").getList(0, 1000);
   marcas_es = records_es.items
     .filter((item) => item.marca === true) // Filtrar solo los segmentos con .marca en true
     .map((item) => {

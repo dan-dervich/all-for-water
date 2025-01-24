@@ -7,7 +7,7 @@ let descripciones_foto_es = [];
 try {
   await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
-  const records = await pb.collection("descripcion_foto_es").getList(0, 50);
+  const records = await pb.collection("descripcion_foto_es").getList(0, 1000);
 
   descripciones_foto_es = records.items.map((item) => {
     const collectionId = "descripcion_foto_es"; // ID de la colección
