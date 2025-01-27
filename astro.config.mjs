@@ -31,5 +31,7 @@ export default defineConfig({
       },
     },
   },
-  outDir: "./dist",
+  // outDir: "./dist",
+  output: "server",
+  adapter: [vercel()],
 });
