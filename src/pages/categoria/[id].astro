@@ -36,11 +36,11 @@ let categoria_es_nombre = items_es.find(
 categoria_es_nombre = categoria_es_nombre ? categoria_es_nombre.nombre : "";
 
 const filteredSegmentos = filteredProductos.flatMap((product) =>
-segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
+  segmentos.filter((segmento) => product.segmentos.includes(segmento.id))
 );
 
 const filteredDescFoto = descripciones_foto.filter((desc) =>
-item.desc.includes(desc.id)
+  item.desc.includes(desc.id)
 );
 
 const uniqueSegment = [
@@ -50,7 +50,7 @@ const uniqueSegment = [
 const descripcion = item.descripcion;
 
 let editedDescFoto =
-filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
+  filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
 
 editedDescFoto = editedDescFoto.split("</div>");
 
@@ -66,19 +66,19 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 
 if (/<table/.test(editedDescFoto[1])) {
   editedDescFoto[1] = editedDescFoto[1]
-  .replace(
-    "<thead>",
-    '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
-  )
-  .replace(
-    "<table",
-    '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
-  )
-  .replace(
-    /<td/g,
-    '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
-  )
-  .replace(/<\/thead>/, "</thead>");
+    .replace(
+      "<thead>",
+      '<thead class="bg-[#045b79] text-white font-normal border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(
+      "<table",
+      '<table class="text-center justify-center items-center w-[1000px] h-[400px] font-normal"'
+    )
+    .replace(
+      /<td/g,
+      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+    )
+    .replace(/<\/thead>/, "</thead>");
 }
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
@@ -104,10 +104,17 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       <div class="flex justify-center items-center md:flex-row flex-col gap-5">
         {
           filteredDescFoto[0] && (
-            <img class="w-1/2 h-auto" src={filteredDescFoto[0].fotoUrl} alt="foto de categoria" />
+            <img
+              class="w-1/2 h-auto"
+              src={filteredDescFoto[0].fotoUrl}
+              alt="foto de categoria"
+            />
           )
         }
-        <div set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` + (descripcion || editedDescFoto[0])} />
+        <div
+          set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +
+            (descripcion || editedDescFoto[0])}
+        />
       </div>
     </div>
     <div class="flex flex-col justify-center items-center">
