@@ -153,12 +153,14 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
         uniqueSegment.length > 0 ? (
           uniqueSegment.map((segment) => {
             const productosPorSegmento = filteredProductos.filter((product) => {
-              if(segment.marca) {
-                if(product.segmentos.length < 2) {
+              if (segment.marca) {
+                if (product.segmentos.length < 2) {
                   return product.segmentos.includes(segment.id);
                 }
+              } else if (product.segmentos.length == 0) {
+                return true
               } else {
-                return product.segmentos.includes(segment.id)
+                return product.segmentos.includes(segment.id);
               }
             });
 
@@ -252,6 +254,6 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
 </Layout>
 <LanguageSwitch
   client:only="react"
-  url={`/es/${categoria_es_nombre}`}
+  url={categoria_es_nombre ? `/es/${categoria_es_nombre}` : "/es"}
   idioma={"EN"}
 />
