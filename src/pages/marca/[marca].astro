@@ -81,6 +81,6 @@ const filteredProductos = productos.filter((product) =>
 
 <LanguageSwitch
   client:only="react"
-  url={`/es/marca/${marca_es_id}`}
+  url={marca_es_id ? `/es/marca/${marca_es_id}` : "/es"}
   idioma={"EN"}
 />
