@@ -73,7 +73,7 @@ const SearchComponent: React.FC = () => {
         const category = findCategoryByProductId(product.id);
         if (category) {
             console.log('Redirecting to category: /categoria/', category.nombre.toUpperCase());
-            window.location.href = "/categoria/" + category.nombre.toUpperCase();
+            window.location.href = "/category/" + category.nombre.toUpperCase();
         }
     };
 
