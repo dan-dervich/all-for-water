@@ -152,9 +152,15 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       {
         uniqueSegment.length > 0 ? (
           uniqueSegment.map((segment) => {
-            const productosPorSegmento = filteredProductos.filter((product) =>
-              product.segmentos.includes(segment.id)
-            );
+            const productosPorSegmento = filteredProductos.filter((product) => {
+              if(segment.marca) {
+                if(product.segmentos.length < 2) {
+                  return product.segmentos.includes(segment.id);
+                }
+              } else {
+                return product.segmentos.includes(segment.id)
+              }
+            });
 
             if (productosPorSegmento.length > 0) {
               return (

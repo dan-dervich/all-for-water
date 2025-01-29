@@ -24,21 +24,7 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
   >
     {
       uniqueMarca.map((marca) => (
-        <MarcasCard
-          imgSrc={marca.fotoUrl}
-          link={
-            "" +
-            (marca.nombre.toLowerCase() === "viqua"
-              ? "/categoria/ULTRAVIOLET%20STERILIZERS"
-              : marca.nombre.toLowerCase() === "matrikx"
-                ? "/categoria/CARTRIDGES"
-                : marca.nombre.toLowerCase() === "purolite"
-                  ? "/categoria/MEDIA%20&%20RESINS"
-                  : marca.nombre.toLowerCase() === "resintech"
-                    ? "/categoria/MEDIA%20&%20RESINS"
-                    : "/marca/" + marca.id)
-          }
-        />
+        <MarcasCard imgSrc={marca.fotoUrl} link={"" + "/marca/" + marca.id} />
       ))
     }
   </div>
