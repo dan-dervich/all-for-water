@@ -2,6 +2,7 @@
 import ContactFormEs from "@components/ContactForm_es.astro";
 import LanguageSwitch from "@components/ui/LenguageSwitch";
 import LayoutEs from "@layouts/Layout_es.astro";
+export const prerender = true
 ---
 
 <LanguageSwitch client:only="react" url={"/contact"} idioma={"ES"} />
