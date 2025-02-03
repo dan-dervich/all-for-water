@@ -151,63 +151,124 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
     <div class="w-full mt-10 mb-20">
       {
         uniqueSegment.length > 0 ? (
-          uniqueSegment.map((segment) => {
-            const productosPorSegmento = filteredProductos.filter((product) => {
-              if (segment.marca) {
-                if (product.segmentos.length < 2) {
-                  return product.segmentos.includes(segment.id);
+          <>
+            {uniqueSegment.map((segment) => {
+              const productosPorSegmento = filteredProductos.filter(
+                (product) => {
+                  if (segment.marca) {
+                    if (product.segmentos.length < 2) {
+                      return product.segmentos.includes(segment.id);
+                    }
+                  } else if (product.segmentos.length == 0) {
+                    return true;
+                  } else {
+                    return product.segmentos.includes(segment.id);
+                  }
                 }
-              } else if (product.segmentos.length == 0) {
-                return true
-              } else {
-                return product.segmentos.includes(segment.id);
-              }
-            });
-
-            if (productosPorSegmento.length > 0) {
-              return (
-                <section id={segment.id} class="mb-10">
-                  <h2
-                    id={"segmento-" + segment.nombre}
-                    class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
-                  >
-                    {segment.nombre}
-                  </h2>
-                  <div
-                    class={`${
-                      productosPorSegmento.length === 1
-                        ? "w-full"
-                        : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
-                    }`}
-                  >
-                    {productosPorSegmento.map((product) => {
-                      const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-                        product.pdfs_tabla.includes(pdf.id)
-                      );
-                      const productPdfs_carta = pdfs_carta.filter((pdf) =>
-                        product.pdfs_carta.includes(pdf.id)
-                      );
-
-                      return (
-                        <CardPorProducto
-                          key={product.id}
-                          id={`producto-${product.id}`}
-                          imgSrc={product.fotoUrl || "vacio"}
-                          text={product.nombre}
-                          desc={product.descripcion}
-                          pdfs_tabla={productPdfs_tabla}
-                          pdfs_carta={productPdfs_carta}
-                          className="w-64 h-64"
-                        />
-                      );
-                    })}
-                  </div>
-                </section>
               );
-            }
 
-            return null;
-          })
+              if (productosPorSegmento.length > 0) {
+                return (
+                  <section id={segment.id} class="mb-10">
+                    <div
+                      class="w-screen"
+                      style="width: 100vw;
+height: 1px;
+flex-shrink: 0;
+border-radius: 100px;
+background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.00) 100%);"
+                    />
+                    <h2
+                      id={"segmento-" + segment.nombre}
+                      class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
+                    >
+                      {segment.nombre}
+                    </h2>
+                    <div
+                      class={`${
+                        productosPorSegmento.length === 1
+                          ? "w-full"
+                          : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
+                      }`}
+                    >
+                      {productosPorSegmento.map((product) => {
+                        const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+                          product.pdfs_tabla.includes(pdf.id)
+                        );
+                        const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                          product.pdfs_carta.includes(pdf.id)
+                        );
+
+                        return (
+                          <CardPorProducto
+                            key={product.id}
+                            id={`producto-${product.id}`}
+                            imgSrc={product.fotoUrl || "vacio"}
+                            text={product.nombre}
+                            desc={product.descripcion}
+                            pdfs_tabla={productPdfs_tabla}
+                            pdfs_carta={productPdfs_carta}
+                            className="w-64 h-64"
+                          />
+                        );
+                      })}
+                    </div>
+                  </section>
+                );
+              }
+
+              return null;
+            })}
+
+            {(() => {
+              const productosSinSegmento = filteredProductos.filter(
+                (product) =>
+                  !product.segmentos || product.segmentos.length === 0
+              );
+
+              if (productosSinSegmento.length > 0) {
+                return (
+                  <>
+                    <hr class="w-full border-t-2 border-light-blue my-10" />
+                    <section class="mb-10">
+                      <h2 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+                        Otros productos
+                      </h2>
+                      <div
+                        class={`${
+                          productosSinSegmento.length > 1
+                            ? "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
+                            : "flex flex-col gap-5 justify-center items-center w-full"
+                        }`}
+                      >
+                        {productosSinSegmento.map((product) => {
+                          const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+                            product.pdfs_tabla.includes(pdf.id)
+                          );
+                          const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                            product.pdfs_carta.includes(pdf.id)
+                          );
+
+                          return (
+                            <CardPorProducto
+                              key={product.id}
+                              id={`producto-${product.id}`}
+                              imgSrc={product.fotoUrl || "vacio"}
+                              text={product.nombre}
+                              desc={product.descripcion}
+                              pdfs_tabla={productPdfs_tabla}
+                              pdfs_carta={productPdfs_carta}
+                            />
+                          );
+                        })}
+                      </div>
+                    </section>
+                  </>
+                );
+              }
+              return null;
+            })()}
+          </>
         ) : (
           <div
             class={`${
