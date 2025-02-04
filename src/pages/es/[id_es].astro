@@ -8,7 +8,7 @@ import pdfs_tabla_es from "@lib/pdfs_tabla_es";
 import { segmentos_es } from "@lib/segmentos_es";
 import { descripciones_foto_es } from "@lib/descripcion_foto_es";
 import { items } from "@lib/categories";
-import LanguageSwitch from "@components/ui/LenguageSwitch";
+import LanguageSwitch from "@components/ui/LanguageSwitch.jsx";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -253,11 +253,11 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                         }`}
                       >
                         {productosSinSegmento.map((product) => {
-                          const productPdfs_tabla = pdfs_tabla_es.filter((pdf) =>
-                            product.pdfs_tabla.includes(pdf.id)
+                          const productPdfs_tabla = pdfs_tabla_es.filter(
+                            (pdf) => product.pdfs_tabla.includes(pdf.id)
                           );
-                          const productPdfs_carta = pdfs_carta_es.filter((pdf) =>
-                            product.pdfs_carta.includes(pdf.id)
+                          const productPdfs_carta = pdfs_carta_es.filter(
+                            (pdf) => product.pdfs_carta.includes(pdf.id)
                           );
 
                           return (

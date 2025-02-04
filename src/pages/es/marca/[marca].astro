@@ -6,7 +6,7 @@ import pdfs_carta from "@lib/pdfs_carta";
 import pdfs_tabla from "@lib/pdfs_tabla";
 import { marcas_es } from "@lib/marcas_es";
 import { marcas } from "@lib/marcas";
-import LanguageSwitch from "@components/ui/LenguageSwitch";
+import LanguageSwitch from "@components/ui/LanguageSwitch";
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -36,7 +36,9 @@ const filteredProductos = productos_es.filter((product) =>
   idioma={"ES"}
 />
 <Layout
-canonical="https://www.allforwater.com/es/marca/" + marcaData.id
+  canonical="https://www.allforwater.com/es/marca/"
+  +
+  marcaData.id
   keywords={marcaData.seo_keywords}
   description={marcaData.seo_description}
   title={marcaData.seo_title}

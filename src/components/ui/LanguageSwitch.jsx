@@ -40,6 +40,7 @@ export default function LanguageSwitch({ url, idioma }) {
   }, [language]);
 
   const toggleLanguage = () => {
+    document.getElementById("loader").style.display = "grid";
     setLanguage((prev) => {
       const newLanguage = prev === "EN" ? "ES" : "EN";
       window.location.href = url;

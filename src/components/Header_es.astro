@@ -14,7 +14,11 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
     <div class="flex justify-between items-center relative text-white">
       <div class="flex justify-center items-center">
         <div class="text-xl">
-          <a id="logo_es" href="/es/">
+          <a
+            id="logo_es"
+            onclick="document.getElementById('loader').style.display = 'grid'"
+            href="/es/"
+          >
             <img
               src="/fotos/logo.png"
               alt="Logo"
@@ -31,12 +35,14 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
           <a
             id="home_es"
             href="/es/"
+            onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links hover:cursor-pointer">INICIO</a
           >
           <ProductsDropdownEs client:only items={items_es} />
           <a
             id="contact_es"
             href="/es/contacto"
+            onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links">CONTACTO</a
           >
         </nav>
@@ -75,14 +81,16 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
         <div class="relative">
           <SearchComponentAsideEs client:load />
         </div>
+        <!-- onclick="sidebar_es.classList.toggle('translate-x-full')" -->
         <a
-          onclick="sidebar_es.classList.toggle('translate-x-full')"
           id="home-sidebar_es"
+          onclick="document.getElementById('loader').style.display = 'grid'"
           class="transition-all nav-links hover:cursor-pointer"
           href="/es/">INICIO</a
         >
+        <!-- onclick="sidebar_es.classList.toggle('translate-x-full')" -->
         <a
-          onclick="sidebar_es.classList.toggle('translate-x-full')"
+          onclick="document.getElementById('loader').style.display = 'grid'"
           id="contact-sidebar_es"
           href="/es/contacto"
           class="transition-all nav-links">CONTACTO</a
@@ -172,5 +180,3 @@ import SearchComponentAsideEs from "./ui/SearchComponentAside_es";
     }
   });
 </script> -->
-
-

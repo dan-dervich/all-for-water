@@ -14,7 +14,11 @@ import SearchComponentAside from "./ui/SearchComponentAside";
     <div class="flex justify-between items-center relative text-white">
       <div class="flex justify-center items-center">
         <div class="text-xl">
-          <a id="logo" href="/">
+          <a
+            id="logo"
+            onclick="document.getElementById('loader').style.display = 'grid'"
+            href="/"
+          >
             <img
               src="/fotos/android-chrome-192x192.png"
               alt="Logo"
@@ -78,9 +82,9 @@ import SearchComponentAside from "./ui/SearchComponentAside";
         <div class="relative">
           <SearchComponentAside client:load />
         </div>
+        <!-- onclick="loader" -->
         <a
           onclick="document.getElementById('loader').style.display = 'grid'"
-          onclick="loader"
           id="home-sidebar"
           class="transition-all nav-links hover:cursor-pointer"
           href="/">HOME</a
