@@ -16,7 +16,7 @@ const { title, description, keywords, canonical } = Astro.props;
 <!doctype html>
 <html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
@@ -29,6 +29,9 @@ const { title, description, keywords, canonical } = Astro.props;
         }
       });
     </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap");
+    </style>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
@@ -43,7 +46,3 @@ const { title, description, keywords, canonical } = Astro.props;
     <FooterEs />
   </body>
 </html>
-<style is:global></style>
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap");
-</style>

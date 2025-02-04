@@ -45,6 +45,7 @@ const ProductsDropdown = ({ items }) => {
             key={item.id}
             href={`/category/${item.nombre}`}
             className="block px-4 py-2 hover:scale-110 transition-all"
+            onClick={()=>{document.getElementById('loader').style.display = 'grid'}}
           >
             <p>{item.nombre}</p>
           </a>

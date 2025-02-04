@@ -23,7 +23,11 @@ import { items } from "@lib/categories";
   >
     {
       items.map((item) => (
-        <a href={`/category/${item.nombre}`} class="w-full h-full">
+        <a
+          href={`/category/${item.nombre}`}
+          onclick="document.getElementById('loader').style.display = 'grid'"
+          class="w-full h-full"
+        >
           <Card imgSrc={item.fotoUrl} text={item.nombre} />
         </a>
       ))

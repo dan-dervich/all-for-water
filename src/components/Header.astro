@@ -32,11 +32,15 @@ import SearchComponentAside from "./ui/SearchComponentAside";
           <a
             id="home"
             href="/"
+            onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links hover:cursor-pointer">HOME</a
           >
           <ProductsDropdown client:only items={items} />
-          <a id="contact" href="/contact" class="transition-all nav-links"
-            >CONTACT US</a
+          <a
+            id="contact"
+            href="/contact"
+            onclick="document.getElementById('loader').style.display = 'grid'"
+            class="transition-all nav-links">CONTACT US</a
           >
         </nav>
         <div class="relative hidden sm:flex">
@@ -75,13 +79,14 @@ import SearchComponentAside from "./ui/SearchComponentAside";
           <SearchComponentAside client:load />
         </div>
         <a
-          onclick="sidebar.classList.toggle('translate-x-full')"
+          onclick="document.getElementById('loader').style.display = 'grid'"
+          onclick="loader"
           id="home-sidebar"
           class="transition-all nav-links hover:cursor-pointer"
           href="/">HOME</a
         >
         <a
-          onclick="sidebar.classList.toggle('translate-x-full')"
+          onclick="document.getElementById('loader').style.display = 'grid'"
           id="contact-sidebar"
           href="/contact"
           class="transition-all nav-links">CONTACT US</a

@@ -24,7 +24,9 @@ export default defineConfig({
       lastmod: new Date(),
     }),
   ],
-
+  prefetch: {
+    defaultStrategy: "load"
+  },
   site: "https://www.allforwater.com",
 
   vite: {

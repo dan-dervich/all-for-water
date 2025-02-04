@@ -3,6 +3,10 @@ const { imgSrc } = Astro.props;
 const { link } = Astro.props;
 ---
 
-<a href={link} class="hover:scale-110 transition-all">
+<a
+  href={link}
+  onclick="document.getElementById('loader').style.display = 'grid'"
+  class="hover:scale-110 transition-all"
+>
   <img src={imgSrc} alt="Logo" class="w-auto h-auto" loading="eager" />
 </a>

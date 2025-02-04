@@ -45,6 +45,7 @@ const AsideProductsDropdown = ({ items }) => {
             className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
             onClick={() => {
               setIsOpen(false);
+              document.getElementById("loader").style.display = "grid";
               // Si tienes una función para cerrar el sidebar, llámala aquí
               if (typeof window !== "undefined") {
                 const sidebar = document.getElementById("sidebar");
