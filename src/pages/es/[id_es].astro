@@ -85,15 +85,8 @@ if (/<table/.test(editedDescFoto[1])) {
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
 ---
 
-<LanguageSwitch
-  client:only="react"
-  url={`/category/${categoria_eng_nombre}`}
-  idioma={"ES"}
-/>
 <LayoutEs
-  canonical="https://www.allforwater.com/es/"
-  +
-  item.nombre
+  canonical={"https://www.allforwater.com/es/" + item.nombre + "/"}
   keywords={item.seo_keywords as string}
   description={item.seo_description as string}
   title={item.seo_title as string}
@@ -323,3 +316,8 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
     }
   </style>
 </LayoutEs>
+<LanguageSwitch
+  client:only="react"
+  url={`/category/${categoria_eng_nombre}`}
+  idioma={"ES"}
+/>

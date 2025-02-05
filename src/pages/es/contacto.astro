@@ -5,7 +5,8 @@ import LayoutEs from "@layouts/Layout_es.astro";
 export const prerender = true;
 ---
 
-<LanguageSwitch client:only="react" url={"/contact"} idioma={"ES"} />
 <LayoutEs title="Contacto">
   <ContactFormEs />
 </LayoutEs>
+
+<LanguageSwitch client:only="react" url={"/contact"} idioma={"ES"} />

@@ -36,9 +36,7 @@ const filteredProductos = productos_es.filter((product) =>
   idioma={"ES"}
 />
 <Layout
-  canonical="https://www.allforwater.com/es/marca/"
-  +
-  marcaData.id
+  canonical={"https://www.allforwater.com/es/marca/" + marcaData.id + "/"}
   keywords={marcaData.seo_keywords}
   description={marcaData.seo_description}
   title={marcaData.seo_title}
