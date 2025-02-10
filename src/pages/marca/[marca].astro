@@ -64,19 +64,30 @@ const filteredProductos = productos.filter((product) =>
           );
 
           return (
-            <div
-              class={`${filteredProductos.length > 1 ? "w-fit" : "w-screen"}`}
-            >
+            // <div
+            //   class={`${filteredProductos.length > 1 ? "w-fit" : "w-screen"}`}
+            // >
               <CardPorProducto
-                id={product.id}
+                key={product.id}
+                id={`producto-${product.id}`}
                 imgSrc={product.fotoUrl || "vacio"}
                 text={product.nombre}
                 desc={product.descripcion}
                 pdfs_tabla={productPdfs_tabla}
                 pdfs_carta={productPdfs_carta}
+                className="w-64 h-64"
               />
-            </div>
-          );
+
+            );
+            {/* <CardPorProducto
+              id={product.id}
+              imgSrc={product.fotoUrl || "vacio"}
+              text={product.nombre}
+              desc={product.descripcion}
+              pdfs_tabla={productPdfs_tabla}
+              pdfs_carta={productPdfs_carta}
+            /> */}
+            // </div>
         })
       }
     </div>
