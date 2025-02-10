@@ -37,9 +37,7 @@ const filteredProductos = productos.filter((product) =>
   description={marcaData.seo_description}
   keywords={marcaData.seo_keywords}
 >
-  <section
-    class="mt-[96px] bg-white flex flex-col items-center justify-center text-center sm:p-10 p-2"
-  >
+  <section class="mb-10 p-5">
     <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
       {marcaData.nombre}
     </h1>
@@ -49,7 +47,13 @@ const filteredProductos = productos.filter((product) =>
       {marcaData.descripcion}
     </p>
 
-    <div class="flex flex-wrap gap-5 justify-center items-start">
+    <div
+      class={`${
+        filteredProductos.length === 1
+          ? "w-full"
+          : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
+      }`}
+    >
       {
         filteredProductos.map((product) => {
           const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
