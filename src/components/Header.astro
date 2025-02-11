@@ -43,7 +43,11 @@ const { currentPage } = Astro.props;
             onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links hover:cursor-pointer">HOME</a
           >
-          <ProductsDropdown client:only items={items} currentPage={currentPage} />
+          <ProductsDropdown
+            client:only
+            items={items}
+            currentPage={currentPage}
+          />
           <a
             id="contact"
             href="/contact"
@@ -99,7 +103,11 @@ const { currentPage } = Astro.props;
           href="/contact"
           class="transition-all nav-links">CONTACT US</a
         >
-        <AsideProductsDropdown client:only items={items} />
+        <AsideProductsDropdown
+          client:only
+          items={items}
+          currentPage={currentPage}
+        />
       </nav>
     </aside>
   </div>

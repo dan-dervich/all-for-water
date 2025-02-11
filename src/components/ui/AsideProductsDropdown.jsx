@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const AsideProductsDropdown = ({ items }) => {
+const AsideProductsDropdown = ({ items, currentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
@@ -55,7 +55,14 @@ const AsideProductsDropdown = ({ items }) => {
               }
             }}
           >
-            <p>{item.nombre}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html:
+                  item.nombre == currentPage
+                    ? "<b>" + item.nombre + "</b>"
+                    : item.nombre,
+              }}
+            ></p>
           </a>
         ))}
       </div>
