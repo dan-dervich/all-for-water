@@ -88,6 +88,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
   title={item.seo_title}
   description={item.seo_description}
   keywords={item.seo_keywords}
+  currentPage={item.nombre}
 >
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
@@ -142,7 +143,6 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
       {
         uniqueSegment.length > 0 &&
           uniqueSegment.map((segment) => {
-            console.log(segment);
             return segment.marca ? (
               <a
                 class="segment-button hover:scale-105 transition-all shadow-md"

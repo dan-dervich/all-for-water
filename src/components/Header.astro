@@ -5,6 +5,10 @@ import ProductsDropdown from "./ui/ProductsDropdown";
 import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 import SearchComponent from "@components/ui/SearchComponent";
 import SearchComponentAside from "./ui/SearchComponentAside";
+interface Props {
+  currentPage?: string;
+}
+const { currentPage } = Astro.props;
 ---
 
 <header id="header" class="fixed top-0 w-full z-50 justify-center flex mt-5">
@@ -39,7 +43,7 @@ import SearchComponentAside from "./ui/SearchComponentAside";
             onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links hover:cursor-pointer">HOME</a
           >
-          <ProductsDropdown client:only items={items} />
+          <ProductsDropdown client:only items={items} currentPage={currentPage} />
           <a
             id="contact"
             href="/contact"

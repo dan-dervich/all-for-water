@@ -19,7 +19,6 @@ const { marca } = Astro.params;
 const marcaData = marcas.find((m) => m.id === marca);
 const marca_es_id = marcaData.espanol ? marcaData.espanol : "";
 
-console.log(marca_es_id);
 
 if (!marcaData) {
   throw new Error(`Marca con ID ${marca} no encontrada`);

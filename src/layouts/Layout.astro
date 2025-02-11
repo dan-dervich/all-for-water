@@ -4,6 +4,7 @@ interface Props {
   description: string;
   keywords: string;
   canonical: string;
+  currentPage?: string;
 }
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -11,7 +12,7 @@ import { Icon } from "astro-icon/components";
 // import ViewTransitions from "astro/components/ViewTransitions.astro";
 // import { ClientRouter } from "astro:transitions";
 
-const { title, description, keywords, canonical } = Astro.props;
+const { title, description, keywords, canonical, currentPage } = Astro.props;
 ---
 
 <!doctype html>
@@ -118,7 +119,7 @@ const { title, description, keywords, canonical } = Astro.props;
         document.getElementById("loader").style.display = "none";
       });
     </script>
-    <Header />
+    <Header currentPage={currentPage} />
     <main>
       <div id="loader">
         <div class="loader"></div>
@@ -135,10 +136,14 @@ const { title, description, keywords, canonical } = Astro.props;
     <script is:inline>
       window.addEventListener("scroll", (e) => {
         // flex
-        if(scrollY > 800) {
-          document.getElementById("scroll-top-fixed").classList.remove("opacity-0")
+        if (scrollY > 800) {
+          document
+            .getElementById("scroll-top-fixed")
+            .classList.remove("opacity-0");
         } else {
-          document.getElementById("scroll-top-fixed").classList.add("opacity-0")
+          document
+            .getElementById("scroll-top-fixed")
+            .classList.add("opacity-0");
         }
       });
       document

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const ProductsDropdown = ({ items }) => {
+const ProductsDropdown = ({ items, currentPage }) => {
+  // console.log(currentPage)
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
@@ -45,9 +46,18 @@ const ProductsDropdown = ({ items }) => {
             key={item.id}
             href={`/category/${item.nombre}`}
             className="block px-4 py-2 hover:scale-110 transition-all"
-            onClick={()=>{document.getElementById('loader').style.display = 'grid'}}
+            onClick={() => {
+              document.getElementById("loader").style.display = "grid";
+            }}
           >
-            <p>{item.nombre}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html:
+                  item.nombre == currentPage
+                    ? "<b>" + item.nombre + "</b>"
+                    : item.nombre,
+              }}
+            ></p>
           </a>
         ))}
       </div>
