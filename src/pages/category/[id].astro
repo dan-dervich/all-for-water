@@ -121,7 +121,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
     <div class="flex flex-col justify-center items-center">
       <div set:html={editedDescFoto[1]} />
     </div>
-    
+
     <div class="flex flex-wrap justify-center gap-5 m-5">
       {
         uniqueSegment.length > 0 &&
@@ -216,7 +216,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                         return (
                           <CardPorProducto
                             key={product.id}
-                            id={`producto-${product.id}`}
+                            id={`${product.id}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
                             desc={product.descripcion}
@@ -273,7 +273,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                           return (
                             <CardPorProducto
                               key={product.id}
-                              id={`producto-${product.id}`}
+                              id={`${product.id}`}
                               imgSrc={product.fotoUrl || "vacio"}
                               text={product.nombre}
                               desc={product.descripcion}
@@ -313,7 +313,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
               return (
                 <CardPorProducto
                   key={product.id}
-                  id={`producto-${product.id}`}
+                  id={`${product.id}`}
                   imgSrc={product.fotoUrl || "vacio"}
                   text={product.nombre}
                   desc={product.descripcion}

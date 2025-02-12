@@ -206,7 +206,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                         return (
                           <CardPorProducto
                             key={product.id}
-                            id={`producto-${product.id}`}
+                            id={`${product.id}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
                             desc={product.descripcion}
@@ -256,7 +256,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                           return (
                             <CardPorProducto
                               key={product.id}
-                              id={`producto-${product.id}`}
+                              id={`${product.id}`}
                               imgSrc={product.fotoUrl || "vacio"}
                               text={product.nombre}
                               desc={product.descripcion}
@@ -296,7 +296,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
               return (
                 <CardPorProducto
                   key={product.id}
-                  id={`producto-${product.id}`}
+                  id={`${product.id}`}
                   imgSrc={product.fotoUrl || "vacio"}
                   text={product.nombre}
                   desc={product.descripcion}

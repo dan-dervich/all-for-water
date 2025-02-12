@@ -19,7 +19,6 @@ const { marca } = Astro.params;
 const marcaData = marcas.find((m) => m.id === marca);
 const marca_es_id = marcaData.espanol ? marcaData.espanol : "";
 
-
 if (!marcaData) {
   throw new Error(`Marca con ID ${marca} no encontrada`);
 }
@@ -63,19 +62,17 @@ const filteredProductos = productos.filter((product) =>
           );
 
           return (
-
-              <CardPorProducto
-                key={product.id}
-                id={`producto-${product.id}`}
-                imgSrc={product.fotoUrl || "vacio"}
-                text={product.nombre}
-                desc={product.descripcion}
-                pdfs_tabla={productPdfs_tabla}
-                pdfs_carta={productPdfs_carta}
-                className="w-64 h-64"
-              />
-
-            );
+            <CardPorProducto
+              key={product.id}
+              id={`${product.id}`}
+              imgSrc={product.fotoUrl || "vacio"}
+              text={product.nombre}
+              desc={product.descripcion}
+              pdfs_tabla={productPdfs_tabla}
+              pdfs_carta={productPdfs_carta}
+              className="w-64 h-64"
+            />
+          );
         })
       }
     </div>
