@@ -8,7 +8,6 @@ const { id } = Astro.props;
 let index = 0;
 let isFirstRow = true;
 let editedDesc = desc;
-
 if (/<table/.test(desc)) {
   editedDesc = editedDesc
     .replace(

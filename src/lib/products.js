@@ -20,6 +20,7 @@ try {
       ? `${pb.baseUrl}/api/files/${collectionId}/${recordId}/${firstFilename}`
       : "/path-to-placeholder-image.png"; // Placeholder en caso de que no haya imagen
 
+
     return {
       ...item,
       fotoUrl: imageUrl, // Agregamos la URL de la imagen al objeto item
