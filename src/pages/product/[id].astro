@@ -1,0 +1,50 @@
+---
+import Layout from "@layouts/Layout.astro";
+import pdfs_carta from "@lib/pdfs_carta";
+import pdfs_tabla from "@lib/pdfs_tabla";
+import { productos } from "@lib/products";
+import CardPorProductoIndividual from "@components/ui/CardPorProductoIndividual.astro";
+import LanguageSwitch from "@components/ui/LanguageSwitch";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return productos.map((marca) => ({
+    params: { id: marca.id },
+  }));
+}
+const producto = productos.find((m) => m.id === Astro.params.id);
+const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+  producto.pdfs_tabla.includes(pdf.id)
+);
+const productPdfs_carta = pdfs_carta.filter((pdf) =>
+  producto.pdfs_carta.includes(pdf.id)
+);
+---
+
+<Layout
+  canonical={"https://www.allforwater.com/product/" + producto.id + "/"}
+  title={producto.seo_title}
+  description={producto.seo_description}
+  keywords={producto.seo_keywords}
+>
+  <section class="mb-10 p-5">
+    <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+      {producto.nombre}
+    </h1>
+    <div>
+      <CardPorProductoIndividual
+        key={producto.id}
+        id={`${producto.id}`}
+        imgSrc={producto.fotoUrl || "vacio"}
+        text={producto.nombre}
+        desc={producto.descripcion}
+        pdfs_tabla={productPdfs_tabla}
+        pdfs_carta={productPdfs_carta}
+        className="w-64 h-64"
+      />
+    </div>
+  </section>
+
+  <LanguageSwitch client:only="react" url={"/es"} idioma={"EN"} />
+</Layout>
