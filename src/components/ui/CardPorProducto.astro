@@ -72,7 +72,7 @@ const urlNombre = text.replace(/[ /.,]/g, "-").toLowerCase();
 <a
   href={`/product/${urlNombre}`}
   id={id}
-  class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl h-auto w-11/12 sm:max-w-96 m-5"
+  class="p-2 bg-[#cce9f6] shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl h-auto w-11/12 sm:max-w-96 m-5"
   >
   <!-- class="h-auto w-11/12 sm:max-w-96 max-w-52 m-5" -->
   <!-- class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl w-screen h-auto" -->
@@ -80,9 +80,9 @@ const urlNombre = text.replace(/[ /.,]/g, "-").toLowerCase();
     src={imgSrc !== "/path-to-placeholder-image.png" ? imgSrc : ""}
     style={imgSrc === "/path-to-placeholder-image.png" ? "display: none;" : ""}
     alt={text}
-    class="overflow-x-hidden sm:max-w-96 w-auto max-h-96 m-5"
+    class="rounded-xl overflow-x-hidden max-w-94 max-h-96 m-5"
     loading="eager"
   />
-  <h2 class="overflow-x-hidden text-[#5C5D56] text-xl font-bold text-wrap text-center">{text}</h2>
+  <h2 class="overflow-x-hidden text-[#4b4c47] text-xl font-bold text-wrap text-center">{text}</h2>
   <!-- <p class=" w-full text-center overflow-auto" set:html={editedDesc} /> -->
 </a>
