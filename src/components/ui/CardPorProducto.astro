@@ -76,10 +76,10 @@ if (pdfs_carta.length > 0) {
   <img
     src={imgSrc !== "/path-to-placeholder-image.png" ? imgSrc : ""}
     style={imgSrc === "/path-to-placeholder-image.png" ? "display: none;" : ""}
-    alt="Housing img"
-    class="sm:max-w-96 w-auto max-h-96 m-5"
+    alt={text}
+    class="overflow-x-hidden sm:max-w-96 w-auto max-h-96 m-5"
     loading="eager"
   />
-  <h2 class="text-[#5C5D56] text-xl font-bold text-wrap text-center">{text}</h2>
-  <p class="w-full text-center overflow-x-scroll" set:html={editedDesc} />
+  <h2 class="overflow-x-hidden text-[#5C5D56] text-xl font-bold text-wrap text-center">{text}</h2>
+  <p class=" w-full text-center overflow-auto" set:html={editedDesc} />
 </div>
