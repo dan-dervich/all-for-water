@@ -66,10 +66,11 @@ if (pdfs_carta.length > 0) {
     editedDesc += `<a class="text-blue-500 hover:underline transition-all flex justify-center items-center" href="${pdf.pdfUrl}" target="_blank" rel="noopener noreferrer">${pdf.texto_link}</a><br>`;
   });
 }
+const urlNombre = text.replace(/[ /.,]/g, "-").toLowerCase();
 ---
 
 <a
-  href={`/product/${id}`}
+  href={`/product/${urlNombre}`}
   id={id}
   class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl sm:w-full h-auto w-11/12"
 >

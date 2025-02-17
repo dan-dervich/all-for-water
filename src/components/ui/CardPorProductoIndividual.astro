@@ -70,7 +70,7 @@ if (pdfs_carta.length > 0) {
 
 <div
   id={id}
-  class="flex flex-col items-center sm:w-full w-screen max-w-screen"
+  class="flex flex-col items-center sm:w-full w-full max-w-screen"
 >
   <!-- class="h-auto w-11/12 sm:max-w-96 max-w-52 m-5" -->
   <img
@@ -81,5 +81,5 @@ if (pdfs_carta.length > 0) {
     loading="eager"
   />
   <h2 class="overflow-x-hidden text-[#5C5D56] text-xl font-bold text-wrap text-center">{text}</h2>
-  <p class=" w-full text-center overflow-auto" set:html={editedDesc} />
+  <p class=" w-full text-wrap text-center overflow-auto" set:html={editedDesc} />
 </div>

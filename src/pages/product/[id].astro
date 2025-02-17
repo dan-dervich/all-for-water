@@ -8,18 +8,30 @@ import LanguageSwitch from "@components/ui/LanguageSwitch";
 
 export const prerender = true;
 
+// export async function getStaticPaths() {
+//   return productos.map((producto) => ({
+//     params: { id: producto.nombre.replace(/[ /.,]/g, "-").toLowerCase() },
+//   }));
+// }
 export async function getStaticPaths() {
-  return productos.map((marca) => ({
-    params: { id: marca.id },
-  }));
+  return productos
+    .filter((producto) => producto.nombre) // Remove products with missing `nombre`
+    .map((producto) => ({
+      params: { id: producto.nombre.replace(/[ /.,]/g, "-").toLowerCase() },
+    }));
 }
-const producto = productos.find((m) => m.id === Astro.params.id);
+
+console.log("Astro Params:", Astro.params);
+const producto = productos.find(
+  (m) => m.nombre.replace(/[ /.,]/g, "-").toLowerCase() === Astro.params.id
+);
 const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
   producto.pdfs_tabla.includes(pdf.id)
 );
 const productPdfs_carta = pdfs_carta.filter((pdf) =>
   producto.pdfs_carta.includes(pdf.id)
 );
+console.log("Astro Props:", Astro.props);
 ---
 
 <Layout
@@ -28,7 +40,7 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
   description={producto.seo_description}
   keywords={producto.seo_keywords}
 >
-  <section class="mb-10 p-5">
+  <section class="mb-10 lg:mt-20 p-5">
     <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
       {producto.nombre}
     </h1>
