@@ -194,7 +194,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                     />
                     <h2
                       id={"segmento-" + segment.nombre}
-                      class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
+                      class="text-light-blue font-semibold lg:text-5xl px-5 text-3xl text-center py-10"
                     >
                       {segment.nombre}
                     </h2>
@@ -295,7 +295,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
             class={`${
               filteredProductos.length > 1
                 ? filteredProductos.length === 2
-                  ? "grid grid-cols-2 gap-5 justify-center items-start w-full"
+                  ? "grid md:grid-cols-2 grid-cols-1 gap-5 justify-center items-start w-full"
                   : filteredProductos.length < 3
                     ? "flex flex-col gap-5 justify-center items-center w-full"
                     : "grid grid-cols-1 xl:grid-cols-3 gap-5 justify-center items-start w-full"
