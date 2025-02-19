@@ -44,8 +44,10 @@ const SearchComponent: React.FC = () => {
         setSearchTerm(term);
 
         if (term.length > 0) {
-            const filteredProductos = productos_es.filter(product =>
-                product.nombre.toLowerCase().includes(term.toLowerCase())
+            const filteredProductos = productos_es.filter(product =>{
+                let prod = product.nombre.toLowerCase() + product.descripcion.toLowerCase()
+                return prod.includes(term.toLowerCase())
+            }
             );
             setSearchResults(filteredProductos);
             setIsResultsVisible(true);
