@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const ProductsDropdown = ({ items, currentPage }) => {
-  // console.log(currentPage)
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {

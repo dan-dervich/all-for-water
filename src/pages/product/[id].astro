@@ -21,7 +21,6 @@ export async function getStaticPaths() {
     }));
 }
 
-console.log("Astro Params:", Astro.params);
 const producto = productos.find(
   (m) => m.nombre.replace(/[ /.,]/g, "-").toLowerCase() === Astro.params.id
 );
@@ -31,7 +30,6 @@ const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
 const productPdfs_carta = pdfs_carta.filter((pdf) =>
   producto.pdfs_carta.includes(pdf.id)
 );
-console.log("Astro Props:", Astro.props);
 ---
 
 <Layout
