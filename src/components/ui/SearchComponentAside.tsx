@@ -44,9 +44,11 @@ const SearchComponent: React.FC = () => {
         setSearchTerm(term);
 
         if (term.length > 0) {
-            const filteredProductos = productos.filter(product =>
-                product.nombre.toLowerCase().includes(term.toLowerCase())
-            );
+            const filteredProductos = productos.filter(product =>{
+                            let prod = product.seo_keywords.toLowerCase() + product.seo_description.toLowerCase() + product.seo_title.toLowerCase() + product.nombre.toLowerCase() + product.descripcion.toLowerCase()
+                            return prod.includes(term.toLowerCase())
+                        }
+                        );
             setSearchResults(filteredProductos);
             setIsResultsVisible(true);
         } else {
@@ -73,8 +75,8 @@ const SearchComponent: React.FC = () => {
         const category = findCategoryByProductId(product.id);
             document.getElementById('loader').style.display = 'grid'
             if (category) {
-            console.log('Redirecting to category: /categoria/', category.nombre.toUpperCase());
-            window.location.href = "/category/" + category.nombre.toUpperCase();
+                const urlNombre = product.nombre.replace(/[ /.,]/g, "-").toLowerCase();
+                window.location.href = "/product/" + urlNombre;
         }
     };
 

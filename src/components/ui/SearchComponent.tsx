@@ -45,8 +45,6 @@ const SearchComponent: React.FC = () => {
 
         if (term.length > 0) {
             const filteredProductos = productos.filter(product =>{
-                // .includes(term.toLowerCase())
-                console.log(product)
                 let prod = product.seo_keywords.toLowerCase() + product.seo_description.toLowerCase() + product.seo_title.toLowerCase() + product.nombre.toLowerCase() + product.descripcion.toLowerCase()
                 return prod.includes(term.toLowerCase())
             }
