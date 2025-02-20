@@ -77,6 +77,8 @@ const SearchComponent: React.FC = () => {
             if (category) {
                 const urlNombre = product.nombre.replace(/[ /.,]/g, "-").toLowerCase();
                 window.location.href = "/product/" + urlNombre;
+        } else {
+            alert('Product not found');
         }
     };
 
