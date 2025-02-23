@@ -12,16 +12,16 @@ if (/<table/.test(desc)) {
   editedDesc = editedDesc
     .replace(
       "<thead>",
-      '<thead class="bg-gray-200 border border-gray-300 border-t-1 border-l-1 border-r-1">'
+      '<thead class="border border-black border-t-1 border-l-1 border-r-1">'
     )
     .replace("<table", '<table class="text-center w-full"')
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<td class="border border-black border-t-1 border-l-1 border-r-1"'
     )
     .replace(
       /<td/g,
-      '<td class="border border-gray-300 border-t-1 border-l-1 border-r-1"'
+      '<td class="border border-black border-t-1 border-l-1 border-r-1"'
     )
     .replace("style", "")
     .replace(/style="[^"]*"/g, "")
@@ -43,14 +43,14 @@ if (/<table/.test(desc)) {
         if (!isFirstRow) index = (index + 1) % pdfs_tabla.length;
         if (isFirstRow) {
           isFirstRow = false;
-          return `<th class="text-nowrap border border-gray-300 border-t-1 border-l-1 border-r-1">
+          return `<th class="text-nowrap border border-black border-t-1 border-l-1 border-r-1">
             ${linkText}
           </th>`;
         }
         isFirstRow = false;
 
         // Devolver la fila de la tabla con enlace
-        return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
+        return `<th class="border border-black border-t-1 border-l-1 border-r-1">
             <a class="${estilos}" href="${content}" target="_blank" rel="noopener noreferrer">${linkText}</a>
           </th></tr>`;
       } else {
