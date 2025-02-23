@@ -43,7 +43,7 @@ if (/<table/.test(desc)) {
         if (!isFirstRow) index = (index + 1) % pdfs_tabla.length;
         if (isFirstRow) {
           isFirstRow = false;
-          return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
+          return `<th class="text-nowrap border border-gray-300 border-t-1 border-l-1 border-r-1">
             ${linkText}
           </th>`;
         }
@@ -66,6 +66,8 @@ if (pdfs_carta.length > 0) {
     editedDesc += `<a class="text-blue-500 hover:underline transition-all flex justify-center items-center" href="${pdf.pdfUrl}" target="_blank" rel="noopener noreferrer">${pdf.texto_link}</a><br>`;
   });
 }
+console.log(editedDesc);
+editedDesc = editedDesc.replace(/<th >/g, "<th class='p-2 text-nowrap'>");
 ---
 
 <div id={id} class="flex flex-col items-center sm:w-full w-full max-w-screen">
@@ -83,7 +85,7 @@ if (pdfs_carta.length > 0) {
     {text}
   </h2>
   <p
-    class="flex items-center justify-center w-full text-wrap text-center overflow-auto"
+    class="flex items-center justify-center w-full text-center overflow-auto"
     set:html={editedDesc}
   />
 </div>
