@@ -14,7 +14,7 @@ if (/<table/.test(desc)) {
       "<thead>",
       '<thead class="bg-cyan-100 border border-black border-t-2 border-l-2 border-r-2 border-b-2">'
     )
-    .replace("<table", '<table class="text-center w-full"')
+    .replace("<table", '<table class="text-center w-full bg-cyan-100"')
     .replace(
       /<td/g,
       '<td class="border border-black border-t-2 border-l-2 border-r-2 border-b-2"'
@@ -67,8 +67,23 @@ if (pdfs_carta.length > 0) {
   });
 }
 console.log(editedDesc);
-editedDesc = editedDesc.replace(/<th >/g, "<th class='p-2 border-black  text-nowrap'>");
-editedDesc = editedDesc.replace(/<tr >/g, "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>")
+editedDesc = editedDesc.replace(
+  /<th >/g,
+  "<th class='p-2 border-black  text-nowrap'>"
+);
+editedDesc = editedDesc.replace(
+  /<th>/g,
+  "<th class='p-2 border-black  text-nowrap'>"
+);
+editedDesc = editedDesc.replace(
+  /<tr >/g,
+  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>"
+);
+editedDesc = editedDesc.replace(
+  /<tr>/g,
+  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>"
+);
+
 ---
 
 <div id={id} class="flex flex-col items-center sm:w-full w-full max-w-screen">
