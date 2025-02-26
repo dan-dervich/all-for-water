@@ -59,7 +59,6 @@ if (/<table/.test(desc)) {
     });
 }
 editedDesc = editedDesc.replace(/<p>/g, "<p>");
-editedDesc = `<div class="w-11/12 text-center flex justify-stretch items-stretch flex-col overflow-auto p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
 if (pdfs_carta.length > 0) {
   editedDesc += "<br>";
   pdfs_carta.forEach((pdf) => {
@@ -83,6 +82,7 @@ editedDesc = editedDesc.replace(
   /<tr>/g,
   "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>"
 );
+editedDesc = `<div class="w-11/12 text-left flex justify-stretch items-center flex-col overflow-auto p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
 
 ---
 
