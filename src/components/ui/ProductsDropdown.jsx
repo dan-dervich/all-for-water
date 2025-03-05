@@ -32,7 +32,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
         />
       </button>
       <div
-        className={`absolute overflow-visible top-full mt-2 left-1/2 -translate-x-3/4 lg:w-[80vw] md:w-screen w-[450px] bg-white text-slate-500 rounded-md shadow-lg grid lg:grid-cols-5 md:grid-cols-5 grid-cols-3 text-center items-center justify-center transition-all p-2 text-base
+        className={`absolute overflow-visible top-full mt-2 left-1/2 xl:-translate-x-3/4 -translate-x-1/2 lg:w-[80vw] md:w-screen w-[450px] bg-white text-slate-500 rounded-md shadow-lg grid lg:grid-cols-5 md:grid-cols-5 grid-cols-3 text-center items-center justify-center transition-all p-2 text-base
                     ${
                       isOpen
                         ? "opacity-100 translate-y-0"
