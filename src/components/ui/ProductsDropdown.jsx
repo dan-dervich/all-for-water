@@ -39,7 +39,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
         />
       </button>
       <div
-        className={`absolute overflow-visible top-full mt-2 left-1/2 lg:-translate-x-2/3 -translate-x-1/2 lg:w-[80vw] md:w-screen w-[450px] bg-white text-slate-500 rounded-md shadow-lg text-center items-center justify-center flex flex-row flex-wrap transition-all p-2 text-base
+        className={`absolute overflow-visible top-full mt-2 left-1/2 lg:-translate-x-2/3 -translate-x-1/2 lg:w-[80vw] md:w-[600px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg text-center items-center justify-center flex flex-row flex-wrap transition-all p-2 text-base
           ${
             isOpen
               ? "opacity-100 translate-y-0"
@@ -51,7 +51,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
           <a
             key={item.id}
             href={`/category/${item.nombre}`}
-            className="text-sm block w-1/5 px-2 py-2 hover:scale-110 transition-all"
+            className="lg:text-sm md:text-xs block w-1/4 px-2 py-2 hover:scale-110 transition-all"
             onClick={() => {
               document.getElementById("loader").style.display = "grid";
             }}
