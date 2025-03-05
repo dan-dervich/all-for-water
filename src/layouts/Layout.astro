@@ -153,5 +153,10 @@ const { title, description, keywords, canonical, currentPage } = Astro.props;
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
+    <script>
+      var scale = "scale(1)";
+      document.body.style.webkitTransform = scale; // Chrome, Opera, Safari
+      document.body.style.transform = scale; // General
+    </script>
   </body>
 </html>
