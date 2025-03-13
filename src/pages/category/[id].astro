@@ -165,23 +165,39 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
         uniqueSegment.length > 0 ? (
           <>
             {uniqueSegment.map((segment) => {
-              const productosPorSegmento = filteredProductos.filter(
-                (product) => {
-                  // Si el segmento tiene marca
-                  if (segment.marca) {
-                    return product.segmentos.includes(segment.id);
-                  }
-                  // Si el segmento no tiene marca, excluir productos sin segmento
-                  else {
-                    return (
-                      product.segmentos.length > 0 &&
-                      product.segmentos.includes(segment.id)
-                    );
-                  }
+              let productosPorSegmento = filteredProductos.filter((product) => {
+                // Si el segmento tiene marca
+                if (segment.marca) {
+                  return product.segmentos.includes(segment.id);
                 }
-              );
+                // Si el segmento no tiene marca, excluir productos sin segmento
+                else {
+                  return (
+                    product.segmentos.length > 0 &&
+                    product.segmentos.includes(segment.id)
+                  );
+                }
+              });
 
               if (productosPorSegmento.length > 0) {
+                let finalprods = [];
+                finalprods = productosPorSegmento.filter(
+                  (product) => product.orden !== 0
+                );
+                let newProds = productosPorSegmento.filter(
+                  (product) => product.orden == 0
+                );
+                finalprods.sort((a, b) => {
+                  if (a.orden < b.orden) {
+                    return -1;
+                  }
+                  if (a.orden > b.orden) {
+                    return 1;
+                  }
+                  return 0;
+                });
+
+                console.log(finalprods.push(...newProds));
                 return (
                   <section id={segment.id} class="mb-10">
                     <div
@@ -200,12 +216,12 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                     </h2>
                     <div
                       class={`${
-                        productosPorSegmento.length === 1
+                        finalprods.length === 1
                           ? "w-full"
                           : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
                       }`}
                     >
-                      {productosPorSegmento.map((product) => {
+                      {finalprods.map((product) => {
                         const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
                           product.pdfs_tabla.includes(pdf.id)
                         );
