@@ -51,7 +51,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
           <a
             key={item.id}
             href={`/category/${item.nombre}`}
-            className="lg:text-sm md:text-xs block w-1/4 px-2 py-2 hover:scale-110 transition-all"
+            className="lg:text-xs md:text-xs block w-1/4 px-2 py-2 hover:scale-110 transition-all"
             onClick={() => {
               document.getElementById("loader").style.display = "grid";
             }}
