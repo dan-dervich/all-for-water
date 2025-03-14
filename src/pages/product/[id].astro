@@ -40,13 +40,15 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
   <a
     href={`/category/${categoria.nombre}`}
     id="back-button"
-    class="duration-300 ease-in-out fixed sm:left-20 sm:top-40 left-5 top-20 flex justify-center items-center rounded-full h-12 w-12 bg-slate-300 hover:bg-slate-100 transition-all"
+    class="duration-300 ease-in-out text-center p-2 fixed sm:left-20 sm:top-32 left-5 top-20 flex justify-center items-center rounded-sm bg-light-blue/60 hover:bg-light-blue/80 text-white transition-all"
   >
-    <Icon class="" name="ri:arrow-left-s-line" size={25} />
+    Go Back To:
+    <br />
+    {categoria.nombre}
   </a>
-  <section class="mb-10 lg:mt-20 p-5">
+  <section class="mb-10 lg:mt-20 mt-36 p-5">
     <h1
-      class="text-light-blue font-semibold text-3xl lg:text-5xl px-5 text-center py-10"
+      class="text-light-blue text-center font-semibold text-3xl lg:text-5xl px-5 py-10"
     >
       {producto.nombre}
     </h1>

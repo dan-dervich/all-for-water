@@ -17,7 +17,7 @@ const { currentPage } = Astro.props;
   >
     <div class="flex justify-between items-center relative text-white">
       <div class="flex justify-center items-center">
-        <div class="text-xl">
+        <div class="text-xl flex items-center gap-5 flex-row">
           <a
             id="logo"
             onclick="document.getElementById('loader').style.display = 'grid'"
@@ -30,6 +30,12 @@ const { currentPage } = Astro.props;
               class="sm:h-24 sm:w-auto h-12 w-auto rounded-full"
             />
           </a>
+          <!-- <a
+            id="home"
+            href="/"
+            onclick="document.getElementById('loader').style.display = 'grid'"
+            class="sm:hidden transition-all nav-links hover:cursor-pointer">HOME</a
+          > -->
         </div>
         <h2 class="hidden sm:flex text-2xl font-edu font-medium">
           All For Water
