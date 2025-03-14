@@ -3,16 +3,13 @@ import Layout from "@layouts/Layout.astro";
 import pdfs_carta from "@lib/pdfs_carta";
 import pdfs_tabla from "@lib/pdfs_tabla";
 import { productos } from "@lib/products";
+import { items } from "@lib/categories";
 import CardPorProductoIndividual from "@components/ui/CardPorProductoIndividual.astro";
 import LanguageSwitch from "@components/ui/LanguageSwitch";
+import { Icon } from "astro-icon/components";
 
 export const prerender = true;
 
-// export async function getStaticPaths() {
-//   return productos.map((producto) => ({
-//     params: { id: producto.nombre.replace(/[ /.,]/g, "-").toLowerCase() },
-//   }));
-// }
 export async function getStaticPaths() {
   return productos
     .filter((producto) => producto.nombre) // Remove products with missing `nombre`
@@ -24,12 +21,14 @@ export async function getStaticPaths() {
 const producto = productos.find(
   (m) => m.nombre.replace(/[ /.,]/g, "-").toLowerCase() === Astro.params.id
 );
+const categoria = items.find((c) => c.productos.includes(producto.id));
 const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
   producto.pdfs_tabla.includes(pdf.id)
 );
 const productPdfs_carta = pdfs_carta.filter((pdf) =>
   producto.pdfs_carta.includes(pdf.id)
 );
+// /category/categoria.nombre
 ---
 
 <Layout
@@ -38,6 +37,13 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
   description={producto.seo_description}
   keywords={producto.seo_keywords}
 >
+  <a
+    href={`/category/${categoria.nombre}`}
+    id="back-button"
+    class="duration-300 ease-in-out fixed left-20 top-40 flex justify-center items-center rounded-full h-12 w-12 bg-slate-300 hover:bg-slate-100 transition-all"
+  >
+    <Icon class="" name="ri:arrow-left-s-line" size={25} />
+  </a>
   <section class="mb-10 lg:mt-20 p-5">
     <h1
       class="text-light-blue font-semibold text-3xl lg:text-5xl px-5 text-center py-10"
