@@ -33,7 +33,7 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
 
 <Layout
   canonical={"https://www.allforwater.com/product/" + producto.id + "/"}
-  title={producto.seo_title}
+  title={producto.seo_title ? producto.seo_title : producto.nombre}
   description={producto.seo_description}
   keywords={producto.seo_keywords}
 >
