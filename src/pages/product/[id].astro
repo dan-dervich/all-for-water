@@ -52,7 +52,7 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
     >
       {producto.nombre}
     </h1>
-    <div>
+    <div class="flex flex-col items-center">
       <CardPorProductoIndividual
         key={producto.id}
         id={`${producto.id}`}
@@ -61,8 +61,12 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
         desc={producto.descripcion}
         pdfs_tabla={productPdfs_tabla}
         pdfs_carta={productPdfs_carta}
+        seo_title={producto.seo_title}
         className="w-64 h-64"
       />
+      <!-- add a contact us button -->
+       <a class="border-2 rounded-md p-2 hover:bg-white hover:text-black transition-all duration-150 ease-in-out bg-light-blue/60 text-white text-lg border-light-blue/60" href="/contact">Request More Information Now!</a>
+       <!-- add a related products section -->
     </div>
   </section>
 
