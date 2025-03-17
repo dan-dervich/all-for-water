@@ -9,7 +9,6 @@ import { segmentos } from "@lib/segmentos";
 import { descripciones_foto } from "@lib/descripcion_foto";
 import LanguageSwitch from "@components/ui/LanguageSwitch.jsx";
 import { items_es } from "@lib/categories_es";
-import SpeedInsights from "@vercel/speed-insights/astro";
 export const prerender = true;
 export async function getStaticPaths() {
   return items.map((item) => ({
@@ -356,5 +355,3 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
   url={categoria_es_nombre ? `/es/${categoria_es_nombre}` : "/es"}
   idioma={"EN"}
 />
-
-<SpeedInsights />
