@@ -6,7 +6,7 @@ import { productos } from "@lib/products";
 import { items } from "@lib/categories";
 import CardPorProductoIndividual from "@components/ui/CardPorProductoIndividual.astro";
 import LanguageSwitch from "@components/ui/LanguageSwitch";
-import { Icon } from "astro-icon/components";
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 export const prerender = true;
 
@@ -76,3 +76,4 @@ console.log(producto.nombre);
 
   <LanguageSwitch client:only="react" url={"/es"} idioma={"EN"} />
 </Layout>
+<SpeedInsights />

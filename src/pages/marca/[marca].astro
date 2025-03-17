@@ -6,7 +6,7 @@ import pdfs_carta from "@lib/pdfs_carta";
 import pdfs_tabla from "@lib/pdfs_tabla";
 import { marcas } from "@lib/marcas";
 import LanguageSwitch from "@components/ui/LanguageSwitch";
-
+import SpeedInsights from "@vercel/speed-insights/astro";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -25,42 +25,42 @@ if (!marcaData) {
 
 // Filtrar los productos que contienen el ID de la marca en su lista de segmentos
 const filteredProductos = productos.filter((product) =>
-  product.segmentos.includes(marcaData.id)
+product.segmentos.includes(marcaData.id)
 );
 ---
 
 <Layout
-  canonical={"https://www.allforwater.com/marca/" + marcaData.id + "/"}
-  title={marcaData.seo_title}
-  description={marcaData.seo_description}
-  keywords={marcaData.seo_keywords}
+canonical={"https://www.allforwater.com/marca/" + marcaData.id + "/"}
+title={marcaData.seo_title}
+description={marcaData.seo_description}
+keywords={marcaData.seo_keywords}
 >
-  <section class="mb-10 p-5">
-    <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
-      {marcaData.nombre}
-    </h1>
-    <p
-      class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
-    >
-      {marcaData.descripcion}
-    </p>
+<section class="mb-10 p-5">
+  <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+    {marcaData.nombre}
+  </h1>
+  <p
+  class="max-w-[800px] text-custom-grey font-light px-5 text-center text-sm sm:text-base"
+  >
+  {marcaData.descripcion}
+</p>
 
-    <div
-      class={`${
+<div
+class={`${
         filteredProductos.length === 1
-          ? "w-full"
-          : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
-      }`}
+        ? "w-full"
+        : "grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center"
+        }`}
     >
-      {
-        filteredProductos.map((product) => {
-          const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-            product.pdfs_tabla.includes(pdf.id)
+    {
+      filteredProductos.map((product) => {
+        const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
+        product.pdfs_tabla.includes(pdf.id)
+      );
+      const productPdfs_carta = pdfs_carta.filter((pdf) =>
+      product.pdfs_carta.includes(pdf.id)
           );
-          const productPdfs_carta = pdfs_carta.filter((pdf) =>
-            product.pdfs_carta.includes(pdf.id)
-          );
-
+          
           return (
             <CardPorProducto
               key={product.id}
@@ -83,4 +83,6 @@ const filteredProductos = productos.filter((product) =>
   client:only="react"
   url={marca_es_id ? `/es/marca/${marca_es_id}` : "/es"}
   idioma={"EN"}
-/>
+  />
+  
+  <SpeedInsights />

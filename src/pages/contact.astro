@@ -2,15 +2,18 @@
 import Layout from "@layouts/Layout.astro";
 import LanguageSwitch from "@components/ui/LanguageSwitch";
 import ContactForm from "@components/ContactForm.astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 export const prerender = true;
 ---
 
 <Layout
-  canonical="https://www.allforwater.com/contact/"
-  description="conctact"
-  keywords=""
-  title="Contact"
+canonical="https://www.allforwater.com/contact/"
+description="conctact"
+keywords=""
+title="Contact"
 >
-  <ContactForm />
+<ContactForm />
 </Layout>
 <LanguageSwitch client:only="react" url={"/es/contacto"} idioma={"EN"} />
+
+<SpeedInsights />
