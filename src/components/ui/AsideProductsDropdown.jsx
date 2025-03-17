@@ -15,6 +15,9 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  let sortedItems = items
+    ?.slice()
+    .sort((a, b) => a.nombre.localeCompare(b.nombre));
   return (
     <div className="relative aside-dropdown-container nav-links">
       <button
@@ -38,7 +41,7 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
                         : "opacity-0 -translate-y-2 pointer-events-none"
                     }`}
       >
-        {items?.map((item) => (
+        {sortedItems?.map((item) => (
           <a
             key={item.id}
             href={`/category/${item.nombre}`}
