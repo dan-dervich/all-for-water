@@ -232,6 +232,7 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                         return (
                           <CardPorProducto
                             key={product.id}
+                            mini_desc={product.mini_desc}
                             id={`${product.id}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
@@ -289,6 +290,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                           return (
                             <CardPorProducto
                               key={product.id}
+                              mini_desc={product.mini_desc}
                               id={`${product.id}`}
                               imgSrc={product.fotoUrl || "vacio"}
                               text={product.nombre}
@@ -328,6 +330,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
 
               return (
                 <CardPorProducto
+                  mini_desc={product.mini_desc}
                   key={product.id}
                   id={`${product.id}`}
                   imgSrc={product.fotoUrl || "vacio"}

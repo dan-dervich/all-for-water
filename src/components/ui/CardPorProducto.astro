@@ -5,6 +5,7 @@ const { desc } = Astro.props;
 const { pdfs_carta } = Astro.props;
 const { pdfs_tabla } = Astro.props;
 const { id } = Astro.props;
+const { mini_desc } = Astro.props;
 let index = 0;
 let isFirstRow = true;
 let editedDesc = desc;
@@ -94,8 +95,7 @@ const urlNombre = text.replace(/[ /.,]/g, "-").toLowerCase();
   border-t-4
   border-l-4
   border-r-4
-  border-b-4
-  "
+  border-b-4"
 >
   <!-- class="h-auto w-11/12 sm:max-w-96 max-w-52 m-5" -->
   <!-- class="shadow-xl shadow-violeta/40 flex flex-col items-center justify-center rounded-xl w-screen h-auto" -->
@@ -111,5 +111,11 @@ const urlNombre = text.replace(/[ /.,]/g, "-").toLowerCase();
   >
     {text}
   </h2>
-  <!-- <p class=" w-full text-center overflow-auto" set:html={editedDesc} /> -->
+  {
+    mini_desc ? (
+      <p class=" w-full text-center overflow-auto" set:html={mini_desc} />
+    ) : (
+      ""
+    )
+  }
 </a>
