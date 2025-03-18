@@ -12,3 +12,4 @@ ToDo:
 [x] orden: panel-mount flowmeters, panel-mount flowmeters with regulator valve, in-link flowmeters
 [x] remove blue white flowmeters 
 [x] remove acrylic from flowmeters
+[ ] Images for fittings #7, 
