@@ -81,6 +81,18 @@ if (/<table/.test(editedDescFoto[1])) {
     .replace(/<\/thead>/, "</thead>");
 }
 editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDescFoto[1]}</div>`;
+let filtProds = filteredProductos;
+if (filteredProductos.some((e) => e.orden == 1)) {
+  filtProds = filteredProductos.sort((a, b) => {
+    if (a.orden < b.orden) {
+      return -1;
+    }
+    if (a.orden > b.orden) {
+      return 1;
+    }
+    return 0;
+  });
+}
 ---
 
 <Layout
@@ -256,7 +268,6 @@ editedDescFoto[1] = `<div class="flex justify-start items-start flex-col w-full 
                 (product) =>
                   !product.segmentos || product.segmentos.length === 0
               );
-
               if (productosSinSegmento.length > 0) {
                 return (
                   <>
@@ -320,7 +331,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                 : "flex flex-col gap-5 justify-center items-center w-full"
             }`}
           >
-            {filteredProductos.map((product) => {
+            {filtProds.map((product) => {
               const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
                 product.pdfs_tabla.includes(pdf.id)
               );
