@@ -13,12 +13,12 @@ export async function getStaticPaths() {
   return productos
     .filter((producto) => producto.nombre) // Remove products with missing `nombre`
     .map((producto) => ({
-      params: { id: producto.nombre.replace(/[ /.,]/g, "-").toLowerCase() },
+      params: { id: producto.nombre.replace(/[ /.,%]/g, "-").toLowerCase() },
     }));
 }
 
 const producto = productos.find(
-  (m) => m.nombre.replace(/[ /.,]/g, "-").toLowerCase() === Astro.params.id
+  (m) => m.nombre.replace(/[ /.,%]/g, "-").toLowerCase() === Astro.params.id
 );
 const categoria = items.find((c) => c.productos.includes(producto.id));
 const productPdfs_tabla = pdfs_tabla.filter((pdf) =>

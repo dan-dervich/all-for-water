@@ -75,7 +75,7 @@ const SearchComponent: React.FC = () => {
         const category = findCategoryByProductId(product.id);
             document.getElementById('loader').style.display = 'grid'
             if (category) {
-                const urlNombre = product.nombre.replace(/[ /.,]/g, "-").toLowerCase();
+                const urlNombre = product.nombre.replace(/[ /.,%]/g, "-").toLowerCase();
                 window.location.href = "/product/" + urlNombre;
         } else {
             alert('Product not found');

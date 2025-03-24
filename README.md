@@ -40,3 +40,5 @@ ToDo:
 [ ] carbon granular SEO
 [ ] resina cationica SEO
 [ ] remove advanced filtration system, change for reverse osmosis system in POU water cooler.
+[ ] Toray blog
+[ ] Water Cooler Blog
