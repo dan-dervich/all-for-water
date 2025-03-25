@@ -21,13 +21,14 @@ const { title, description, keywords, canonical, currentPage } = Astro.props;
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta
-      property="og:image"
-      content="/fotos/favicon_io/apple-touch-icon.png"
+    property="og:image"
+    content="/fotos/favicon_io/apple-touch-icon.png"
     />
     <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width" /> -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
