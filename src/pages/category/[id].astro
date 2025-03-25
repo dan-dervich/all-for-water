@@ -18,11 +18,13 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 
+// find category aka item = current category
 const item = items.find((product) => product.nombre === id);
 if (!item) {
   throw new Error(`Item with name ${id} not found`);
 }
 
+// find all products that belong to the current category
 const filteredProductos = productos.filter((product) =>
   item.productos.includes(product.id)
 );
@@ -53,7 +55,6 @@ uniqueSegment = uniqueSegment.sort((a, b) => {
   }
   return 0;
 });
-console.log(uniqueSegment)
 
 const descripcion = item.descripcion;
 
@@ -218,6 +219,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                 });
 
                 console.log(finalprods.push(...newProds));
+                if (segment.skip) return "";
                 return (
                   <section id={segment.id} class="mb-10">
                     <div
@@ -249,11 +251,22 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                           product.pdfs_carta.includes(pdf.id)
                         );
 
+                        let id = "";
+                        if (product.segmentos.length == 2) {
+                          // can't check if segment cause only id
+                          if (
+                            uniqueSegment.find(
+                              (s) => s.id == product.segmentos[0]
+                            )?.marca
+                          )
+                          id = product.segmentos[1];
+                          else id = product.segmentos[0];
+                        }
                         return (
                           <CardPorProducto
                             key={product.id}
                             mini_desc={product.mini_desc}
-                            id={`${product.id}`}
+                            id={`${id}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
                             desc={product.descripcion}
