@@ -24,6 +24,8 @@ export default defineConfig({
       lastmod: new Date(),
     }),
   ],
+  // add trailing slash
+  trailingSlash: "always",
   prefetch: {
     defaultStrategy: "load"
   },
@@ -36,10 +38,8 @@ export default defineConfig({
       },
     },
   },
-  // outDir: "./dist",
   output: "server",
   adapter: vercel({
     webAnalytics: { enabled: true },
-    
   }),
 });
