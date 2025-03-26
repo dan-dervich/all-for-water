@@ -257,10 +257,10 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                           if (
                             uniqueSegment.find(
                               (s) => s.id == product.segmentos[0]
-                            )?.marca
+                            )?.skip
                           )
-                          id = product.segmentos[1];
-                          else id = product.segmentos[0];
+                            id = product.segmentos[0];
+                          else id = product.segmentos[1];
                         }
                         return (
                           <CardPorProducto
