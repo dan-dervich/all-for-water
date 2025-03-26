@@ -62,7 +62,7 @@ let editedDescFoto =
   filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
 
 editedDescFoto = editedDescFoto.split("</div>");
-
+console.log(editedDescFoto)
 editedDescFoto[0] = editedDescFoto[0].replace(
   "<div>",
   "<div class='flex flex-col justify-center text-center items-center'>"
@@ -135,7 +135,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
         }
         <div
           set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +
-            (descripcion || editedDescFoto[0])}
+            (descripcion ||editedDescFoto[0])}
         />
       </div>
     </div>
