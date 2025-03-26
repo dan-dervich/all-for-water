@@ -254,13 +254,20 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                         let id = "";
                         if (product.segmentos.length == 2) {
                           // can't check if segment cause only id
-                          if (
-                            uniqueSegment.find(
-                              (s) => s.id == product.segmentos[0]
-                            )?.skip
-                          )
-                            id = product.segmentos[0];
-                          else id = product.segmentos[1];
+                          let firstSegment = uniqueSegment.find(
+                            (s) => s.id == product.segmentos[0]
+                          );
+                          let secondSegment = uniqueSegment.find(
+                            (s) => s.id == product.segmentos[1]
+                          );
+                          if (firstSegment?.skip)
+                            id = firstSegment.marca
+                              ? "segmento-" + firstSegment?.nombre
+                              : product.segmentos[0];
+                          else
+                            id = secondSegment.marca
+                              ? "segmento-" + secondSegment?.nombre
+                              : product.segmentos[1];
                         }
                         return (
                           <CardPorProducto
