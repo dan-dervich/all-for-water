@@ -18,16 +18,29 @@ const { title, description, keywords, canonical, currentPage } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQXY0F2QXT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-HQXY0F2QXT");
+    </script>
+
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta
-    property="og:image"
-    content="/fotos/favicon_io/apple-touch-icon.png"
+      property="og:image"
+      content="/fotos/favicon_io/apple-touch-icon.png"
     />
     <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <meta name="viewport" content="width=device-width" /> -->
     <link
       rel="apple-touch-icon"
@@ -155,6 +168,5 @@ const { title, description, keywords, canonical, currentPage } = Astro.props;
         });
     </script>
   </body>
-  <script>
-  </script>
+  <script></script>
 </html>

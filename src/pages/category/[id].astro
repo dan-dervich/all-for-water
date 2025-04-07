@@ -111,9 +111,9 @@ if (filteredProductos.some((e) => e.orden == 1)) {
   keywords={item.seo_keywords}
   currentPage={item.nombre}
 >
-  <section
+<section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
-  >
+    >
     <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
       {
         (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
@@ -122,21 +122,21 @@ if (filteredProductos.some((e) => e.orden == 1)) {
     </h1>
     <div
       class="sm:max-w-[1000px] max-w-full text-custom-grey font-light px-5 text-center text-sm sm:text-base flex flex-col justify-center items-center"
-    >
+      >
       <div class="flex justify-center items-center md:flex-row flex-col gap-5">
         {
           filteredDescFoto[0] && (
             <img
-              class="w-1/2 h-auto"
-              src={filteredDescFoto[0].fotoUrl}
+            class="w-1/2 h-auto"
+            src={filteredDescFoto[0].fotoUrl}
               alt="foto de categoria"
-            />
-          )
+              />
+            )
         }
         <div
           set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +
-            (descripcion ||editedDescFoto[0])}
-        />
+          (descripcion ||editedDescFoto[0])}
+          />
       </div>
     </div>
     <div class="flex flex-col justify-center items-center">
@@ -147,13 +147,13 @@ if (filteredProductos.some((e) => e.orden == 1)) {
       {
         uniqueSegment.length > 0 &&
           uniqueSegment.map((segment) =>
-            segment.marca ? (
+          segment.marca ? (
               ""
             ) : (
               <a
                 class="bg-blue-500 text-white py-2 px-4 rounded segment-button hover:scale-105 transition-all flex items-center justify-center"
                 href={`#${segment.id}`}
-              >
+                >
                 {segment.nombre}
               </a>
             )
@@ -168,7 +168,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
               <a
                 class="segment-button hover:scale-105 transition-all shadow-md"
                 href={"#segmento-" + segment.nombre}
-              >
+                >
                 <img
                   src={segment.fotoUrl}
                   alt={segment.nombre}
@@ -233,7 +233,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                     <h2
                       id={"segmento-" + segment.nombre}
                       class="text-light-blue font-semibold lg:text-5xl px-5 text-3xl text-center py-10"
-                    >
+                      >
                       {segment.nombre}
                     </h2>
                     <div
@@ -261,7 +261,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                             (s) => s.id == product.segmentos[1]
                           );
                           if (firstSegment?.skip)
-                            id = firstSegment.marca
+                          id = firstSegment.marca
                               ? "segmento-" + firstSegment?.nombre
                               : product.segmentos[0];
                           else
@@ -280,7 +280,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                             pdfs_tabla={productPdfs_tabla}
                             pdfs_carta={productPdfs_carta}
                             className="w-64 h-64"
-                          />
+                            />
                         );
                       })}
                     </div>
@@ -302,7 +302,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                     <div
                       class="w-screen"
                       style="width: 100vw;
-height: 1px;
+                      height: 1px;
 flex-shrink: 0;
 border-radius: 100px;
 background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.00) 100%);"
@@ -316,17 +316,17 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                           productosSinSegmento.length > 1
                             ? "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-center items-start w-full"
                             : "flex flex-col gap-5 justify-center items-center w-full"
-                        }`}
+                            }`}
                       >
                         {productosSinSegmento.map((product) => {
                           const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-                            product.pdfs_tabla.includes(pdf.id)
-                          );
-                          const productPdfs_carta = pdfs_carta.filter((pdf) =>
-                            product.pdfs_carta.includes(pdf.id)
-                          );
+                          product.pdfs_tabla.includes(pdf.id)
+                        );
+                        const productPdfs_carta = pdfs_carta.filter((pdf) =>
+                        product.pdfs_carta.includes(pdf.id)
+                      );
 
-                          return (
+                      return (
                             <CardPorProducto
                               key={product.id}
                               mini_desc={product.mini_desc}
@@ -356,9 +356,9 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                   : filteredProductos.length < 3
                     ? "flex flex-col gap-5 justify-center items-center w-full"
                     : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-5 justify-center items-start w-full"
-                : "flex flex-col gap-5 justify-center items-center w-full"
-            }`}
-          >
+                    : "flex flex-col gap-5 justify-center items-center w-full"
+                    }`}
+                    >
             {filtProds.map((product) => {
               const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
                 product.pdfs_tabla.includes(pdf.id)
@@ -377,7 +377,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                   desc={product.descripcion}
                   pdfs_tabla={productPdfs_tabla}
                   pdfs_carta={productPdfs_carta}
-                />
+                  />
               );
             })}
           </div>
@@ -386,7 +386,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
     </div>
   </section>
 
-  <style>
+<style>
     html {
       scroll-behavior: smooth;
     }

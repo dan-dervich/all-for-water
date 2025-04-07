@@ -35,10 +35,13 @@ ToDo:
 [x] Stainless steel needle valve from 1/2" - 2" 
 [x] reordenar tanks, primero tanks frp, luego brine tanks, luego accessorios
 [x] pagina ind de plunger pumps CAT
-[ ] Make segments point to brand if product is in brand and segment.
-[ ] change order of products in membrane so that two products don't appear in a row because of segmentation
-[ ] carbon granular SEO
-[ ] resina cationica SEO
+[x] Make segments point to brand if product is in brand and segment.
+[x] change order of products in membrane so that two products don't appear in a row because of segmentation
+[x] carbon granular SEO
+[x] resina cationica SEO
+[ ] tanque hidroneumatico en ingles
+[ ] flow restrictor en ingles
+[ ] valvula automatica de cierre
 [ ] remove advanced filtration system, change for reverse osmosis system in POU water cooler.
 [ ] Toray blog
 [ ] Water Cooler Blog
