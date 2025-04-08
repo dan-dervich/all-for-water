@@ -44,7 +44,7 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
         {sortedItems?.map((item) => (
           <a
             key={item.id}
-            href={`/category/${item.nombre}`}
+            href={`/category/${item.nombre}/`}
             className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
             onClick={() => {
               setIsOpen(false);

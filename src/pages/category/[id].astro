@@ -296,6 +296,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                 (product) =>
                   !product.segmentos || product.segmentos.length === 0
               );
+              console.log(productosSinSegmento)
               if (productosSinSegmento.length > 0) {
                 return (
                   <>
@@ -345,7 +346,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                 );
               }
               return null;
-            })()}
+            })}
           </>
         ) : (
           <div
