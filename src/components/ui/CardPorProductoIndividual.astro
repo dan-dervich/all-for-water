@@ -22,7 +22,7 @@ if (/<table/.test(desc)) {
     )
     .replace("style", "")
     .replace(/style="[^"]*"/g, "")
-    .replace("<ul", '<ul class="list-disc list-inside ml-5"')
+    .replace("<ul", '<ul class="list-disc ml-5"')
     .replace(/<li[^>]*>/g, '<li class="mb-2">') // Agrega margen entre elementos de lista
     .replace(/<p>/g, '<p class="mb-4">') // Agrega margen entre párrafos y listas
     .replace(/&rdquo;/g, '"') // Corrige comillas en el contenido
