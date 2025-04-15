@@ -5,6 +5,12 @@ User-agent: *
 Disallow: /toast/
 
 User-agent: *
+Disallow: /_vercel/
+
+User-agent: *
+Disallow: /_astro/
+
+User-agent: *
 Allow: /fotos/favicon_io
 
 Sitemap: https://allforwater.com/sitemap-index.xml
