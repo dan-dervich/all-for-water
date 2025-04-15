@@ -62,7 +62,6 @@ let editedDescFoto =
   filteredDescFoto.length > 0 ? filteredDescFoto[0].descripcion : "";
 
 editedDescFoto = editedDescFoto.split("</div>");
-console.log(editedDescFoto)
 editedDescFoto[0] = editedDescFoto[0].replace(
   "<div>",
   "<div class='flex flex-col justify-center text-center items-center'>"
@@ -217,8 +216,10 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                   }
                   return 0;
                 });
-
-                console.log(finalprods.push(...newProds));
+                for(let i = 0; i < finalprods.length; i++){
+                  console.log(finalprods[i].orden)
+                }
+                finalprods.push(...newProds)
                 if (segment.skip) return "";
                 return (
                   <section id={segment.id} class="mb-10">
@@ -273,7 +274,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                           <CardPorProducto
                             key={product.id}
                             mini_desc={product.mini_desc}
-                            id={`${id}`}
+                            id={`${id} + ${product.orden}`}
                             imgSrc={product.fotoUrl || "vacio"}
                             text={product.nombre}
                             desc={product.descripcion}
@@ -296,7 +297,6 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                 (product) =>
                   !product.segmentos || product.segmentos.length === 0
               );
-              console.log(productosSinSegmento)
               if (productosSinSegmento.length > 0) {
                 return (
                   <>
@@ -315,7 +315,7 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
                       <div
                         class={`${
                           productosSinSegmento.length > 1
-                            ? "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-center items-start w-full"
+                            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-start w-full"
                             : "flex flex-col gap-5 justify-center items-center w-full"
                             }`}
                       >
