@@ -95,7 +95,7 @@ editedDesc = `<div class="w-11/12 text-left flex justify-stretch items-center fl
   <img
     src={imgSrc !== "/path-to-placeholder-image.png" ? imgSrc : ""}
     style={imgSrc === "/path-to-placeholder-image.png" ? "display: none;" : ""}
-    alt={seo_title}
+    alt={seo_title || text}
     class="overflow-x-hidden sm:max-w-96 w-auto max-h-96 m-5"
     loading="eager"
   />
