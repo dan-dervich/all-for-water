@@ -24,7 +24,7 @@ const uniqueMarca = [...new Set(marcas.map((marca) => marca))];
   >
     {
       uniqueMarca.map((marca) => (
-        <MarcasCard imgSrc={marca.fotoUrl} link={"" + "/marca/" + marca.id} />
+        <MarcasCard imgSrc={marca.fotoUrl} link={"" + "/marca/" + marca.id + "/"} />
       ))
     }
   </div>
