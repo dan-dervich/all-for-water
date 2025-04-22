@@ -1,6 +1,11 @@
 ---
 import Card from "./ui/Card.astro";
 import { items } from "@lib/categories";
+items.sort((a, b) => {
+  if (a.nombre < b.nombre) return -1;
+  if (a.nombre > b.nombre) return 1;
+  return 0;
+});
 ---
 
 <section
@@ -19,7 +24,7 @@ import { items } from "@lib/categories";
     Resintech, and many more companies
   </p>
   <div
-    class="grid gap-10 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  class="grid gap-10 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     {
       items.map((item) => (
