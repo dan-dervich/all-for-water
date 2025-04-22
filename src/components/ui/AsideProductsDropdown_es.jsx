@@ -30,13 +30,12 @@ const AsideProductsDropdown = ({ items }) => {
         className={`absolute overflow-y-auto 
                     -left-12 top-full mt-2
                     w-52 max-h-[300px] bg-white text-slate-500 rounded-md shadow-lg 
-                    flex flex-col gap-2 text-center items-center justify-start 
+                    flex flex-col gap-2 text-center items-center justify-center 
                     transition-all p-4 z-50
-                    ${
-                      isOpen
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 -translate-y-2 pointer-events-none"
-                    }`}
+                    ${isOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
       >
         {items?.map((item) => (
           <a

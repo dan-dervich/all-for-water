@@ -49,7 +49,7 @@ export default function LanguageSwitch({ url, idioma }) {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-5 left-5 z-50">
       <div className="relative w-28 h-14 bg-[#55A5CA] rounded-full p-1 flex items-center">
         {/* Inactive language button */}
         <button
