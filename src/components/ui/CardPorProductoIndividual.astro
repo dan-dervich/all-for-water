@@ -13,15 +13,15 @@ if (/<table/.test(desc)) {
   editedDesc = editedDesc
     .replace(
       "<thead>",
-      '<thead class="bg-cyan-100 border border-black border-t-2 border-l-2 border-r-2 border-b-2">'
+      '<thead class="w-max bg-cyan-100 border border-black border-t-2 border-l-2 border-r-2 border-b-2">',
     )
-    .replace("<table", '<table class="text-center w-full bg-cyan-100"')
+    .replace("<table", '<table class="text-center bg-cyan-100 sm:ml-0 ml-72"')
     .replace(
       /<td/g,
-      '<td class="border border-black border-t-2 border-l-2 border-r-2 border-b-2"'
+      '<td class="border border-black border-t-2 border-l-2 border-r-2 border-b-2"',
     )
-    .replace("style", "")
     .replace(/style="[^"]*"/g, "")
+    .replace("style", "")
     .replace("<ul", '<ul class="list-disc ml-5"')
     .replace(/<li[^>]*>/g, '<li class="mb-2">') // Agrega margen entre elementos de lista
     .replace(/<p>/g, '<p class="mb-4">') // Agrega margen entre párrafos y listas
@@ -64,30 +64,31 @@ if (pdfs_carta.length > 0) {
 }
 editedDesc = editedDesc.replace(
   /<th >/g,
-  "<th class='p-2 border-black text-nowrap border-r-2 border-l-2'>"
+  "<th class='w-max p-2 border-black text-nowrap border-r-2 border-l-2'>",
 );
 editedDesc = editedDesc.replace(
   /<th>/g,
-  "<th class='p-2 border-black text-nowrap border-r-2 border-l-2'>"
+  "<th class='p-2 border-black text-nowrap border-r-2 border-l-2'>",
 );
 editedDesc = editedDesc.replace(
   /<tr >/g,
-  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>"
+  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>",
 );
 editedDesc = editedDesc.replace(
   /<tr>/g,
-  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>"
+  "<tr class='transition-all ease-in-out duration-100 hover:bg-cyan-200'>",
 );
 editedDesc = editedDesc.replace(
   /<tr/g,
-  '<tr class="transition-all ease-in-out duration-100 hover:bg-cyan-200"'
+  '<tr class="transition-all ease-in-out duration-100 hover:bg-cyan-200"',
 );
 // add border left and right to <th> tags wich contain existing classes
 editedDesc = editedDesc.replace(/<th class="[^"]*">/g, (match) =>
-  match.replace('">', ' border-black border-r-2 border-l-2">')
+  match.replace('">', ' border-black border-r-2 border-l-2">'),
 );
 
-editedDesc = `<div class="w-11/12 text-left flex justify-stretch items-center flex-col overflow-auto p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
+// editedDesc = `<div class="p-4 m-2 sm:w-screen overflow-scroll max-w-sm flex justify-center items-center flex-col text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
+editedDesc = `<div class="flex justify-stretch text-left items-center gap-2 flex-col overflow-scroll w-11/12 m-2">${editedDesc}</div>`;
 ---
 
 <div id={id} class="flex flex-col items-center sm:w-full w-full max-w-screen">
@@ -99,13 +100,12 @@ editedDesc = `<div class="w-11/12 text-left flex justify-stretch items-center fl
     class="overflow-x-hidden sm:max-w-96 w-auto max-h-96 m-5"
     loading="eager"
   />
-  <h2
+  <!-- <h2
     class="overflow-x-hidden text-[#5C5D56] text-xl font-bold text-wrap text-center"
   >
     {text}
-  </h2>
+  </h2> -->
+  <!-- class="flex items-center justify-center text-center overflow-hidden" -->
   <p
-    class="flex items-center justify-center w-full text-center overflow-auto"
-    set:html={editedDesc}
-  />
+    set:html={editedDesc}></p>
 </div>
