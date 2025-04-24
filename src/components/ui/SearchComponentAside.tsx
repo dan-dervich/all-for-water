@@ -87,6 +87,8 @@ const SearchComponent: React.FC = () => {
             <input
                 type="text"
                 placeholder="Search..."
+                name='search'
+                id="search-bar"
                 value={searchTerm}
                 onChange={handleSearch}
                 className="px-3 py-2 max-w-32 sm:max-w-60 rounded-full text-black focus:outline-none transition-all"
