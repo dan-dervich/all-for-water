@@ -81,7 +81,7 @@ const SearchComponent: React.FC = () => {
     };
 
     return (
-        <div ref={searchRef} className="relative">
+        <div ref={searchRef} className="relative hidden sm:block">
             <input
                 type="text"
                 placeholder="Search..."
