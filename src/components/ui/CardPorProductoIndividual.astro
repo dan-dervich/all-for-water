@@ -47,9 +47,9 @@ if (/<table/.test(desc)) {
         isFirstRow = false;
 
         // Devolver la fila de la tabla con enlace
-        return `<th class="text-nowrap border border-black border-t-2 border-l-2 border-r-2 border-b-2">
+        return `<td class="text-nowrap border border-black border-t-2 border-l-2 border-r-2 border-b-2">
             <a class="${estilos}" href="${content}" target="_blank" rel="noopener noreferrer">${linkText}</a>
-          </th></tr>`;
+          </td></tr>`;
       } else {
         return "</tr>";
       }

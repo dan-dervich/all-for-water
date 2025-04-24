@@ -5,9 +5,11 @@ import ProductsDropdown from "./ui/ProductsDropdown";
 import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 import SearchComponent from "@components/ui/SearchComponent";
 import SearchComponentAside from "./ui/SearchComponentAside";
+import { Image } from "astro:assets";
 interface Props {
   currentPage?: string;
 }
+import Logo from "../../public/fotos/android-chrome-192x192.png";
 const { currentPage } = Astro.props;
 ---
 
@@ -23,11 +25,12 @@ const { currentPage } = Astro.props;
             onclick="document.getElementById('loader').style.display = 'grid'"
             href="/"
           >
-            <img
-              src="/fotos/android-chrome-192x192.png"
+            <Image
+              class="sm:max-h-96 min-h-12 sm:min-h-24 sm:w-auto h-12 w-auto rounded-full"
+              src={Logo}
+              format="webp"
               alt="Logo"
               loading="eager"
-              class="sm:h-24 sm:w-auto h-12 w-auto rounded-full"
             />
           </a>
           <!-- <a
@@ -83,6 +86,7 @@ const { currentPage } = Astro.props;
     >
       <button
         id="close-button"
+        aria-label="Close menu"
         class="flex pb-10 pt-5"
         onclick="sidebar.classList.toggle('translate-x-full')"
       >

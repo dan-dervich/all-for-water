@@ -58,7 +58,7 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
               }
             }}
           >
-            <p class="text-xs"
+            <p className="text-xs"
               dangerouslySetInnerHTML={{
                 __html:
                   item.nombre == currentPage

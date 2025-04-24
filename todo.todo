@@ -1,5 +1,6 @@
+option s(start) option d(done) option c(canceled)
 TODO:
     ✔ fix mobile view for tables @started(25-04-22 01:14) @done(25-04-22 02:14) @lasted(1h54s)
-    option s(start) option d(don)
     ✔ fix mobile view for navbar @started(25-04-22 13:39) @done(25-04-22 13:46) @lasted(7m19s)
-    ☐ fix categories unorganized @started(25-04-22 13:51)
+    ✔ fix categories unorganized @started(25-04-22 13:51) @done(25-04-22 13:52) @lasted(1m28s)
+    ✔ fix alt text on images @started(25-04-24 12:03) @done(25-04-24 12:12) @lasted(9m3s)
