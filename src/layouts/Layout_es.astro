@@ -31,8 +31,11 @@ const { title, description, keywords, canonical } = Astro.props;
       @import url("https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap");
     </style>
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
+    <meta
+      name="description"
+      content={`${description ? description : "allforwater una pagina de venta mayorista de insumos de tratamiento de agua"}`}
+    />
+    <meta name="keywords" content={`${keywords ? keywords : "allforwater"}`} />
     <link rel="canonical" href={canonical} />
   </head>
   <body class="w-screen overflow-x-hidden">
