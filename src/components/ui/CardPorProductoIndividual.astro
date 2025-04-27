@@ -88,6 +88,9 @@ editedDesc = editedDesc.replace(/<th class="[^"]*">/g, (match) =>
 );
 
 // editedDesc = `<div class="p-4 m-2 sm:w-screen overflow-scroll max-w-sm flex justify-center items-center flex-col text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
+editedDesc = editedDesc.replace(/<h1>/g, "<h2 class='text-2xl'>");
+let reg = new RegExp("</h1>", "g");
+editedDesc = editedDesc.replace(reg, "<h2>");
 editedDesc = `<div class="flex justify-stretch text-left items-center gap-2 flex-col overflow-scroll w-11/12 m-2">${editedDesc}</div>`;
 ---
 
