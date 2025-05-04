@@ -1,6 +1,7 @@
 ---
 const { imgSrc } = Astro.props;
 const { link } = Astro.props;
+const { nombre_marca } = Astro.props;
 ---
 
 <a
@@ -8,5 +9,5 @@ const { link } = Astro.props;
   onclick="document.getElementById('loader').style.display = 'grid'"
   class="hover:scale-110 transition-all"
 >
-  <img src={imgSrc} alt="Logo" class="w-auto h-auto" loading="lazy" />
+  <img src={imgSrc} alt={nombre_marca ? nombre_marca : "Brand Name"} class="w-auto h-auto" loading="lazy" />
 </a>
