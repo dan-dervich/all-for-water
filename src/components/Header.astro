@@ -56,7 +56,7 @@ const { currentPage } = Astro.props;
             class="transition-all nav-links hover:cursor-pointer">HOME</a
           >
           <ProductsDropdown
-            client:only
+            client:only="react"
             items={items}
             currentPage={currentPage}
           />
@@ -68,7 +68,7 @@ const { currentPage } = Astro.props;
           >
         </nav>
         <div class="relative hidden sm:flex">
-          <SearchComponent client:load />
+          <SearchComponent client:only="react" />
         </div>
         <button
           id="menu-button"
@@ -102,7 +102,7 @@ const { currentPage } = Astro.props;
       </button>
       <nav class="flex flex-col gap-y-10 justify-center items-center">
         <div class="relative">
-          <SearchComponentAside client:load />
+          <SearchComponentAside client:only="react" />
         </div>
         <!-- onclick="loader" -->
         <a
@@ -118,7 +118,7 @@ const { currentPage } = Astro.props;
           class="transition-all nav-links">CONTACT US</a
         >
         <AsideProductsDropdown
-          client:only
+          client:only="react"
           items={items}
           currentPage={currentPage}
         />
