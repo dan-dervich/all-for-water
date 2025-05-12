@@ -25,13 +25,13 @@ if (!marcaData) {
 
 // Filtrar los productos que contienen el ID de la marca en su lista de segmentos
 const filteredProductos = productos.filter((product) =>
-  product.segmentos.includes(marcaData.id)
+  product.segmentos.includes(marcaData.id),
 );
 ---
 
 <Layout
   canonical={"https://www.allforwater.com/marca/" + marcaData.id + "/"}
-  title={marcaData.seo_title}
+  title={marcaData.seo_title ? marcaData.seo_title : marcaData.nombre}
   description={marcaData.seo_description}
   keywords={marcaData.seo_keywords}
 >
@@ -55,10 +55,10 @@ const filteredProductos = productos.filter((product) =>
       {
         filteredProductos.map((product) => {
           const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-            product.pdfs_tabla.includes(pdf.id)
+            product.pdfs_tabla.includes(pdf.id),
           );
           const productPdfs_carta = pdfs_carta.filter((pdf) =>
-            product.pdfs_carta.includes(pdf.id)
+            product.pdfs_carta.includes(pdf.id),
           );
 
           return (
