@@ -68,7 +68,7 @@ const { currentPage } = Astro.props;
           >
         </nav>
         <div class="relative hidden sm:flex">
-          <SearchComponent client:only="react" />
+          <SearchComponent client:load />
         </div>
         <button
           id="menu-button"
@@ -102,7 +102,7 @@ const { currentPage } = Astro.props;
       </button>
       <nav class="flex flex-col gap-y-10 justify-center items-center">
         <div class="relative">
-          <SearchComponentAside client:only="react" />
+          <SearchComponentAside client:load />
         </div>
         <!-- onclick="loader" -->
         <a
