@@ -30,7 +30,7 @@ export async function getStaticPaths() {
       .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
       .trim(); // Remove leading/trailing hyphens
   }
-  return items
+  let categories = [...new Set(items
     .map((item) => ({
       params: { id: slugify(item.nombre) },
     }))
@@ -38,7 +38,8 @@ export async function getStaticPaths() {
       items.map((item) => ({
         params: { id: item.nombre },
       })),
-    );
+    ))];
+  return categories;
 }
 
 const { id } = Astro.params;
@@ -54,8 +55,11 @@ if (id.includes(" ")) {
 
 // find category aka item = current category
 const item = items.find((product) => slugify(product.nombre) === id);
+console.log(item);
 if (!item) {
-  throw new Error(`Item with name ${id} not found`);
+  return new Response("Category not found", {
+    status: 404,
+  });
 }
 
 // find all products that belong to the current category
