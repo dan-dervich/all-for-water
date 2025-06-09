@@ -18,25 +18,28 @@ export async function getStaticPaths() {
 }
 
 const producto = productos.find(
-  (m) => m.nombre.replace(/[ /.,%]/g, "-").toLowerCase() === Astro.params.id
+  (m) => m.nombre.replace(/[ /.,%]/g, "-").toLowerCase() === Astro.params.id,
 );
 const categoria = items.find((c) => c.productos.includes(producto.id));
 const productPdfs_tabla = pdfs_tabla.filter((pdf) =>
-  producto.pdfs_tabla.includes(pdf.id)
+  producto.pdfs_tabla.includes(pdf.id),
 );
 const productPdfs_carta = pdfs_carta.filter((pdf) =>
-  producto.pdfs_carta.includes(pdf.id)
+  producto.pdfs_carta.includes(pdf.id),
 );
-
 ---
 
 <Layout
   canonical={"https://www.allforwater.com/product/" + Astro.params.id + "/"}
-  title={producto.seo_title ? producto.seo_title : producto.nombre.length > 60 ? producto.nombre.substring(0, 57) + "..." : producto.nombre}
+  title={producto.seo_title
+    ? producto.seo_title
+    : producto.nombre.length > 60
+      ? producto.nombre.substring(0, 57) + "..."
+      : producto.nombre}
   description={producto.seo_description}
   keywords={producto.seo_keywords}
 >
-  <a
+  <!-- <a
     href={`/category/${categoria.nombre}/`}
     id="back-button"
     class="duration-300 ease-in-out text-center p-2 fixed sm:left-20 sm:top-32 left-5 top-20 flex justify-center items-center rounded-sm bg-light-blue/60 hover:bg-light-blue/80 text-black transition-all"
@@ -44,10 +47,18 @@ const productPdfs_carta = pdfs_carta.filter((pdf) =>
     Go Back To:
     <br />
     {categoria.nombre}
-  </a>
+  </a> -->
   <section class="mb-10 mt-36 p-4 overflow-hidden">
+    <a
+      href={`/category/${categoria.nombre}/`}
+      class="duration-300 ease-in-out text-center p-2 rounded-sm bg-gray-400/60 hover:bg-gray-400/80 text-black transition-all"
+      id="back-button"
+    >
+      &larr; Go Back To:
+      {categoria.nombre}
+    </a>
     <h1
-      class="text-light-blue text-center font-semibold text-3xl lg:text-5xl px-5 py-10"
+      class="text-black text-center font-semibold text-3xl lg:text-5xl px-5 py-10"
     >
       {producto.nombre}
     </h1>
