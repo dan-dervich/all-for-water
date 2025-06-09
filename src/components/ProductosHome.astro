@@ -6,6 +6,15 @@ items.sort((a, b) => {
   if (a.nombre > b.nombre) return 1;
   return 0;
 });
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+    .replace(" ", "-")
+    .trim(); // Remove leading/trailing hyphens
+}
 ---
 
 <section
@@ -29,7 +38,7 @@ items.sort((a, b) => {
     {
       items.map((item) => (
         <a
-          href={`/category/${item.nombre}/`}
+          href={`/category/${slugify(item.nombre)}/`}
           onclick="document.getElementById('loader').style.display = 'grid'"
           class="w-full h-full"
         >

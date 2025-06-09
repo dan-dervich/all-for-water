@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const AsideProductsDropdown = ({ items, currentPage }) => {
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+      .replace(" ", "-")
+      .trim(); // Remove leading/trailing hyphens
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
@@ -35,16 +44,15 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
                     w-52 max-h-[300px] bg-white text-slate-500 rounded-md shadow-lg 
                     flex flex-col gap-2 text-center items-center justify-start 
                     transition-all p-4 z-50
-                    ${
-                      isOpen
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 -translate-y-2 pointer-events-none"
-                    }`}
+                    ${isOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
       >
         {sortedItems?.map((item) => (
           <a
             key={item.id}
-            href={`/category/${item.nombre}/`}
+            href={`/category/${slugify(item.nombre)}/`}
             className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
             onClick={() => {
               setIsOpen(false);

@@ -9,6 +9,15 @@ import { IoMdArrowDropdown } from "react-icons/io";
 //   }`}
 
 const ProductsDropdown = ({ items, currentPage }) => {
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+      .replace(" ", "-")
+      .trim(); // Remove leading/trailing hyphens
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
@@ -40,17 +49,16 @@ const ProductsDropdown = ({ items, currentPage }) => {
       </button>
       <div
         className={`absolute overflow-visible top-full mt-2 left-1/2 lg:-translate-x-2/3 -translate-x-1/2 lg:w-[80vw] md:w-[600px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg text-center items-center justify-center flex flex-row flex-wrap transition-all p-2 text-base
-          ${
-            isOpen
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-2 pointer-events-none"
+          ${isOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         onMouseLeave={() => setIsOpen(false)}
       >
         {sortedItems?.map((item) => (
           <a
             key={item.id}
-            href={`/category/${item.nombre}/`}
+            href={`/category/${slugify(item.nombre)}/`}
             className="lg:text-xs md:text-xs block w-1/4 px-2 py-2 hover:scale-110 transition-all"
             onClick={() => {
               document.getElementById("loader").style.display = "grid";
