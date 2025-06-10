@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const AsideProductsDropdown = ({ items, currentPage }) => {
+const AsideProductsDropdown = ({ items, currentPage, name }) => {
   function slugify(text) {
     return text
       .toLowerCase()
@@ -24,12 +24,72 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  let sortedItems = items
-    ?.slice()
-    .sort((a, b) => a.nombre.localeCompare(b.nombre));
+  {/* //         ${isOpen
+  //   ? "opacity-100 translate-y-0"
+  //   : "opacity-0 -translate-y-2 pointer-events-none"
+  // }`} */}
   return (
-    <div className="relative aside-dropdown-container nav-links">
-      <button
+    <div className="relative aside-dropdown-container overflow-scroll">
+      <button className="transition-all w-full text-lg font-medium flex items-center justify-center text-center gap-x-1" onClick={() => { setIsOpen(!isOpen); }}>
+        {name}
+        <IoMdArrowDropdown
+          className={`transition-all transform ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
+      <div
+        className={`
+          ${isOpen ? "h-full overflow-y-scroll p-4" : "p-0 h-0 overflow-hidden"}
+                  -left-12 top-full mt-2
+                  w-52 max-h-[300px] bg-white text-slate-500 rounded-md shadow-lg 
+                  flex flex-col gap-2 text-center items-center justify-start 
+                  z-50
+                  opacity-100 translate-y-0`}
+      >
+        {
+          items.map((item) => {
+            console.log(item)
+            return (
+              <a
+                key={item.id}
+                href={`/category/${slugify(item.nombre)}/`}
+                className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
+                onClick={() => {
+                  setIsOpen(false);
+                  document.getElementById("loader").style.display = "grid";
+                  // Si tienes una función para cerrar el sidebar, llámala aquí
+                  if (typeof window !== "undefined") {
+                    const sidebar = document.getElementById("sidebar");
+                    if (sidebar) {
+                      sidebar.classList.add("translate-x-full");
+                    }
+                  }
+                }}
+              >
+                <p className="text-xs"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      item.nombre == currentPage
+                        ? "<b>" + item.nombre + "</b>"
+                        : item.nombre,
+                  }}
+                ></p>
+              </a>
+            )
+          })}
+      </div>
+    </div >
+  );
+};
+{/* <button
+  className="transition-all flex items-center gap-x-1"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  PRODUCTS
+  <IoMdArrowDropdown
+    className={`transition-all transform ${isOpen ? "rotate-180" : ""}`}
+  />
+</button> */}
+{/* <button
         className="transition-all flex items-center gap-x-1"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -76,11 +136,7 @@ const AsideProductsDropdown = ({ items, currentPage }) => {
             ></p>
           </a>
         ))}
-      </div>
-    </div>
-  );
-};
-
+      </div> */}
 const style = `
 .nav-links {
     font-size: 1.2rem;

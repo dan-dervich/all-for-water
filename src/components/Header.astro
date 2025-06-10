@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { items } from "@lib/categories";
+import { items as main_categories } from "@lib/main_categories";
 import ProductsDropdown from "./ui/ProductsDropdown";
 import AsideProductsDropdown from "./ui/AsideProductsDropdown";
 import SearchComponent from "@components/ui/SearchComponent";
@@ -56,7 +57,7 @@ const { currentPage } = Astro.props;
           >
           <ProductsDropdown
             client:only="react"
-            items={items}
+            items={main_categories}
             currentPage={currentPage}
           />
           <a
@@ -85,7 +86,7 @@ const { currentPage } = Astro.props;
     </div>
     <aside
       id="sidebar"
-      class="fixed z-50 top-0 right-0 w-64 h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
+      class="overflow-y-scroll fixed z-50 top-0 right-0 w-64 h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
     >
       <button
         id="close-button"
@@ -110,17 +111,26 @@ const { currentPage } = Astro.props;
           class="transition-all nav-links hover:cursor-pointer"
           href="/">HOME</a
         >
+        <div class="overflow-y-scroll flex justify-center items-center flex-col text-center">
+          {
+            main_categories.map((category) => {
+              return (
+                <AsideProductsDropdown
+                  client:only="react"
+                  name={category.name}
+                  items={category?.expand?.categories}
+                  currentPage={currentPage}
+                />
+              );
+            })
+          }
+        </div>
         <a
           onclick="document.getElementById('loader').style.display = 'grid'"
           id="contact-sidebar"
           href="/contact/"
           class="transition-all nav-links">CONTACT US</a
         >
-        <AsideProductsDropdown
-          client:only="react"
-          items={items}
-          currentPage={currentPage}
-        />
       </nav>
     </aside>
   </div>

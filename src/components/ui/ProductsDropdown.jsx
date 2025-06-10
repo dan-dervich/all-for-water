@@ -31,9 +31,9 @@ const ProductsDropdown = ({ items, currentPage }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  const sortedItems = items
-    ?.slice()
-    .sort((a, b) => a.nombre.localeCompare(b.nombre));
+  // const sortedItems = items
+  //   ?.slice()
+  //   .sort((a, b) => a.nombre.localeCompare(b.nombre));
 
   return (
     <div className="relative products-dropdown-container nav-links">
@@ -47,33 +47,70 @@ const ProductsDropdown = ({ items, currentPage }) => {
           className={`transition-all transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
+      {/* // overflow-visible */}
       <div
-        className={`absolute overflow-visible top-full mt-2 left-1/2 lg:-translate-x-2/3 -translate-x-1/2 lg:w-[80vw] md:w-[600px] w-[450px] bg-white text-slate-500 rounded-md shadow-lg text-center items-center justify-center flex flex-row flex-wrap transition-all p-2 text-base
+        className={`
+          absolute
+          top-full
+          mt-2
+          left-1/2
+          lg:-translate-x-2/3
+          -translate-x-1/2 
+          lg:max-w-[80vw]
+          lg:w-[70vw]
+          md:w-[600px] 
+          w-[450px] 
+          bg-white 
+          text-slate-500 
+          rounded-md 
+          shadow-lg 
+          text-center 
+          items-start 
+          justify-center 
+          flex 
+          flex-row 
+          flex-wrap 
+          gap-2
+          transition-all 
+          p-2 
+          text-base
+          overflow-scroll
+          max-h-[85vh]
           ${isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         onMouseLeave={() => setIsOpen(false)}
       >
-        {sortedItems?.map((item) => (
-          <a
-            key={item.id}
-            href={`/category/${slugify(item.nombre)}/`}
-            className="lg:text-xs md:text-xs block w-1/4 px-2 py-2 hover:scale-110 transition-all"
-            onClick={() => {
-              document.getElementById("loader").style.display = "grid";
-            }}
-          >
-            <p
-              dangerouslySetInnerHTML={{
-                __html:
-                  item.nombre == currentPage
-                    ? "<b>" + item.nombre + "</b>"
-                    : item.nombre,
-              }}
-            ></p>
-          </a>
-        ))}
+        {items?.map((main_cat) => {
+          return (
+            <div className="  display flex flex-col text-left">
+              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}`}>{main_cat.name}</a></h3>
+              {main_cat.expand?.categories?.map((item) => {
+                return (
+                  <a
+                    key={item.id}
+                    href={`/category/${slugify(item.nombre)}/`}
+                    className="lg:text-xs md:text-xs block px-2 py-2 hover:scale-110 transition-all"
+                    onClick={() => {
+                      document.getElementById("loader").style.display = "grid";
+                    }}
+                  >
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          item.nombre === currentPage
+                            ? "<b>" + item.nombre + "</b>"
+                            : item.nombre,
+                      }}
+                    ></p>
+                  </a>
+                )
+              })}
+            </div>
+          )
+        })}
+
       </div>
     </div>
   );

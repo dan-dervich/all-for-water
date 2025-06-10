@@ -171,13 +171,13 @@ const { title, description, keywords, canonical, currentPage } = Astro.props;
         document.getElementById("loader").style.display = "none";
       });
     </script>
+    <Header currentPage={currentPage} />
     <main>
       <slot />
       <div id="loader">
         <div class="loader"></div>
       </div>
     </main>
-    <Header currentPage={currentPage} />
     <Footer />
     <button
       id="scroll-top-fixed"
