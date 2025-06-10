@@ -3,6 +3,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const AsideProductsDropdown = ({ items, currentPage, name }) => {
   function slugify(text) {
+    if(!text) return "";
     return text
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
@@ -50,7 +51,6 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
       >
         {
           items.map((item) => {
-            console.log(item)
             return (
               <a
                 key={item.id}

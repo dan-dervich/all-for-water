@@ -10,6 +10,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const ProductsDropdown = ({ items, currentPage }) => {
   function slugify(text) {
+    if (!text) return "";
     return text
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
@@ -85,7 +86,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
         {items?.map((main_cat) => {
           return (
             <div className="  display flex flex-col text-left">
-              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name}</a></h3>
+              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
               {main_cat.expand?.categories?.map((item) => {
                 return (
                   <a

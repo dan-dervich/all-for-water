@@ -58,7 +58,6 @@ const current_category = main_categories.find(
             >
                 {
                     current_category?.expand?.categories?.map((category) => {
-                        console.log(category);
                         return (
                             <a
                                 href={`/category/${slugify(category.nombre)}/`}

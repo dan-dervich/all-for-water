@@ -55,7 +55,6 @@ if (id.includes(" ")) {
 
 // find category aka item = current category
 const item = items.find((product) => slugify(product.nombre) === id);
-console.log(item);
 if (!item) {
   return new Response("Category not found", {
     status: 404,
@@ -254,9 +253,6 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                   }
                   return 0;
                 });
-                for (let i = 0; i < finalprods.length; i++) {
-                  console.log(finalprods[i].orden);
-                }
                 finalprods.push(...newProds);
                 if (segment.skip) return "";
                 return (
