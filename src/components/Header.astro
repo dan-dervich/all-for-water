@@ -36,12 +36,6 @@ const { currentPage } = Astro.props;
               loading="eager"
             />
           </a>
-          <!-- <a
-            id="home"
-            href="/"
-            onclick="document.getElementById('loader').style.display = 'grid'"
-            class="sm:hidden transition-all nav-links hover:cursor-pointer">HOME</a
-          > -->
         </div>
         <p class="hidden sm:flex text-2xl font-edu font-medium">
           All For Water
@@ -111,7 +105,9 @@ const { currentPage } = Astro.props;
           class="transition-all nav-links hover:cursor-pointer"
           href="/">HOME</a
         >
-        <div class="overflow-y-scroll flex justify-center items-center flex-col text-center">
+        <div
+          class="overflow-y-scroll flex justify-center items-center flex-col text-center"
+        >
           {
             main_categories.map((category) => {
               return (

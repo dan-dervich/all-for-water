@@ -99,9 +99,9 @@ const ProductsDropdown = ({ items, currentPage }) => {
                     <p
                       dangerouslySetInnerHTML={{
                         __html:
-                          item.nombre === currentPage
-                            ? "<b>" + item.nombre + "</b>"
-                            : item.nombre,
+                          item.nombre === slugify(currentPage)
+                            ? '<b class="text-md">' + item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ") + "</b>"
+                            : item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" "),
                       }}
                     ></p>
                   </a>

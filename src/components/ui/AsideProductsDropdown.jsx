@@ -31,7 +31,10 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
   return (
     <div className="relative aside-dropdown-container overflow-scroll">
       <button className="transition-all w-full text-lg font-medium flex items-center justify-center text-center gap-x-1" onClick={() => { setIsOpen(!isOpen); }}>
-        {name}
+        {name.split(" ").map((word) => {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }
+        ).join(" ")}
         <IoMdArrowDropdown
           className={`transition-all transform ${isOpen ? "rotate-180" : ""}`}
         />
@@ -68,9 +71,9 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
                 <p className="text-xs"
                   dangerouslySetInnerHTML={{
                     __html:
-                      item.nombre == currentPage
-                        ? "<b>" + item.nombre + "</b>"
-                        : item.nombre,
+                      item.nombre == slugify(currentPage)
+                        ? "<b>" + item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ") + "</b>"
+                        : item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" "),
                   }}
                 ></p>
               </a>
