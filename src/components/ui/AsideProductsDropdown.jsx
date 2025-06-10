@@ -71,7 +71,7 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
                 <p className="text-xs"
                   dangerouslySetInnerHTML={{
                     __html:
-                      item.nombre == slugify(currentPage)
+                      slugify(item.nombre) == slugify(currentPage)
                         ? "<b>" + item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ") + "</b>"
                         : item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" "),
                   }}
