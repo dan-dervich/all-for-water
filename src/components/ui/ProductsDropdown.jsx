@@ -85,7 +85,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
         {items?.map((main_cat) => {
           return (
             <div className="  display flex flex-col text-left">
-              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}`}>{main_cat.name}</a></h3>
+              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name}</a></h3>
               {main_cat.expand?.categories?.map((item) => {
                 return (
                   <a

@@ -1,0 +1,80 @@
+---
+import Card from "@components/ui/Card.astro";
+import LanguageSwitch from "@components/ui/LanguageSwitch";
+import Layout from "@layouts/Layout.astro";
+import { items as main_categories } from "@lib/main_categories";
+
+function slugify(text) {
+    return text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+        .replace(" ", "-")
+        .trim(); // Remove leading/trailing hyphens
+}
+export const prerender = true;
+export async function getStaticPaths() {
+    function slugify(text) {
+        return text
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+            .replace(/\s+/g, "-") // Replace spaces with hyphens
+            .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+            .replace(" ", "-")
+            .trim(); // Remove leading/trailing hyphens
+    }
+    return main_categories.map((category) => ({
+        params: { category: slugify(category.name) },
+    }));
+}
+
+const { category } = Astro.params;
+const current_category = main_categories.find(
+    (cat) => slugify(cat.name) === category,
+);
+---
+
+<Layout
+    title="Segmentation Page"
+    description="Explore our segmentation categories to find tailored solutions for your needs."
+    keywords="segmentation, categories, tailored solutions, water treatment, wholesale"
+    canonical={"https://www.allforwater.com/segmentation/" + category}
+>
+    <section
+        class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
+    >
+        <h1
+            class="text-light-blue font-semibold text-5xl px-5 text-center py-10"
+        >
+            {
+                current_category.name?.charAt(0)?.toUpperCase() +
+                    current_category.name?.slice(1)
+            }
+        </h1>
+        <div class="w-full mt-10 mb-20 flex items-center justify-center">
+            <div
+                class="grid gap-10 w-3/4 mt-10 items-center justify-center mb-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            >
+                {
+                    current_category?.expand?.categories?.map((category) => {
+                        console.log(category);
+                        return (
+                            <a
+                                href={`/category/${slugify(category.nombre)}/`}
+                                onclick="document.getElementById('loader').style.display = 'grid'"
+                                class="w-full h-full"
+                            >
+                                <Card
+                                    imgSrc={`https://allforwater.pockethost.io/api/files/${category.collectionId}/${category.id}/${category.foto}`}
+                                    text={category.nombre}
+                                />
+                            </a>
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </section>
+</Layout>
+<LanguageSwitch client:only="react" url={`/es`} idioma={"EN"} />
