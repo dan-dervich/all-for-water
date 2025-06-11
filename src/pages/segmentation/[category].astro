@@ -3,7 +3,7 @@ import Card from "@components/ui/Card.astro";
 import LanguageSwitch from "@components/ui/LanguageSwitch";
 import Layout from "@layouts/Layout.astro";
 import { items as main_categories } from "@lib/main_categories";
-
+import { items as categories } from "@lib/categories";
 function slugify(text) {
     return text
         .toLowerCase()
@@ -72,9 +72,36 @@ const current_category = main_categories.find(
                         );
                     })
                 }
-                {current_category?.expand?.segment?.map((segment)=> {
-                    console.log(segment)
-                })}
+                {
+                    current_category?.expand?.segment?.map((segment) => {
+                        let categoryIndex = 0;
+                        for (let i = 0; i < categories.length; i++) {
+                            categories[i].expand?.productos.forEach((e) =>
+                                e.id == segment.id ? console.log(e.nombre) : "",
+                            );
+                            if (
+                                categories[i].expand?.productos?.some((obj) =>
+                                    obj.segmentos.includes(segment.id),
+                                )
+                            ) {
+                                categoryIndex = i;
+                                break;
+                            }
+                        }
+                        return (
+                            <a
+                                href={`/category/${slugify(categories[categoryIndex].nombre)}#${segment.id}/`}
+                                onclick="document.getElementById('loader').style.display = 'grid'"
+                                class="w-full h-full"
+                            >
+                                <Card
+                                    imgSrc={`https://allforwater.pockethost.io/api/files/${segment.collectionId}/${segment.id}/${segment.foto}`}
+                                    text={segment.nombre}
+                                />
+                            </a>
+                        );
+                    })
+                }
             </div>
         </div>
     </section>
