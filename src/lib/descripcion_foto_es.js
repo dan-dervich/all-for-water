@@ -5,7 +5,7 @@ const pb = new PocketBase("https://allforwater.pockethost.io");
 let descripciones_foto_es = [];
 
 try {
-  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
+
 
   const records = await pb.collection("descripcion_foto_es").getList(0, 1000);
 

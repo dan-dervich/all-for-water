@@ -104,7 +104,6 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
               {main_cat.expand?.segment?.map((item) => {
                 let categoryName = ''
                 for (let i = 0; i < categories.length; i++) {
-                  categories[i].expand?.productos.forEach((e) => e.id == item.id ? console.log(e.nombre) : "")
                   if (categories[i].expand?.productos?.some((obj) => obj.segmentos.includes(item.id))) {
                     categoryName = categories[i].nombre;
                     break;

@@ -5,7 +5,7 @@ const pb = new PocketBase("https://allforwater.pockethost.io");
 let segmentos_es = [];
 
 try {
-  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
+
 
   const records = await pb.collection("segmentos_es").getList(0, 40);
   segmentos_es = records.items.map((item) => {

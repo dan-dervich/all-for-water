@@ -5,7 +5,7 @@ const pb = new PocketBase("https://allforwater.pockethost.io");
 let pdfs_carta_es = [];
 
 try {
-  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
+
 
   pdfs_carta_es = await pb.collection("pdfs_carta_es").getList(0, 1000);
   pdfs_carta_es = pdfs_carta_es.items;

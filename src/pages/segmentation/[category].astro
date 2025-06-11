@@ -76,9 +76,6 @@ const current_category = main_categories.find(
                     current_category?.expand?.segment?.map((segment) => {
                         let categoryIndex = 0;
                         for (let i = 0; i < categories.length; i++) {
-                            categories[i].expand?.productos.forEach((e) =>
-                                e.id == segment.id ? console.log(e.nombre) : "",
-                            );
                             if (
                                 categories[i].expand?.productos?.some((obj) =>
                                     obj.segmentos.includes(segment.id),

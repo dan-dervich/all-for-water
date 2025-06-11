@@ -5,7 +5,7 @@ const pb = new PocketBase("https://allforwater.pockethost.io");
 let marcas_es = [];
 
 try {
-  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
+
 
   const records_es = await pb.collection("segmentos_es").getList(0, 1000);
   marcas_es = records_es.items
