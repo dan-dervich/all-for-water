@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-// className={`absolute overflow-visible top-full mt-2 left-1/2 xl:-translate-x-3/4 -translate-x-1/2 lg:w-[80vw] md:w-screen w-[450px] bg-white text-slate-500 rounded-md shadow-lg grid lg:grid-cols-5 md:grid-cols-5 grid-cols-3 text-center items-center justify-center transition-all p-2 text-base
-//   ${
-//     isOpen
-//       ? "opacity-100 translate-y-0"
-//       : "opacity-0 -translate-y-2 pointer-events-none"
-//   }`}
-
-const ProductsDropdown = ({ items, currentPage }) => {
+const ProductsDropdown = ({ items, currentPage, categories }) => {
   function slugify(text) {
     if (!text) return "";
     return text
@@ -31,11 +24,6 @@ const ProductsDropdown = ({ items, currentPage }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
-
-  // const sortedItems = items
-  //   ?.slice()
-  //   .sort((a, b) => a.nombre.localeCompare(b.nombre));
-
   return (
     <div className="relative products-dropdown-container nav-links">
       <button
@@ -43,7 +31,7 @@ const ProductsDropdown = ({ items, currentPage }) => {
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setIsOpen(true)}
       >
-        PRODUCTS
+        Products
         <IoMdArrowDropdown
           className={`transition-all transform ${isOpen ? "rotate-180" : ""}`}
         />
@@ -68,31 +56,36 @@ const ProductsDropdown = ({ items, currentPage }) => {
           text-center 
           items-start 
           justify-center 
-          flex 
-          flex-row 
-          flex-wrap 
-          gap-2
+          gap-4
           transition-all 
           p-2 
           text-base
           overflow-scroll
-          max-h-[85vh]
+          max-h-[75vh]
+          grid
+          md:grid-cols-3
+          lg:grid-cols-4
+
           ${isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         onMouseLeave={() => setIsOpen(false)}
       >
+        {/* // flex 
+        // flex-row 
+        // flex-wrap  */}
         {items?.map((main_cat) => {
           return (
-            <div className="  display flex flex-col text-left">
-              <h3 className="underline text-black"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
+            <div key={main_cat.id} className="display flex flex-col text-left">
+              <h3 className="underline text-light-blue"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
               {main_cat.expand?.categories?.map((item) => {
+                // add container for space around
                 return (
                   <a
                     key={item.id}
                     href={`/category/${slugify(item.nombre)}/`}
-                    className="lg:text-xs md:text-xs block px-2 py-2 hover:scale-110 transition-all"
+                    className="lg:text-base md:text-base block px-2 py-2 hover:scale-110 transition-all"
                     onClick={() => {
                       document.getElementById("loader").style.display = "grid";
                     }}
@@ -108,6 +101,36 @@ const ProductsDropdown = ({ items, currentPage }) => {
                   </a>
                 )
               })}
+              {main_cat.expand?.segment?.map((item) => {
+                let categoryName = ''
+                for (let i = 0; i < categories.length; i++) {
+                  categories[i].expand?.productos.forEach((e) => e.id == item.id ? console.log(e.nombre) : "")
+                  if (categories[i].expand?.productos?.some((obj) => obj.segmentos.includes(item.id))) {
+                    categoryName = categories[i].nombre;
+                    break;
+                  }
+                }
+                return (
+                  <a
+                    key={item.id}
+                    href={`/category/${slugify(categoryName)}#${item.id}/`}
+                    className="lg:text-base md:text-base block px-2 py-2 hover:scale-110 transition-all"
+                    onClick={() => {
+                      document.getElementById("loader").style.display = "grid";
+                    }}
+                  >
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          slugify(categoryName) === slugify(currentPage)
+                            ? '<b class="text-md">' + item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ") + "</b>"
+                            : item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" "),
+                      }}
+                    ></p>
+                  </a>
+                )
+              }
+              )}
             </div>
           )
         })}

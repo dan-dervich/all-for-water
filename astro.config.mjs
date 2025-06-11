@@ -25,7 +25,7 @@ export default defineConfig({
     }),
   ],
   // add trailing slash
-  trailingSlash: "always",
+  // trailingSlash: "always",
   prefetch: {
     defaultStrategy: "load"
   },

@@ -30,15 +30,19 @@ export async function getStaticPaths() {
       .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
       .trim(); // Remove leading/trailing hyphens
   }
-  let categories = [...new Set(items
-    .map((item) => ({
-      params: { id: slugify(item.nombre) },
-    }))
-    .concat(
-      items.map((item) => ({
-        params: { id: item.nombre },
-      })),
-    ))];
+  let categories = [
+    ...new Set(
+      items
+        .map((item) => ({
+          params: { id: slugify(item.nombre) },
+        }))
+        .concat(
+          items.map((item) => ({
+            params: { id: item.nombre },
+          })),
+        ),
+    ),
+  ];
   return categories;
 }
 
@@ -150,7 +154,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
   <section
     class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
   >
-    <h1 class="text-light-blue font-semibold text-5xl px-5 text-center py-10">
+    <h1 class="text-black font-semibold text-5xl px-5 text-center py-10">
       {
         (item.nombre_url || item.nombre).charAt(0).toUpperCase() +
           (item.nombre_url || item.nombre).slice(1)
@@ -170,7 +174,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
           )
         }
         <div
-          set:html={`<span class="text-light-blue font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +
+          set:html={`<span class="text-black font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +
             (descripcion || editedDescFoto[0])}
         />
       </div>
@@ -203,7 +207,7 @@ if (filteredProductos.some((e) => e.orden == 1)) {
             return segment.marca ? (
               <a
                 class="segment-button hover:scale-105 transition-all shadow-md"
-                href={"#segmento-" + segment.nombre}
+                href={"#" + segment.id}
               >
                 <img
                   src={segment.fotoUrl}
@@ -263,11 +267,11 @@ if (filteredProductos.some((e) => e.orden == 1)) {
                       height: 1px;
                       flex-shrink: 0;
                       border-radius: 100px;
-                      background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.00) 100%);"
+                      background: radial-gradient(50% 50% at 50% 50%, #000000 0%, rgba(19, 37, 79, 0.00) 100%);"
                     />
                     <h2
                       id={"segmento-" + segment.nombre}
-                      class="text-light-blue font-semibold lg:text-5xl px-5 text-3xl text-center py-10"
+                      class="text-black font-semibold lg:text-5xl px-5 text-3xl text-center py-10"
                     >
                       {segment.nombre}
                     </h2>
@@ -420,7 +424,18 @@ background: radial-gradient(50% 50% at 50% 50%, #55A5CA 0%, rgba(19, 37, 79, 0.0
       }
     </div>
   </section>
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", (e) => {
+      if (window.location.hash) {
+        const targetId = window.location.hash.substring(1).slice(0, -1); // Remove the '#'
+        const targetElement = document.getElementById(targetId);
 
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    });
+  </script>
   <style>
     html {
       scroll-behavior: smooth;

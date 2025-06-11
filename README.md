@@ -45,3 +45,40 @@ ToDo:
 [ ] remove advanced filtration system, change for reverse osmosis system in POU water cooler.
 [ ] Toray blog
 [ ] Water Cooler Blog
+[ ] search card dr agua portamembranas acero inoxidable
+[ ] headers to black instead of blue
+[x] add segments functionality to nav(consider looping through categories till we find a product that has that segment, O(n*p))
+orden para allforwater de categorias:
+1. maquinas de osmosis inversa comercial
+2. membranas 
+3. antiescalante
+4. portamembranas
+5. uv
+6. lamparas y cuarzos
+7. valvulas clack
+8. ablandadores clack
+9. medios de filtracion
+10. carcazas
+11. cartuchos
+12. cooler
+13. fittings
+14. tuberia
+
+categorias para nav:
+1. reverse osmosis systems -> membranas, antiescalante, portamembranas, maquinas comerciales, flowmeters, UF
+2. wastewater membranes -> mbr
+3. ablandadores y filtros -> ablandadores, valvulas, medios filtrantes, tanks
+4. bombas -> separar por goulds, procon, CAT
+5. coolers -> coolers, cartuchos(pedir foto nueva de los cartuchos para coolers)
+6. medios filtrantes -> medios(separar por marcas y usos)
+7. UltraViolet Viqua -> UV, Lamparas, Cuarzo, balastros
+8. tuberia y fittings -> tuberia, fittings, diverters
+9. pressure gauges and flowmeters -> flowmeters, gauges
+10. ozone -> ozotech, viqua
+11. residential RO -> residential reverse osmosis systems, ACCESSORIES REVERSE OSMOSIS
+12. cartridges -> cartridges(subir los GAC en el orden), special media cartridges
+13. housings -> housings, brackets
+
+high flow sediment filters -> high flow sediment filters
+faucets -> faucets
+controllers and monitors for ro systems -> testers & monitors

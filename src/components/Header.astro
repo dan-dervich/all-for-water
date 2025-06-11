@@ -47,18 +47,19 @@ const { currentPage } = Astro.props;
             id="home"
             href="/"
             onclick="document.getElementById('loader').style.display = 'grid'"
-            class="transition-all nav-links hover:cursor-pointer">HOME</a
+            class="transition-all nav-links hover:cursor-pointer">Home</a
           >
           <ProductsDropdown
             client:only="react"
             items={main_categories}
+            categories={items}
             currentPage={currentPage}
           />
           <a
             id="contact"
             href="/contact/"
             onclick="document.getElementById('loader').style.display = 'grid'"
-            class="transition-all nav-links">CONTACT US</a
+            class="transition-all nav-links">Contact Us</a
           >
         </nav>
         <div class="relative hidden sm:flex">
@@ -103,7 +104,7 @@ const { currentPage } = Astro.props;
           onclick="document.getElementById('loader').style.display = 'grid'"
           id="home-sidebar"
           class="transition-all nav-links hover:cursor-pointer"
-          href="/">HOME</a
+          href="/">Home</a
         >
         <div
           class="overflow-y-scroll flex justify-center items-center flex-col text-center"
@@ -115,6 +116,8 @@ const { currentPage } = Astro.props;
                   client:only="react"
                   name={category.name}
                   items={category?.expand?.categories}
+                  segments={category?.expand?.segment}
+                  categories={items}
                   currentPage={currentPage}
                 />
               );
@@ -125,7 +128,7 @@ const { currentPage } = Astro.props;
           onclick="document.getElementById('loader').style.display = 'grid'"
           id="contact-sidebar"
           href="/contact/"
-          class="transition-all nav-links">CONTACT US</a
+          class="transition-all nav-links">Contact Us</a
         >
       </nav>
     </aside>

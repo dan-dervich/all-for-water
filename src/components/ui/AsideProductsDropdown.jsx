@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const AsideProductsDropdown = ({ items, currentPage, name }) => {
+const AsideProductsDropdown = ({ items, currentPage, name, segments, categories }) => {
   function slugify(text) {
-    if(!text) return "";
+    if (!text) return "";
     return text
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
@@ -50,7 +50,7 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
                   opacity-100 translate-y-0`}
       >
         {
-          items.map((item) => {
+          items?.map((item) => {
             return (
               <a
                 key={item.id}
@@ -79,6 +79,44 @@ const AsideProductsDropdown = ({ items, currentPage, name }) => {
               </a>
             )
           })}
+        {segments?.map((item) => {
+          let categoryName = ''
+          for (let i = 0; i < categories.length; i++) {
+            categories[i].expand?.productos.forEach((e) => e.id == item.id ? console.log(e.nombre) : "")
+            if (categories[i].expand?.productos?.some((obj) => obj.segmentos.includes(item.id))) {
+              categoryName = categories[i].nombre;
+              break;
+            }
+          }
+          return (
+            <a
+              key={item.id}
+              className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
+              href={`/category/${slugify(categoryName)}#${item.id}`}
+              onClick={() => {
+                setIsOpen(false);
+                document.getElementById("loader").style.display = "grid";
+                // Si tienes una función para cerrar el sidebar, llámala aquí
+                if (typeof window !== "undefined") {
+                  const sidebar = document.getElementById("sidebar");
+                  if (sidebar) {
+                    sidebar.classList.add("translate-x-full");
+                  }
+                }
+              }}
+            >
+              <p
+                dangerouslySetInnerHTML={{
+                  __html:
+                    slugify(categoryName) === slugify(currentPage)
+                      ? '<b class="text-md">' + item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ") + "</b>"
+                      : item.nombre.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" "),
+                }}
+              ></p>
+            </a>
+          )
+        }
+        )}
       </div>
     </div >
   );
