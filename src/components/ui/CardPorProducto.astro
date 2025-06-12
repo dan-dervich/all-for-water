@@ -2,10 +2,9 @@
 const { imgSrc } = Astro.props;
 const { text } = Astro.props;
 const { desc } = Astro.props;
-const { pdfs_carta } = Astro.props;
-const { pdfs_tabla } = Astro.props;
 const { id } = Astro.props;
 const { mini_desc } = Astro.props;
+const { search_text } = Astro.props;
 let index = 0;
 let isFirstRow = true;
 let editedDesc = desc;
@@ -30,49 +29,17 @@ if (/<table/.test(desc)) {
     .replace(/<li[^>]*>/g, '<li class="mb-2">') // Agrega margen entre elementos de lista
     .replace(/<p>/g, '<p class="mb-4">') // Agrega margen entre párrafos y listas
     .replace(/&rdquo;/g, '"') // Corrige comillas en el contenido
-    .replace(/&ldquo;/g, '"')
-    .replace(/<\/tr>/g, () => {
-      if (pdfs_tabla.length > 0) {
-        const content = isFirstRow
-          ? "DATA SHEET"
-          : pdfs_tabla[index]?.pdfUrl || "#";
-        const linkText = isFirstRow ? "DATA SHEET" : "VIEW";
-        const estilos = isFirstRow
-          ? ""
-          : "text-blue-500 hover:underline transition-all";
-        // Cambiar al siguiente índice después de la primera fila
-        if (!isFirstRow) index = (index + 1) % pdfs_tabla.length;
-        if (isFirstRow) {
-          isFirstRow = false;
-          return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
-            ${linkText}
-          </th>`;
-        }
-        isFirstRow = false;
-
-        // Devolver la fila de la tabla con enlace
-        return `<th class="border border-gray-300 border-t-1 border-l-1 border-r-1">
-            <a class="${estilos}" href="${content}" target="_blank" rel="noopener noreferrer">${linkText}</a>
-          </th></tr>`;
-      } else {
-        return "</tr>";
-      }
-    });
+    .replace(/&ldquo;/g, '"');
 }
-editedDesc = editedDesc.replace(/<p>/g, "<p>");
+editedDesc = editedDesc?.replace(/<p>/g, "<p>");
 editedDesc = `<div class="flex justify-stretch items-stretch text-start flex-col w-full overflow-auto p-4 text-gray-800 font-medium leading-relaxed gap-5">${editedDesc}</div>`;
-if (pdfs_carta.length > 0) {
-  editedDesc += "<br>";
-  pdfs_carta.forEach((pdf) => {
-    editedDesc += `<a class="text-blue-500 hover:underline transition-all flex justify-center items-center" href="${pdf.pdfUrl}" target="_blank" rel="noopener noreferrer">${pdf.texto_link}</a><br>`;
-  });
-}
 const urlNombre = text.replace(/[ /.,%]/g, "-").toLowerCase();
 ---
 
 <a
   href={`/product/${urlNombre}/`}
   id={id}
+  data-search-value={search_text}
   class="p-2
   transition-all
   ease-linear

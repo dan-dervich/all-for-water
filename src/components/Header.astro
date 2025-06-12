@@ -4,8 +4,6 @@ import { items } from "@lib/categories";
 import { items as main_categories } from "@lib/main_categories";
 import ProductsDropdown from "./ui/ProductsDropdown";
 import AsideProductsDropdown from "./ui/AsideProductsDropdown";
-import SearchComponent from "@components/ui/SearchComponent";
-import SearchComponentAside from "./ui/SearchComponentAside";
 import { Image } from "astro:assets";
 interface Props {
   currentPage?: string;
@@ -14,7 +12,7 @@ import Logo from "../../public/fotos/android-chrome-192x192.png";
 const { currentPage } = Astro.props;
 ---
 
-<header id="header" class="fixed top-0 w-screen z-50 justify-center flex mt-5">
+<header id="header" class="fixed top-0 w-screen z-50 justify-center flex mt-2">
   <div
     class="px-5 bg-light-blue from-light-blue to-transparent text-white rounded-full w-11/12"
   >
@@ -52,8 +50,8 @@ const { currentPage } = Astro.props;
           <ProductsDropdown
             client:only="react"
             items={main_categories}
-            categories={items}
             currentPage={currentPage}
+            categories={items}
           />
           <a
             id="contact"
@@ -61,10 +59,13 @@ const { currentPage } = Astro.props;
             onclick="document.getElementById('loader').style.display = 'grid'"
             class="transition-all nav-links">Contact Us</a
           >
+          <a
+            id="contact"
+            href="/search/"
+            onclick="document.getElementById('loader').style.display = 'grid'"
+            class="transition-all nav-links">Search</a
+          >
         </nav>
-        <div class="relative hidden sm:flex">
-          <SearchComponent client:load />
-        </div>
         <button
           id="menu-button"
           aria-label="open menu button"
@@ -81,7 +82,7 @@ const { currentPage } = Astro.props;
     </div>
     <aside
       id="sidebar"
-      class="overflow-y-scroll fixed z-50 top-0 right-0 w-64 h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
+      class="overflow-y-scroll fixed z-50 top-0 right-0 w-full h-full bg-light-blue text-white p-4 transform transition-transform translate-x-full duration-300"
     >
       <button
         id="close-button"
@@ -96,9 +97,6 @@ const { currentPage } = Astro.props;
         />
       </button>
       <nav class="flex flex-col gap-y-10 justify-center items-center">
-        <div class="relative">
-          <SearchComponentAside client:load />
-        </div>
         <!-- onclick="loader" -->
         <a
           onclick="document.getElementById('loader').style.display = 'grid'"
@@ -107,7 +105,7 @@ const { currentPage } = Astro.props;
           href="/">Home</a
         >
         <div
-          class="overflow-y-scroll flex justify-center items-center flex-col text-center"
+          class="overflow-y-scroll flex justify-center items-center gap-4 flex-col text-center"
         >
           {
             main_categories.map((category) => {
@@ -129,6 +127,12 @@ const { currentPage } = Astro.props;
           id="contact-sidebar"
           href="/contact/"
           class="transition-all nav-links">Contact Us</a
+        >
+        <a
+          onclick="document.getElementById('loader').style.display = 'grid'"
+          id="home-sidebar"
+          class="transition-all nav-links hover:cursor-pointer"
+          href="/search">Search</a
         >
       </nav>
     </aside>

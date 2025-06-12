@@ -30,7 +30,7 @@ const AsideProductsDropdown = ({ items, currentPage, name, segments, categories 
   //   : "opacity-0 -translate-y-2 pointer-events-none"
   // }`} */}
   return (
-    <div className="relative aside-dropdown-container overflow-scroll">
+    <div className="relative place-items-center aside-dropdown-container overflow-scroll">
       <button className="transition-all w-full text-lg font-medium flex items-center justify-center text-center gap-x-1" onClick={() => { setIsOpen(!isOpen); }}>
         {name.split(" ").map((word) => {
           return word.charAt(0).toUpperCase() + word.slice(1);
@@ -68,7 +68,8 @@ const AsideProductsDropdown = ({ items, currentPage, name, segments, categories 
                   }
                 }}
               >
-                <p className="text-xs"
+                <p
+                  className="w-full px-4 py-2 hover:scale-105 transition-all hover:bg-gray-50 rounded-md"
                   dangerouslySetInnerHTML={{
                     __html:
                       slugify(item.nombre) == slugify(currentPage)

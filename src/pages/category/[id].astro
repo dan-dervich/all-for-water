@@ -166,12 +166,13 @@ if (filteredProductos.some((e) => e.orden == 1)) {
       <div class="flex justify-center items-center md:flex-row flex-col gap-5">
         {
           filteredDescFoto[0] && (
-            <img
-              class="w-1/2 h-auto"
-              src={filteredDescFoto[0].fotoUrl}
-              alt="foto de categoria"
-            />
-          )
+              <img
+
+                class={filteredDescFoto[0] === "/path-to-placeholder-image.png" ? "w-1/2 h-auto" : "hidden"}
+                src={filteredDescFoto[0].fotoUrl}
+                alt="foto de categoria"
+              />
+            )
         }
         <div
           set:html={`<span class="text-black font-semibold text-3xl px-5 text-center py-10">We Only sell Wholesale | Same day shipping</span>` +

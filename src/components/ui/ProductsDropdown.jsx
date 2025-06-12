@@ -43,11 +43,11 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
           top-full
           mt-2
           left-1/2
-          lg:-translate-x-2/3
+          lg:-translate-x-3/4
           -translate-x-1/2 
-          lg:max-w-[80vw]
-          lg:w-[70vw]
-          md:w-[600px] 
+          md:-translate-x-[60%]
+          lg:w-[90vw]
+          md:w-[80vw] 
           w-[450px] 
           bg-white 
           text-slate-500 
@@ -58,13 +58,12 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
           justify-center 
           gap-4
           transition-all 
-          p-2 
+          p-4
           text-base
           overflow-scroll
           max-h-[75vh]
           grid
           md:grid-cols-3
-          lg:grid-cols-4
 
           ${isOpen
             ? "opacity-100 translate-y-0"
@@ -75,17 +74,26 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
         {/* // flex 
         // flex-row 
         // flex-wrap  */}
-        {items?.map((main_cat) => {
+        {items?.map((main_cat, key) => {
+          let categoriesc = main_cat.expand.categories?.slice()
+          let segments = main_cat.expand.segment?.slice()
+          // main_cat.segment.length + main_cat.categories.length > 3
+          if (main_cat.segment.length + main_cat.categories.length > 3) {
+            if (segments?.length > 1)
+              categoriesc.push(...segments)
+            segments = []
+            categoriesc = categoriesc.slice(0, 3)
+          }
           return (
             <div key={main_cat.id} className="display flex flex-col text-left">
-              <h3 className="underline text-light-blue"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
-              {main_cat.expand?.categories?.map((item) => {
+              <h3 className="underline text-light-blue hover:text-light-blue/40 transition-all"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
+              {categoriesc?.map((item) => {
                 // add container for space around
                 return (
                   <a
                     key={item.id}
                     href={`/category/${slugify(item.nombre)}/`}
-                    className="lg:text-base md:text-base block px-2 py-2 hover:scale-110 transition-all"
+                    className="lg:text-base w-fit md:text-base block text-left py-2 hover:scale-105 transition-all"
                     onClick={() => {
                       document.getElementById("loader").style.display = "grid";
                     }}
@@ -101,7 +109,7 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
                   </a>
                 )
               })}
-              {main_cat.expand?.segment?.map((item) => {
+              {segments?.map((item) => {
                 let categoryName = ''
                 for (let i = 0; i < categories.length; i++) {
                   if (categories[i].expand?.productos?.some((obj) => obj.segmentos.includes(item.id))) {
@@ -113,7 +121,7 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
                   <a
                     key={item.id}
                     href={`/category/${slugify(categoryName)}#${item.id}/`}
-                    className="lg:text-base md:text-base block px-2 py-2 hover:scale-110 transition-all"
+                    className="lg:text-base w-fit md:text-base block py-2 hover:scale-110 transition-all"
                     onClick={() => {
                       document.getElementById("loader").style.display = "grid";
                     }}
@@ -130,6 +138,7 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
                 )
               }
               )}
+              <a className="underline text-black hover:text-black/40 w-fit transition-all" href={`/segmentation/${slugify(main_cat.name)}`} >View More  →</a>
             </div>
           )
         })}

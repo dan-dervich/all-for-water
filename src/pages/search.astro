@@ -1,0 +1,203 @@
+---
+import Layout from "@layouts/Layout.astro";
+import CardPorProducto from "@components/ui/CardPorProducto.astro";
+import { productos } from "@lib/products";
+import LanguageSwitch from "@components/ui/LanguageSwitch.jsx";
+export const prerender = true;
+
+function slugify(text) {
+    return text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/--+/g, "-") // Replace multiple hyphens with single hyphen
+        .replace(" ", "-")
+        .trim(); // Remove leading/trailing hyphens
+}
+
+// find category aka item = current category
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * array.length);
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+shuffleArray(productos);
+---
+
+<Layout
+    canonical={"https://www.allforwater.com/search/"}
+    title={"search"}
+    description={"search"}
+    keywords={"allforwater search"}
+    currentPage={"search"}
+>
+    <section
+        class="mt-[128px] bg-white flex flex-col items-center justify-center text-center sm:p-10"
+    >
+        <h1 class="text-black font-semibold text-5xl px-5 text-center py-10">
+            Search For Products
+        </h1>
+        <input
+            type="search"
+            placeholder="search..."
+            id="search-box"
+            class="p-2 text-lg border-light-blue border rounded-md w-3/4"
+        />
+        <div class="w-full mt-10 mb-20">
+            <div
+                id="search-gallery"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center"
+            >
+                {
+                    productos.map((product) => {
+                        let search_text =
+                            product.nombre.toLowerCase() +
+                            " " +
+                            product.mini_desc.toLowerCase() +
+                            " " +
+                            product?.expand?.segmentos
+                                ?.map((s) => s.nombre)
+                                .join() +
+                            " " +
+                            " " +
+                            product?.descripcion_seo?.toLowerCase() +
+                            product?.titulo_seo?.toLowerCase() +
+                            product?.palabras_claves_seo?.toLowerCase();
+                        search_text = search_text.replace(/<(?:.|\n)*?>/gm, "");
+                        return (
+                            <CardPorProducto
+                                key={product.id}
+                                mini_desc={product.mini_desc}
+                                id={`${product.id} + ${product.orden}`}
+                                imgSrc={product.fotoUrl || "vacio"}
+                                text={product.nombre}
+                                desc={product.description}
+                                search_text={search_text}
+                            />
+                        );
+                    })
+                }
+            </div>
+            <h3 class="text-3xl mt-5">More Products</h3>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center"
+                id="mas-productos-container"
+            >
+                {
+                    productos?.map((producto) => {
+                        let search_text =
+                            producto.nombre.toLowerCase() +
+                            " " +
+                            producto.mini_desc.toLowerCase() +
+                            " " +
+                            producto?.expand?.segmentos
+                                ?.map((s) => s.nombre)
+                                .join() +
+                            " " +
+                            producto.descripcion.toLowerCase() +
+                            " " +
+                            producto?.descripcion_seo?.toLowerCase() +
+                            producto?.titulo_seo?.toLowerCase() +
+                            producto?.palabras_claves_seo?.toLowerCase();
+                        search_text = search_text.replace(/<(?:.|\n)*?>/gm, "");
+                        return (
+                            <CardPorProducto
+                                key={producto.id}
+                                imgSrc={producto.fotoUrl}
+                                text={producto.nombre}
+                                desc={producto.mini_desc}
+                                search_text={search_text}
+                            />
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </section>
+    <script is:inline>
+        function levenshtein(a, b) {
+            const m = a.length,
+                n = b.length;
+            if (m === 0) return n;
+            if (n === 0) return m;
+            const dp = Array.from({ length: m + 1 }, () =>
+                Array(n + 1).fill(0),
+            );
+            for (let i = 0; i <= m; i++) dp[i][0] = i;
+            for (let j = 0; j <= n; j++) dp[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    dp[i][j] = Math.min(
+                        dp[i - 1][j] + 1, // delete
+                        dp[i][j - 1] + 1, // insert
+                        dp[i - 1][j - 1] + cost, // substitute
+                    );
+                }
+            }
+            return dp[m][n];
+        }
+
+        function fuzzyMatch(query, text) {
+            const words = text.split(/\s+/);
+            const threshold = 0.5; // lower = stricter
+            const results = words.map((word) => {
+                const dist = levenshtein(query, word);
+                const similarity =
+                    1 - dist / Math.max(word.length, query.length);
+                return similarity;
+            });
+            return Math.max(...results) >= 1 - threshold;
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const searchBox = document.getElementById("search-box");
+            const productosContainer =
+                document.getElementById("search-gallery");
+            const productos = productosContainer.querySelectorAll("a");
+            console.log(productos);
+            searchBox.addEventListener("input", (e) => {
+                let searchText = e.target.value.toLowerCase().trim();
+                if (e.target.value == "") return;
+                productos.forEach((producto) => {
+                    const searchTextAttr = producto.dataset.searchValue;
+                    if (fuzzyMatch(searchText, searchTextAttr)) {
+                        producto.style.display = "flex";
+                    } else {
+                        producto.style.display = "none";
+                    }
+                });
+            });
+            const masProductos = document.getElementById(
+                "mas-productos-container",
+            );
+            const masProductosItems = masProductos.querySelectorAll("a");
+            searchBox.addEventListener("input", (e) => {
+                if (e.target.value == "") return;
+                let searchText = e.target.value.toLowerCase();
+                searchText = searchText.replace("á", "a");
+                searchText = searchText.replace("é", "e");
+                searchText = searchText.replace("í", "i");
+                searchText = searchText.replace("ó", "o");
+                searchText = searchText.replace("ú", "u");
+                searchText = searchText.replace("ñ", "n");
+                masProductosItems.forEach((producto) => {
+                    const searchTextAttr = producto.dataset.searchText;
+                    if (fuzzyMatch(searchText, searchTextAttr)) {
+                        producto.style.display = "none";
+                    } else {
+                        producto.style.display = "flex";
+                    }
+                });
+            });
+        });
+    </script>
+</Layout>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<LanguageSwitch client:only="react" url={"/es"} idioma={"EN"} />

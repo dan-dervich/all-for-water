@@ -45,9 +45,10 @@ ToDo:
 [ ] remove advanced filtration system, change for reverse osmosis system in POU water cooler.
 [ ] Toray blog
 [ ] Water Cooler Blog
-[ ] search card dr agua portamembranas acero inoxidable
-[ ] headers to black instead of blue
+[x] headers to black instead of blue
 [x] add segments functionality to nav(consider looping through categories till we find a product that has that segment, O(n*p))
+[x] view more like in applied membranes
+[x] posibility of change mobile nav to show products dropdown and then all categories and sub categories
 orden para allforwater de categorias:
 1. maquinas de osmosis inversa comercial
 2. membranas 
