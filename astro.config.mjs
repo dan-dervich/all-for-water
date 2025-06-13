@@ -25,7 +25,7 @@ export default defineConfig({
     }),
   ],
   // add trailing slash
-  // trailingSlash: "always",
+  trailingSlash: "always",
   prefetch: {
     defaultStrategy: "load"
   },
@@ -41,6 +41,6 @@ export default defineConfig({
   output: "server",
   adapter: vercel({
     webAnalytics: { enabled: true },
-    fallback: "blocking"
+    fallback: true
   }),
 });
