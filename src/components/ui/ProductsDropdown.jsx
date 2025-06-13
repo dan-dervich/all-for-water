@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-const ProductsDropdown = ({ items, currentPage, categories }) => {
+const ProductsDropdown = ({ items, currentPage, categories, seg }) => {
   function slugify(text) {
     if (!text) return "";
     return text
@@ -12,6 +12,8 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
       .replace(" ", "-")
       .trim(); // Remove leading/trailing hyphens
   }
+
+
   const [isOpen, setIsOpen] = useState(false);
 
   React.useEffect(() => {
@@ -75,8 +77,10 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
         // flex-row 
         // flex-wrap  */}
         {items?.map((main_cat, key) => {
-          let categoriesc = main_cat.expand.categories?.slice()
-          let segments = main_cat.expand.segment?.slice()
+          const cats = categories.filter((c) => main_cat.categories?.includes(c.id))
+          const segment = seg.filter((s) => main_cat.segment?.includes(s.id))
+          let categoriesc = cats?.slice()
+          let segments = segment?.slice()
           // main_cat.segment.length + main_cat.categories.length > 3
           if (main_cat.segment.length + main_cat.categories.length > 3) {
             if (segments?.length > 1)
@@ -85,7 +89,7 @@ const ProductsDropdown = ({ items, currentPage, categories }) => {
             categoriesc = categoriesc.slice(0, 3)
           }
           return (
-            <div key={main_cat.id} className="display flex flex-col text-left">
+            <div key={main_cat.id} className="flex justify-around h-full flex-col text-left">
               <h3 className="underline text-light-blue hover:text-light-blue/40 transition-all"><a href={`/segmentation/${slugify(main_cat.name)}/`}>{main_cat.name.split(" ").map((word) => { return word.charAt(0).toUpperCase() + word.slice(1) }).join(" ")}</a></h3>
               {categoriesc?.map((item) => {
                 // add container for space around

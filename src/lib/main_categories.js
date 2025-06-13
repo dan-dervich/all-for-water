@@ -6,9 +6,10 @@ let items = [];
 
 try {
 
+    await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
+    // expand: "categories, segment",
     const records = await pb.collection("main_categories").getList(0, 1000, {
-        expand: "categories, segment",
         sort: "+orden"
     });
     items = records.items

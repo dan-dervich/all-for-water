@@ -6,6 +6,7 @@ let marcas = [];
 
 try {
 
+  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
   const records = await pb.collection("segmentos").getList(0, 1000);
   marcas = records.items

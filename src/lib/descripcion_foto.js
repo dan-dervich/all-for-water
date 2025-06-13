@@ -6,6 +6,7 @@ let descripciones_foto = [];
 
 try {
 
+  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
   const records = await pb.collection("descripcion_foto").getList(0, 1000);
 

@@ -9,6 +9,7 @@ interface Props {
   currentPage?: string;
 }
 import Logo from "../../public/fotos/android-chrome-192x192.png";
+import { segmentos } from "@lib/segmentos";
 const { currentPage } = Astro.props;
 ---
 
@@ -52,6 +53,7 @@ const { currentPage } = Astro.props;
             items={main_categories}
             currentPage={currentPage}
             categories={items}
+            seg={segmentos}
           />
           <a
             id="contact"
@@ -109,12 +111,20 @@ const { currentPage } = Astro.props;
         >
           {
             main_categories.map((category) => {
+              // ?.expand?.segment
+              // expand.categories
+              const cats = items.filter((c) =>
+                category.categories?.includes(c.id),
+              );
+              const segment = segmentos.filter((s) =>
+                category.segment?.includes(s.id),
+              );
               return (
                 <AsideProductsDropdown
                   client:only="react"
                   name={category.name}
-                  items={category?.expand?.categories}
-                  segments={category?.expand?.segment}
+                  items={cats}
+                  segments={segment}
                   categories={items}
                   currentPage={currentPage}
                 />

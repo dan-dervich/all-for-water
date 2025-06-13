@@ -6,6 +6,7 @@ let pdfs_tabla_es = [];
 
 try {
 
+  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
   pdfs_tabla_es = await pb.collection("pdfs_tabla_es").getList(0, 1000);
   pdfs_tabla_es = pdfs_tabla_es.items;

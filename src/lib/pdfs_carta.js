@@ -6,6 +6,7 @@ let pdfs_carta = [];
 
 try {
 
+  await pb.admins.authWithPassword("pedro@gmail.com", "Pedro12345");
 
   pdfs_carta = await pb.collection("pdfs_carta").getList(0, 1000);
   pdfs_carta = pdfs_carta.items;
